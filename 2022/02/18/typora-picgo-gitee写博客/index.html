@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":false,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="使用typora+picgo+gitee来写博客，将图片放在gitee上进行托管，避免了在本地写博客后无法直接复制粘贴到其他博客网站上，附有typora beta 版本下载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="typora+picgo+gitee写博客">
+<meta property="og:url" content="http://example.com/2022/02/18/typora-picgo-gitee%E5%86%99%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:site_name" content="南的个人博客">
+<meta property="og:description" content="使用typora+picgo+gitee来写博客，将图片放在gitee上进行托管，避免了在本地写博客后无法直接复制粘贴到其他博客网站上，附有typora beta 版本下载">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409308.png">
+<meta property="og:image" content="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409309.png">
+<meta property="og:image" content="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409310.png">
+<meta property="og:image" content="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409311.png">
+<meta property="og:image" content="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409312.png">
+<meta property="og:image" content="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409313.png">
+<meta property="og:image" content="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409314.png">
+<meta property="og:image" content="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409315.png">
+<meta property="og:image" content="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409316.png">
+<meta property="og:image" content="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409317.png">
+<meta property="og:image" content="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409318.png">
+<meta property="article:published_time" content="2022-02-18T05:36:26.000Z">
+<meta property="article:modified_time" content="2022-02-18T06:32:59.564Z">
+<meta property="article:author" content="li kunsong">
+<meta property="article:tag" content="typora">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409308.png">
+
+<link rel="canonical" href="http://example.com/2022/02/18/typora-picgo-gitee%E5%86%99%E5%8D%9A%E5%AE%A2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>typora+picgo+gitee写博客 | 南的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">南的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">遇事不决，但问春风</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/18/typora-picgo-gitee%E5%86%99%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="li kunsong">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          typora+picgo+gitee写博客
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-02-18 13:36:26 / 修改时间：14:32:59" itemprop="dateCreated datePublished" datetime="2022-02-18T13:36:26+08:00">2022-02-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/typora/" itemprop="url" rel="index"><span itemprop="name">typora</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">使用typora+picgo+gitee来写博客，将图片放在gitee上进行托管，避免了在本地写博客后无法直接复制粘贴到其他博客网站上，附有typora beta 版本下载</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>平时在本地写博客的时候，总是要考虑博客的图片问题，因为typora的图片路径是相对的和绝对的，导致在本地写的博客很难直接复制粘贴到csdn，博客园，或者自己搭建的博客上面，使用picgo+gitee可以直接将图片放到gitee上</p>
+</blockquote>
+<h3 id="在gitee上创建一个仓库，用来存放图片"><a href="#在gitee上创建一个仓库，用来存放图片" class="headerlink" title="在gitee上创建一个仓库，用来存放图片"></a>在gitee上创建一个仓库，用来存放图片</h3><ul>
+<li>创建一个仓库，<strong>仓库要开源</strong></li>
+</ul>
+<h3 id><a href="#" class="headerlink" title></a><img src="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409308.png" alt="image-20220218134154290"></h3><ul>
+<li><p>打开gitee上的设置，获取私人令牌</p>
+<p><img src="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409309.png" alt="image-20220218134416674" style="zoom: 50%;"><img src="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409310.png" alt="image-20220218134706312"></p>
+</li>
+<li><p>创建完成后，复制令牌</p>
+</li>
+</ul>
+<h3 id="下载PicGo"><a href="#下载PicGo" class="headerlink" title="下载PicGo"></a>下载PicGo</h3><p>在github上下载即可，我下载的是2.30正式版本的，比较稳定（<strong>电脑应用商店也可以下载，我在联想的应用商店上可以直接下载</strong>）</p>
+<p><img src="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409311.png" alt="image-20220218135107315">下载完后，打开PicGo，下载gitee-uploader插件<img src="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409312.png" alt="image-20220218135323494">下载完插件后，配置gitee的信息（<strong>容易出错</strong>)</p>
+<p><img src="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409313.png" alt="image-20220218135630508"> </p>
+<p><strong>注意</strong></p>
+<ul>
+<li><strong>仓库的地址</strong>：<img src="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409314.png" alt="image-20220218140003548"></li>
+<li><strong>path</strong>：就是仓库下的一个文件夹，自己创建即可</li>
+</ul>
+<h3 id="typora配置"><a href="#typora配置" class="headerlink" title="typora配置"></a>typora配置</h3><p>目前typora 1.0 以后的版本开始收费，但是之前的bata版本不收费仍可以使用，下面是我正在使用的beta版本，想用1.0以后版本的可自行去typora官网购买</p>
+<blockquote>
+<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1eS_0PXyigDi2bebWetfZCw">https://pan.baidu.com/s/1eS_0PXyigDi2bebWetfZCw</a><br>提取码：abcd</p>
+</blockquote>
+<p>点击文件，打开 偏好设置 ==&gt; 图像  </p>
+<p><img src="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409315.png" alt="image-20220218140238877">设置完成后，点击验证图片上传选项</p>
+<p><img src="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409316.png" alt="image-20220218140359135"></p>
+<h3 id="报错修改"><a href="#报错修改" class="headerlink" title="报错修改"></a>报错修改</h3><h4 id="Failed-to-fetch"><a href="#Failed-to-fetch" class="headerlink" title="Failed to fetch"></a>Failed to fetch</h4><p>这个错误一般由端口错误造成的，修改PicGo的端口即可</p>
+<p>打开PicGo设置 ==&gt; 设置server ，把端口修改为36677即可</p>
+<p><img src="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409317.png" alt="image-20220218140835409"></p>
+<h3 id="图片的文件名冲突"><a href="#图片的文件名冲突" class="headerlink" title="图片的文件名冲突"></a>图片的文件名冲突</h3><p><img src="https://gitee.com/li-kunsong/imga/raw/master/img/202202181409318.png" alt="image-20220218140820774"></p>
+<p><strong>至于其他问题，参考日志上面的错误信息自行百度即可</strong></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>li kunsong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2022/02/18/typora-picgo-gitee%E5%86%99%E5%8D%9A%E5%AE%A2/" title="typora+picgo+gitee写博客">http://example.com/2022/02/18/typora-picgo-gitee写博客/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/typora/" rel="tag"># typora</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/16/%E4%BD%BF%E7%94%A8docker%E5%9C%A8tomcat%E9%95%9C%E5%83%8F%E4%B8%8A%E6%94%BEweb%E6%96%87%E4%BB%B6/" rel="prev" title="使用docker在tomcat镜像上放web文件">
+      <i class="fa fa-chevron-left"></i> 使用docker在tomcat镜像上放web文件
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/03/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E8%9A%82%E8%9A%81%E6%84%9F%E5%86%92/" rel="next" title="蓝桥杯-蚂蚁感冒">
+      蓝桥杯-蚂蚁感冒 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8gitee%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%BB%93%E5%BA%93%EF%BC%8C%E7%94%A8%E6%9D%A5%E5%AD%98%E6%94%BE%E5%9B%BE%E7%89%87"><span class="nav-number">1.</span> <span class="nav-text">在gitee上创建一个仓库，用来存放图片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDPicGo"><span class="nav-number">3.</span> <span class="nav-text">下载PicGo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#typora%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">typora配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A5%E9%94%99%E4%BF%AE%E6%94%B9"><span class="nav-number">5.</span> <span class="nav-text">报错修改</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Failed-to-fetch"><span class="nav-number">5.1.</span> <span class="nav-text">Failed to fetch</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E7%9A%84%E6%96%87%E4%BB%B6%E5%90%8D%E5%86%B2%E7%AA%81"><span class="nav-number">6.</span> <span class="nav-text">图片的文件名冲突</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">li kunsong</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wuwei1636" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wuwei1636" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/1537628435@qq.com" title="E-Mail → 1537628435@qq.com"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/streams_star?spm=1000.2115.3001.5343" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;streams_star?spm&#x3D;1000.2115.3001.5343" rel="noopener" target="_blank">CSDN</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">li kunsong</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+<script>
+!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+</script>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</html>
