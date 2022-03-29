@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>hexo 私密文章设置</title>
+      <link href="/2022/03/29/textpasss/"/>
+      <url>/2022/03/29/textpasss/</url>
+      
+        <content type="html"><![CDATA[<p>下载hexo插件</p><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install hexo-blog-<span class="built_in">encrypt</span> <span class="comment">--save</span></span><br></pre></td></tr></table></figure><p>安装之后设置密码即可</p><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">password:</span> mikej</span><br><span class="line"><span class="symbol">abstract:</span> 有东西被加密了, 请输入密码查看.</span><br><span class="line"><span class="symbol">message:</span> 您好, 这里需要密码.</span><br><span class="line"><span class="symbol">wrong_pass_message:</span> 密码错误.</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> hexo </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>蓝桥杯-买不到的数目</title>
       <link href="/2022/03/03/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E4%B9%B0%E4%B8%8D%E5%88%B0%E7%9A%84%E6%95%B0%E7%9B%AE/"/>
       <url>/2022/03/03/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E4%B9%B0%E4%B8%8D%E5%88%B0%E7%9A%84%E6%95%B0%E7%9B%AE/</url>
