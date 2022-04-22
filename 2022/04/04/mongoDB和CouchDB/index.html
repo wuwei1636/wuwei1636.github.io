@@ -27,15 +27,15 @@
 <meta property="og:site_name" content="南的个人博客">
 <meta property="og:description" content="mongoDB的使用，CouchDB的使用以及他们的区别">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/li-kunsong/imga/raw/master/img/202204041425030.png">
-<meta property="og:image" content="https://gitee.com/li-kunsong/imga/raw/master/img/202204041425032.png">
-<meta property="og:image" content="https://gitee.com/li-kunsong/imga/raw/master/img/202204041426079.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202204221756354.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202204221756355.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202204221756356.png">
 <meta property="article:published_time" content="2022-04-04T06:23:21.000Z">
-<meta property="article:modified_time" content="2022-04-04T06:26:34.655Z">
+<meta property="article:modified_time" content="2022-04-22T09:56:48.839Z">
 <meta property="article:author" content="li kunsong">
 <meta property="article:tag" content="NoSql">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/li-kunsong/imga/raw/master/img/202204041425030.png">
+<meta name="twitter:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202204221756354.png">
 
 <link rel="canonical" href="http://example.com/2022/04/04/mongoDB%E5%92%8CCouchDB/">
 
@@ -212,10 +212,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-04-04 14:23:21 / 修改时间：14:26:34" itemprop="dateCreated datePublished" datetime="2022-04-04T14:23:21+08:00">2022-04-04</time>
+              <time title="创建时间：2022-04-04 14:23:21" itemprop="dateCreated datePublished" datetime="2022-04-04T14:23:21+08:00">2022-04-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-22 17:56:48" itemprop="dateModified" datetime="2022-04-22T17:56:48+08:00">2022-04-22</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -322,12 +328,12 @@
 <p>运行mongoDB</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mongod -dbpath &quot;C:\Program Files\MongoDB\Server\5.0\data\db&quot;</span><br><span class="line"><span class="meta"># </span><span class="language-bash">运行此行命令运用一直开启mongoDB服务，但是命令行窗口不能关闭</span></span><br></pre></td></tr></table></figure>
 
-<p>之后在浏览器上运行   <code>localhost:27017</code><br><img src="https://gitee.com/li-kunsong/imga/raw/master/img/202204041425030.png" alt="image.png"></p>
+<p>之后在浏览器上运行   <code>localhost:27017</code><br><img src="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202204221756354.png" alt="image.png"></p>
 <h3 id="安装mongoDB-compass-可视化界面"><a href="#安装mongoDB-compass-可视化界面" class="headerlink" title="安装mongoDB compass 可视化界面"></a>安装mongoDB compass 可视化界面</h3><p> <a target="_blank" rel="noopener" href="https://www.mongodb.com/try/download/compass">可视化界面</a>   </p>
-<p>是一个压缩包，解压后，直接运行里面的exe即可打开界面，然后点击connect ，mongoDB默认的端口是：<a target="_blank" rel="noopener" href="https://localhost:27017/">https://localhost:27017/</a> ，连接之后是如下界面<br><img src="https://gitee.com/li-kunsong/imga/raw/master/img/202204041425032.png" alt="img"></p>
+<p>是一个压缩包，解压后，直接运行里面的exe即可打开界面，然后点击connect ，mongoDB默认的端口是：<a target="_blank" rel="noopener" href="https://localhost:27017/">https://localhost:27017/</a> ，连接之后是如下界面<br><img src="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202204221756355.png" alt="img"></p>
 <h3 id="mongoDB的基本命令"><a href="#mongoDB的基本命令" class="headerlink" title="mongoDB的基本命令"></a>mongoDB的基本命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="language-bash"><span class="comment"># 创建数据库</span></span></span><br><span class="line">use DATABASE_NAME // 如果数据库不存在，就创建数据库，否则进入到指定的数据库</span><br><span class="line"><span class="meta">#</span><span class="language-bash"><span class="comment"># 但是刚刚创建的数据库没有显示在所有数据库中，因为还没有插入数据，插入数据后即可显示</span></span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://gitee.com/li-kunsong/imga/raw/master/img/202204041426079.png" alt="image.png"></p>
+<p><img src="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202204221756356.png" alt="image.png"></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">删除数据库 </span><br><span class="line">db.dropDatabase() #需要先进入数据库中在进行删除</span><br><span class="line"></span><br><span class="line">删除数据库中的集合</span><br><span class="line">db.collection.drop()</span><br><span class="line"></span><br><span class="line">对数据库进行插入文档</span><br><span class="line">db.COLLEECTION_NAME.insert(document</span><br><span class="line"></span><br><span class="line">COLLECTION_NAME 是文档的名字。</span><br><span class="line"></span><br><span class="line">查看已经插入的文档</span><br><span class="line">db.COLLECTION_NAME.find()</span><br><span class="line">db.COLLECTION_NAME.find().pretty()  #出现的文档信息更有条理</span><br></pre></td></tr></table></figure>
 
 <p>还可以将数据变成一个变量再进行插入</p>
