@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202204221756355.png">
 <meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202204221756356.png">
 <meta property="article:published_time" content="2022-04-04T06:23:21.000Z">
-<meta property="article:modified_time" content="2022-04-22T17:10:32.013Z">
+<meta property="article:modified_time" content="2022-04-23T03:41:54.349Z">
 <meta property="article:author" content="li kunsong">
 <meta property="article:tag" content="NoSql">
 <meta name="twitter:card" content="summary">
@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-23 01:10:32" itemprop="dateModified" datetime="2022-04-23T01:10:32+08:00">2022-04-23</time>
+                <time title="修改时间：2022-04-23 11:41:54" itemprop="dateModified" datetime="2022-04-23T11:41:54+08:00">2022-04-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -329,7 +329,29 @@
 <li>mongodb的索引同样也是B树，在一些索引的优化和设计上和MySQL比较相似。</li>
 <li>mongodb的查询中也有mysql的in，where，group等字段，而且向group那样的查询会比mysql更强大</li>
 </ol>
-<h5 id="mongodb的存储结构"><a href="#mongodb的存储结构" class="headerlink" title="mongodb的存储结构"></a>mongodb的存储结构</h5><p>MongoDB的存储类似JSON，每个db中有多个collection，相当于table，每个collection内是许许多多的document，这个document的schemeless的。</p>
+<h5 id="mongodb的数据冗余机制"><a href="#mongodb的数据冗余机制" class="headerlink" title="mongodb的数据冗余机制"></a>mongodb的数据冗余机制</h5><p>Mongodb的数据冗余机制分为两种，主从复制（Master-Slave）和副本集（ReplicaSet）的方式。这两种操作方式都是通过回放主节点操作日志的异步数据同步方式。</p>
+<p>主节点会将操作日志记录到oplog中，从节点从主节点请求oplog日志，然后在节点上回放来构建数据；如果主节点和从节点数据超过oplog的范围，则需要从节点和主节点先进行sync后再反演oplog日志。</p>
+<p>ReloicaSet是在Master-Salve同步机制的基础上加上了选举机制。一个ReplicaSet中的各个节点之间有心跳信息，当主节点失败时，从节点发起一轮主节点的选取过程，重新选出一个主节点。主节点的选取跟各个节点的配置优先级和数据的更新程度有关。选主节点先考虑优先级，再考虑拥有最新数据的节点，然后选出一个节点作为新的主节点。各个节点和主节点进行数据同步，旧的主节点重新加入ReplicaSet后，会作为从节点与新的主节点进行数据同步。</p>
+<p>Mongodb通过这种操作日志回放进行数据同步的方式保证数据的最终一致性。主节点为了数据的安全性加入了journal机制，但是由于不同节点之间的数据是异步同步的，在主节点宕机或者网络故障时有可能丢失数据。</p>
+<h5 id="mongodb的数据分片机制"><a href="#mongodb的数据分片机制" class="headerlink" title="mongodb的数据分片机制"></a>mongodb的数据分片机制</h5><p>Nosql系统的水平拓展性依赖于其数据的分片机制和数据迁移机制。Mongodb集群通过自动分片机制来进行数据的分片和数据迁移。</p>
+<h5 id="mongodb的存储结构"><a href="#mongodb的存储结构" class="headerlink" title="mongodb的存储结构"></a>mongodb的存储结构</h5><p>Mongodb将数据按照数据库（database），集合（collection）和文档（document）的方式进行存储，分别对应RDBMS中的数据库，表和记录的概念。Mongodb为每个数据库建立一个namespace（.ns结尾）文件，存储该数据库的元信息，比如该数据都有那些collections，各个collcetions的数据文件，索引文件信息等。</p>
+<p>MongoDB的记录是个文档，它是由字段对值的数据结构，类似JSON，同时字段的值可以包括其他文档，数组和文档数据，即文档的嵌套。</p>
+<p>Mongodb每个db中有多个collection，相当于table，每个collection内是许许多多的document，Mongdb对数据格式要求宽松，因此document的schemaless的。</p>
+<p>同时mongodb的所有数据都存放在文件中，Mongodb的文件采用预分配的方式来避免磁盘碎片化和保证操作性能。第一次分配数据文件是64M，后续分配文件的数据指数级递增，知道预分配的数据文件大小达到2G。</p>
+<p>Mongodb通过mmap来操作所有磁盘文件，Mongodb启动时将所ns文件和所有数据文件通过mmap的方式全部映射到进程逻辑地址空间，后续通过内存的操作来操作物理文件。</p>
+<p>Mongodb存储引擎的优缺点</p>
+<p>Mongodb采用mmap将存储文件全部映射到进程逻辑地址空间，通过操作系统的page cache 和 缺页中断机制来实现数据在内存和磁盘之间的迁移。</p>
+<p>这种实现结构是将系统的内存作为存储系统的缓存，而缓存的管理完全由操作系统的界面缓存机制来管理，大大简化了Mongodb的存储引擎设计和实现。</p>
+<p>这样做的优点是在系统内存充足的时候，会将所有的数据和索引文件都放在内存中，读写速度会非常快。另外，由于将内存管理任务交给操作系统的界面缓存来完成，使得Mongodb的存储引擎实现简单明了。</p>
+<p>缺点：</p>
+<ol>
+<li>通过mmap的形式将索引和数据文件全部映射到进程地址空间，使用页缓存来管理内存，是的mongodb会占用大量的内存，随着数据的增加，系统内存都会被mongodb占用。</li>
+<li>mongodb再数据和索引的量超过系统内存时，会造成大量的缺页中断，导致数据在磁盘和内存之间频繁换入换出，增加磁盘的IO压力，增加访问延迟。</li>
+</ol>
+<h5 id="对mongodb单节点的性能测试"><a href="#对mongodb单节点的性能测试" class="headerlink" title="对mongodb单节点的性能测试"></a>对mongodb单节点的性能测试</h5><p>测试机器为：VMWare虚拟机CentOS6.4 CPU：4核  内存：8G</p>
+<p>当数据量达到千万级的时候最大访问时间小于1ms，访问性能很好；</p>
+<p>当数据量达到4亿级的时，多客户端访问时间最大达到6s，在数据集过大的时候，mongodb会造成大量的磁盘IO和频繁的内存换入换出，导致mongodb的性能下降。</p>
+<p>考虑到使用mongodb的数据量不会很大，超过上亿级别，加上mongodb在千万级数据量的时候访问速度很好，所以选择使用mongodb。</p>
 <h2 id="MongoDB安装"><a href="#MongoDB安装" class="headerlink" title="MongoDB安装"></a>MongoDB安装</h2><p><a target="_blank" rel="noopener" href="https://www.mongodb.com/try">windows 下载地址</a></p>
 <p>一路直接安装即可，<strong>自行修改下载路径，下的时候选择自定义安装</strong>，安装完毕之后需要在server/bin/data目录下创建一个db文件夹</p>
 <p>运行mongoDB</p>
@@ -351,7 +373,6 @@
 
 <p>进行插入操作</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt; </span><span class="language-bash">db.col.insert(document)</span></span><br><span class="line">WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)</span><br><span class="line"><span class="meta">&gt; </span></span><br></pre></td></tr></table></figure>
-
 
 
 
@@ -455,7 +476,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mongoDB%E5%92%8CCouchDB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.</span> <span class="nav-text">mongoDB和CouchDB的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodb%E7%9A%84%E8%B0%83%E7%A0%94"><span class="nav-number">2.</span> <span class="nav-text">mongodb的调研</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mongodb%E6%98%AF%E9%9D%A2%E5%90%91%E6%96%87%E6%A1%A3%E7%9A%84nosql%E3%80%82"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">mongodb是面向文档的nosql。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%8E%E6%80%BB%E4%BD%93%E4%B8%8A%E7%9C%8B"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">从总体上看</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mongodb%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">2.0.0.3.</span> <span class="nav-text">mongodb的存储结构</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MongoDB%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">MongoDB安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85mongoDB-compass-%E5%8F%AF%E8%A7%86%E5%8C%96%E7%95%8C%E9%9D%A2"><span class="nav-number">3.1.</span> <span class="nav-text">安装mongoDB compass 可视化界面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongoDB%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">mongoDB的基本命令</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mongoDB%E5%92%8CCouchDB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.</span> <span class="nav-text">mongoDB和CouchDB的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodb%E7%9A%84%E8%B0%83%E7%A0%94"><span class="nav-number">2.</span> <span class="nav-text">mongodb的调研</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mongodb%E6%98%AF%E9%9D%A2%E5%90%91%E6%96%87%E6%A1%A3%E7%9A%84nosql%E3%80%82"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">mongodb是面向文档的nosql。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%8E%E6%80%BB%E4%BD%93%E4%B8%8A%E7%9C%8B"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">从总体上看</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mongodb%E7%9A%84%E6%95%B0%E6%8D%AE%E5%86%97%E4%BD%99%E6%9C%BA%E5%88%B6"><span class="nav-number">2.0.0.3.</span> <span class="nav-text">mongodb的数据冗余机制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mongodb%E7%9A%84%E6%95%B0%E6%8D%AE%E5%88%86%E7%89%87%E6%9C%BA%E5%88%B6"><span class="nav-number">2.0.0.4.</span> <span class="nav-text">mongodb的数据分片机制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mongodb%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">2.0.0.5.</span> <span class="nav-text">mongodb的存储结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%B9mongodb%E5%8D%95%E8%8A%82%E7%82%B9%E7%9A%84%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="nav-number">2.0.0.6.</span> <span class="nav-text">对mongodb单节点的性能测试</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MongoDB%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">MongoDB安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85mongoDB-compass-%E5%8F%AF%E8%A7%86%E5%8C%96%E7%95%8C%E9%9D%A2"><span class="nav-number">3.1.</span> <span class="nav-text">安装mongoDB compass 可视化界面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongoDB%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">mongoDB的基本命令</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
