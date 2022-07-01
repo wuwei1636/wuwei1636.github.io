@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202206131704777.png">
 <meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202206131704778.png">
 <meta property="article:published_time" content="2022-06-06T07:54:57.000Z">
-<meta property="article:modified_time" content="2022-06-13T09:19:24.647Z">
+<meta property="article:modified_time" content="2022-06-29T14:32:11.165Z">
 <meta property="article:author" content="li kunsong">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -227,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-06-13 17:19:24" itemprop="dateModified" datetime="2022-06-13T17:19:24+08:00">2022-06-13</time>
+                <time title="修改时间：2022-06-29 22:32:11" itemprop="dateModified" datetime="2022-06-29T22:32:11+08:00">2022-06-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -364,7 +364,11 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;User&gt; userlist = mapper.getUserLike(<span class="string">&quot;%李%&quot;</span>);</span><br></pre></td></tr></table></figure>
 
 <p>在sql拼接中使用通配符</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getUserLike&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.li.pojo.User&quot;</span>&gt;</span></span><br><span class="line">    select * from mybatis.user where name like &quot;%&quot;#&#123;value&#125;&quot;%&quot;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getUserLike&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.li.pojo.User&quot;</span>&gt;</span></span><br><span class="line">    select * from mybatis.user where name like &quot;%&quot;#&#123;value&#125;&quot;%&quot;;  // 会报错 ，下面两种均可以</span><br><span class="line">    select * from ssmbuild.books where bookName like &#x27;%$&#123;bookName&#125;%&#x27;;</span><br><span class="line">    select * from ssmbuild.books where bookName like concat(&#x27;%&#x27;,#&#123;bookName&#125;,&#x27;%&#x27;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
 
 <h2 id="配置解析"><a href="#配置解析" class="headerlink" title="配置解析"></a>配置解析</h2><h3 id="核心配置"><a href="#核心配置" class="headerlink" title="核心配置"></a>核心配置</h3><p><code>mybatis-config.xml </code>  MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">configuration（配置）</span><br><span class="line">properties（属性）</span><br><span class="line">settings（设置）</span><br><span class="line">typeAliases（类型别名）</span><br><span class="line">typeHandlers（类型处理器）</span><br><span class="line">objectFactory（对象工厂）</span><br><span class="line">plugins（插件）</span><br><span class="line">environments（环境配置）</span><br><span class="line">environment（环境变量）</span><br><span class="line">transactionManager（事务管理器）</span><br><span class="line">dataSource（数据源）</span><br><span class="line">databaseIdProvider（数据库厂商标识）</span><br><span class="line">mappers（映射器）</span><br></pre></td></tr></table></figure>
@@ -883,7 +887,10 @@
     <a href="/2022/05/13/%E7%94%B5%E8%84%91%E8%BF%9E%E4%B8%8Awifi%E6%B5%8F%E8%A7%88%E5%99%A8%E6%97%A0%E6%B3%95%E4%B8%8A%E7%BD%91%E9%97%AE%E9%A2%98/" rel="prev" title="电脑连上wifi浏览器无法上网问题">
       <i class="fa fa-chevron-left"></i> 电脑连上wifi浏览器无法上网问题
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/06/14/springmvc/" rel="next" title="springmvc">
+      springmvc <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -956,7 +963,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
