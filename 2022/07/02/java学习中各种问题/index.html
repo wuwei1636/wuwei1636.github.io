@@ -22,7 +22,7 @@
 
   <meta name="description" content="总结java学习过程中遇见的问题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java学习中各种问题">
+<meta property="og:title" content="web学习中各种问题">
 <meta property="og:url" content="http://www.nan-bluesky.top/2022/07/02/java%E5%AD%A6%E4%B9%A0%E4%B8%AD%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="南的个人博客">
 <meta property="og:description" content="总结java学习过程中遇见的问题">
@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202210271733612.png">
 <meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202210271732719.png">
 <meta property="article:published_time" content="2022-07-02T02:55:26.000Z">
-<meta property="article:modified_time" content="2022-12-31T06:29:18.674Z">
+<meta property="article:modified_time" content="2023-01-06T03:01:09.865Z">
 <meta property="article:author" content="li kunsong">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -55,7 +55,7 @@
   };
 </script>
 
-  <title>java学习中各种问题 | 南的个人博客</title>
+  <title>web学习中各种问题 | 南的个人博客</title>
   
 
 
@@ -215,7 +215,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          java学习中各种问题
+          web学习中各种问题
         </h1>
 
         <div class="post-meta">
@@ -237,7 +237,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-12-31 14:29:18" itemprop="dateModified" datetime="2022-12-31T14:29:18+08:00">2022-12-31</time>
+                <time title="修改时间：2023-01-06 11:01:09" itemprop="dateModified" datetime="2023-01-06T11:01:09+08:00">2023-01-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -325,6 +325,19 @@
 </blockquote>
 <p>解决办法：</p>
 <p>在下载的时候添加后缀即可 <code>--no-fund</code></p>
+<h1 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h1><h2 id="启动项目报错"><a href="#启动项目报错" class="headerlink" title="启动项目报错"></a>启动项目报错</h2><blockquote>
+<p>Error: error:0308010C:digital envelope routines::unsupported</p>
+</blockquote>
+<p>问题原因：</p>
+<p>​        node v17版本以后，使用了新的OpenSSL3.0，OpenSSL3.0对允许算法和密钥大小增加了严格的限制，可能会对生态系统造成一些影响。故此以前的项目在升级 nodejs 版本后会报错。</p>
+<p>解决办法：</p>
+<p>​      修改package.json，在相关构建命令之前加入<code>set NODE_OPTIONS=–openssl-legacy-provider</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">   <span class="attr">&quot;serve&quot;</span><span class="punctuation">:</span> <span class="string">&quot;SET NODE_OPTIONS=--openssl-legacy-provider &amp;&amp; vue-cli-service serve&quot;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;SET NODE_OPTIONS=--openssl-legacy-provider &amp;&amp; vue-cli-service build&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h1 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h1><h2 id="div-中-img-和-span-同时水平居中"><a href="#div-中-img-和-span-同时水平居中" class="headerlink" title="div 中 img 和 span 同时水平居中"></a><code>div</code> 中 <code>img</code> 和 <code>span</code> 同时水平居中</h2><p>解决方法： 在 img 和 span 中同时加上 <code>vertical-align : middle </code>即可    </p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;height: 35px;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;./images/xxx.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span> <span class="attr">style</span>=<span class="string">&quot;vertical-align: middle;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">&quot; vertical-align: middle;&quot;</span>&gt;</span>xxxx<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -389,7 +402,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.nan-bluesky.top/2022/07/02/java%E5%AD%A6%E4%B9%A0%E4%B8%AD%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98/" title="java学习中各种问题">http://www.nan-bluesky.top/2022/07/02/java学习中各种问题/</a>
+    <a href="http://www.nan-bluesky.top/2022/07/02/java%E5%AD%A6%E4%B9%A0%E4%B8%AD%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98/" title="web学习中各种问题">http://www.nan-bluesky.top/2022/07/02/java学习中各种问题/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -474,7 +487,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#springboot"><span class="nav-number">1.</span> <span class="nav-text">springboot</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#application-properties%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81"><span class="nav-number">1.1.</span> <span class="nav-text">application.properties中文乱码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%8Cswagger%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE"><span class="nav-number">1.2.</span> <span class="nav-text">配置完swagger无法访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-server%E9%97%AA%E9%80%80"><span class="nav-number">1.3.</span> <span class="nav-text">Redis-server闪退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zookeeper"><span class="nav-number">1.4.</span> <span class="nav-text">zookeeper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8Cspringboot%E9%A1%B9%E7%9B%AE%E6%97%B6%EF%BC%8C%E8%BF%90%E8%A1%8C%E7%B1%BB%E4%B8%8A%E6%9C%89%E7%BA%A2%E8%89%B2%E5%8F%89%E5%8F%B7"><span class="nav-number">1.5.</span> <span class="nav-text">运行springboot项目时，运行类上有红色叉号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nested-exception-is-org-apache-ibatis-binding-BindingException-Parameter-%E2%80%98XXX%E2%80%99-not-found"><span class="nav-number">1.6.</span> <span class="nav-text">nested exception is org.apache.ibatis.binding.BindingException: Parameter ‘XXX’ not found</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Maven"><span class="nav-number">2.</span> <span class="nav-text">Maven</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E5%A4%96%E9%83%A8%E5%AF%BC%E5%85%A5jar%E5%8C%85%E5%88%B0pom%E4%B8%AD"><span class="nav-number">2.1.</span> <span class="nav-text">从外部导入jar包到pom中</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NPM"><span class="nav-number">3.</span> <span class="nav-text">NPM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF"><span class="nav-number">4.</span> <span class="nav-text">前端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#div-%E4%B8%AD-img-%E5%92%8C-span-%E5%90%8C%E6%97%B6%E6%B0%B4%E5%B9%B3%E5%B1%85%E4%B8%AD"><span class="nav-number">4.1.</span> <span class="nav-text">div 中 img 和 span 同时水平居中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#div%E4%B8%ADimg%E5%B1%85%E4%B8%AD%E6%98%BE%E7%A4%BA"><span class="nav-number">4.2.</span> <span class="nav-text">div中img居中显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E9%A1%B5%E4%B8%80%E7%9B%B4%E5%87%BA%E7%8E%B0%E8%93%9D%E8%89%B2%E8%83%8C%E6%99%AF%E8%A7%A3%E5%86%B3"><span class="nav-number">4.3.</span> <span class="nav-text">网页一直出现蓝色背景解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p%E6%A0%87%E7%AD%BE%E5%86%85%E5%AE%B9%E8%B6%85%E8%BF%87%E4%B8%80%E8%A1%8C%EF%BC%88%E5%A4%9A%E8%A1%8C%EF%BC%89%E8%87%AA%E5%8A%A8%E7%9C%81%E7%95%A5"><span class="nav-number">4.4.</span> <span class="nav-text">p标签内容超过一行（多行）自动省略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E8%A1%8C%E7%9C%81%E7%95%A5"><span class="nav-number">4.4.1.</span> <span class="nav-text">单行省略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%A1%8C%E7%9C%81%E7%95%A5"><span class="nav-number">4.4.2.</span> <span class="nav-text">多行省略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E6%82%AC%E6%B5%AE%E4%BD%BF%E9%A2%9C%E8%89%B2%E5%B9%B3%E6%BB%91%E5%8F%98%E6%8D%A2"><span class="nav-number">4.5.</span> <span class="nav-text">鼠标悬浮使颜色平滑变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E5%8F%98%E9%BB%91%E7%99%BD"><span class="nav-number">4.6.</span> <span class="nav-text">网站变黑白</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E5%90%8E%E7%AB%AF%E5%AF%B9%E6%8E%A5"><span class="nav-number">5.</span> <span class="nav-text">前后端对接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E8%A1%A8%E6%A0%BC"><span class="nav-number">5.1.</span> <span class="nav-text">动态生成表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E7%9A%84%E8%A1%A8%E6%A0%BC%E5%AE%9E%E7%8E%B0%E6%AD%A3%E5%B8%B8%E7%9A%84%E7%82%B9%E5%87%BB%E5%8A%9F%E8%83%BD"><span class="nav-number">5.2.</span> <span class="nav-text">动态生成的表格实现正常的点击功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jq%E8%AE%BE%E8%AE%A1%E8%B7%B3%E8%BD%AC"><span class="nav-number">5.3.</span> <span class="nav-text">jq设计跳转</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#springboot"><span class="nav-number">1.</span> <span class="nav-text">springboot</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#application-properties%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81"><span class="nav-number">1.1.</span> <span class="nav-text">application.properties中文乱码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%8Cswagger%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE"><span class="nav-number">1.2.</span> <span class="nav-text">配置完swagger无法访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-server%E9%97%AA%E9%80%80"><span class="nav-number">1.3.</span> <span class="nav-text">Redis-server闪退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zookeeper"><span class="nav-number">1.4.</span> <span class="nav-text">zookeeper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8Cspringboot%E9%A1%B9%E7%9B%AE%E6%97%B6%EF%BC%8C%E8%BF%90%E8%A1%8C%E7%B1%BB%E4%B8%8A%E6%9C%89%E7%BA%A2%E8%89%B2%E5%8F%89%E5%8F%B7"><span class="nav-number">1.5.</span> <span class="nav-text">运行springboot项目时，运行类上有红色叉号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nested-exception-is-org-apache-ibatis-binding-BindingException-Parameter-%E2%80%98XXX%E2%80%99-not-found"><span class="nav-number">1.6.</span> <span class="nav-text">nested exception is org.apache.ibatis.binding.BindingException: Parameter ‘XXX’ not found</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Maven"><span class="nav-number">2.</span> <span class="nav-text">Maven</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E5%A4%96%E9%83%A8%E5%AF%BC%E5%85%A5jar%E5%8C%85%E5%88%B0pom%E4%B8%AD"><span class="nav-number">2.1.</span> <span class="nav-text">从外部导入jar包到pom中</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NPM"><span class="nav-number">3.</span> <span class="nav-text">NPM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue"><span class="nav-number">4.</span> <span class="nav-text">Vue</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E9%A1%B9%E7%9B%AE%E6%8A%A5%E9%94%99"><span class="nav-number">4.1.</span> <span class="nav-text">启动项目报错</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF"><span class="nav-number">5.</span> <span class="nav-text">前端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#div-%E4%B8%AD-img-%E5%92%8C-span-%E5%90%8C%E6%97%B6%E6%B0%B4%E5%B9%B3%E5%B1%85%E4%B8%AD"><span class="nav-number">5.1.</span> <span class="nav-text">div 中 img 和 span 同时水平居中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#div%E4%B8%ADimg%E5%B1%85%E4%B8%AD%E6%98%BE%E7%A4%BA"><span class="nav-number">5.2.</span> <span class="nav-text">div中img居中显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E9%A1%B5%E4%B8%80%E7%9B%B4%E5%87%BA%E7%8E%B0%E8%93%9D%E8%89%B2%E8%83%8C%E6%99%AF%E8%A7%A3%E5%86%B3"><span class="nav-number">5.3.</span> <span class="nav-text">网页一直出现蓝色背景解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p%E6%A0%87%E7%AD%BE%E5%86%85%E5%AE%B9%E8%B6%85%E8%BF%87%E4%B8%80%E8%A1%8C%EF%BC%88%E5%A4%9A%E8%A1%8C%EF%BC%89%E8%87%AA%E5%8A%A8%E7%9C%81%E7%95%A5"><span class="nav-number">5.4.</span> <span class="nav-text">p标签内容超过一行（多行）自动省略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E8%A1%8C%E7%9C%81%E7%95%A5"><span class="nav-number">5.4.1.</span> <span class="nav-text">单行省略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%A1%8C%E7%9C%81%E7%95%A5"><span class="nav-number">5.4.2.</span> <span class="nav-text">多行省略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E6%82%AC%E6%B5%AE%E4%BD%BF%E9%A2%9C%E8%89%B2%E5%B9%B3%E6%BB%91%E5%8F%98%E6%8D%A2"><span class="nav-number">5.5.</span> <span class="nav-text">鼠标悬浮使颜色平滑变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E5%8F%98%E9%BB%91%E7%99%BD"><span class="nav-number">5.6.</span> <span class="nav-text">网站变黑白</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E5%90%8E%E7%AB%AF%E5%AF%B9%E6%8E%A5"><span class="nav-number">6.</span> <span class="nav-text">前后端对接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E8%A1%A8%E6%A0%BC"><span class="nav-number">6.1.</span> <span class="nav-text">动态生成表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E7%9A%84%E8%A1%A8%E6%A0%BC%E5%AE%9E%E7%8E%B0%E6%AD%A3%E5%B8%B8%E7%9A%84%E7%82%B9%E5%87%BB%E5%8A%9F%E8%83%BD"><span class="nav-number">6.2.</span> <span class="nav-text">动态生成的表格实现正常的点击功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jq%E8%AE%BE%E8%AE%A1%E8%B7%B3%E8%BD%AC"><span class="nav-number">6.3.</span> <span class="nav-text">jq设计跳转</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -546,7 +559,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
