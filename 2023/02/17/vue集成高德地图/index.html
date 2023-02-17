@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.nan-bluesky.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":false,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="Vue集成高德地图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue集成高德地图">
+<meta property="og:url" content="http://www.nan-bluesky.top/2023/02/17/vue%E9%9B%86%E6%88%90%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE/index.html">
+<meta property="og:site_name" content="南的个人博客">
+<meta property="og:description" content="Vue集成高德地图">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202302172029158.png">
+<meta property="article:published_time" content="2023-02-17T12:09:48.000Z">
+<meta property="article:modified_time" content="2023-02-17T12:32:42.178Z">
+<meta property="article:author" content="li kunsong">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202302172029158.png">
+
+<link rel="canonical" href="http://www.nan-bluesky.top/2023/02/17/vue%E9%9B%86%E6%88%90%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Vue集成高德地图 | 南的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">
+    <a target="_blank" rel="noopener" href="https://github.com/wuwei1636" class="github-corner" aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+    </path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+    </path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+    </svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    </div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">南的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">遇事不决，但问春风</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.nan-bluesky.top/2023/02/17/vue%E9%9B%86%E6%88%90%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="li kunsong">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue集成高德地图
+        </h1>
+
+        <div class="post-meta">
+	
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-02-17 20:09:48 / 修改时间：20:32:42" itemprop="dateCreated datePublished" datetime="2023-02-17T20:09:48+08:00">2023-02-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">Vue集成高德地图</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>最近在做一个Vue集成高德地图的项目，中间遇到了很多问题，所以记录一下</p>
+</blockquote>
+<h1 id="Vue-ElementUi中国省市区-省市，三级-两级联动选择"><a href="#Vue-ElementUi中国省市区-省市，三级-两级联动选择" class="headerlink" title="Vue+ElementUi中国省市区/省市，三级/两级联动选择"></a>Vue+ElementUi中国省市区/省市，三级/两级联动选择</h1><p>Vue集成高德地图之前，首先要实现Element UI对各个省市的选择</p>
+<h2 id="安装城市数据"><a href="#安装城市数据" class="headerlink" title="安装城市数据"></a>安装城市数据</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install element-china-area-data -S</span><br></pre></td></tr></table></figure>
+
+<h2 id="省市不带“全部”的二级联动"><a href="#省市不带“全部”的二级联动" class="headerlink" title="省市不带“全部”的二级联动"></a>省市不带“全部”的二级联动</h2><ol>
+<li><p>导入二级数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123; provinceAndCityData &#125; from &#x27;element-china-area-data&#x27;</span><br></pre></td></tr></table></figure></li>
+<li><p>HTML部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;el-cascader</span><br><span class="line">      size=&quot;large&quot;</span><br><span class="line">      :options=&quot;options&quot;</span><br><span class="line">      v-model=&quot;selectedOptions&quot;</span><br><span class="line">      @change=&quot;handleChange&quot;&gt;</span><br><span class="line">    &lt;/el-cascader&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>Js部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        options: provinceAndCityData,</span><br><span class="line">        selectedOptions: []</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"> </span><br><span class="line">    methods: &#123;</span><br><span class="line">      handleChange () &#123;</span><br><span class="line">        var loc = &quot;&quot;;</span><br><span class="line">        for (let i = 0; i &lt; this.selectedOptions.length; i++) &#123;</span><br><span class="line">            loc += CodeToText[this.selectedOptions[i]];</span><br><span class="line">        &#125;</span><br><span class="line">        console.log(loc)//打印区域码所对应的属性值即中文地址</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">     //也可以这样写</span><br><span class="line">    handleChange (value) &#123;</span><br><span class="line">        console.log(value)</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="省市带“全部”的二级联动"><a href="#省市带“全部”的二级联动" class="headerlink" title="省市带“全部”的二级联动"></a>省市带“全部”的二级联动</h2><ol>
+<li><p>导入二级数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123; provinceAndCityDataPlus  &#125; from &#x27;element-china-area-data&#x27;</span><br></pre></td></tr></table></figure></li>
+<li><p>HTML部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;el-cascader</span><br><span class="line">      size=&quot;large&quot;</span><br><span class="line">      :options=&quot;options&quot;</span><br><span class="line">      v-model=&quot;selectedOptions&quot;</span><br><span class="line">      @change=&quot;handleChange&quot;&gt;</span><br><span class="line">    &lt;/el-cascader&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>Js部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        options: provinceAndCityDataPlus ,</span><br><span class="line">        selectedOptions: []</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"> </span><br><span class="line">    methods: &#123;</span><br><span class="line">      handleChange () &#123;</span><br><span class="line">        var loc = &quot;&quot;;</span><br><span class="line">        for (let i = 0; i &lt; this.selectedOptions.length; i++) &#123;</span><br><span class="line">            loc += CodeToText[this.selectedOptions[i]];</span><br><span class="line">        &#125;</span><br><span class="line">        console.log(loc)//打印区域码所对应的属性值即中文地址</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">     //也可以这样写</span><br><span class="line">    handleChange (value) &#123;</span><br><span class="line">        console.log(value)</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="省市不带全部的三级联动"><a href="#省市不带全部的三级联动" class="headerlink" title="省市不带全部的三级联动"></a>省市不带全部的三级联动</h2><ol>
+<li><p>导入二级数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123; regionData &#125; from &#x27;element-china-area-data&#x27;</span><br></pre></td></tr></table></figure></li>
+<li><p>HTML部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;el-cascader</span><br><span class="line">      size=&quot;large&quot;</span><br><span class="line">      :options=&quot;options&quot;</span><br><span class="line">      v-model=&quot;selectedOptions&quot;</span><br><span class="line">      @change=&quot;handleChange&quot;&gt;</span><br><span class="line">    &lt;/el-cascader&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>Js部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        options: regionData,</span><br><span class="line">        selectedOptions: []</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"> </span><br><span class="line">    methods: &#123;</span><br><span class="line">      handleChange () &#123;</span><br><span class="line">        var loc = &quot;&quot;;</span><br><span class="line">        for (let i = 0; i &lt; this.selectedOptions.length; i++) &#123;</span><br><span class="line">            loc += CodeToText[this.selectedOptions[i]];</span><br><span class="line">        &#125;</span><br><span class="line">        console.log(loc)//打印区域码所对应的属性值即中文地址</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">     //也可以这样写</span><br><span class="line">    handleChange (value) &#123;</span><br><span class="line">        console.log(value)</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>示例</p>
+<p><img src="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202302172029158.png" alt="image-20230217202904143"></p>
+</li>
+</ol>
+<h2 id="省市带全部的三级联动"><a href="#省市带全部的三级联动" class="headerlink" title="省市带全部的三级联动"></a>省市带全部的三级联动</h2><ol>
+<li><p>导入二级数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123; regionDataPlus  &#125; from &#x27;element-china-area-data&#x27;</span><br></pre></td></tr></table></figure></li>
+<li><p>HTML部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;el-cascader</span><br><span class="line">      size=&quot;large&quot;</span><br><span class="line">      :options=&quot;options&quot;</span><br><span class="line">      v-model=&quot;selectedOptions&quot;</span><br><span class="line">      @change=&quot;handleChange&quot;&gt;</span><br><span class="line">    &lt;/el-cascader&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>Js部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        options: regionDataPlus ,</span><br><span class="line">        selectedOptions: []</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"> </span><br><span class="line">    methods: &#123;</span><br><span class="line">      handleChange () &#123;</span><br><span class="line">        var loc = &quot;&quot;;</span><br><span class="line">        for (let i = 0; i &lt; this.selectedOptions.length; i++) &#123;</span><br><span class="line">            loc += CodeToText[this.selectedOptions[i]];</span><br><span class="line">        &#125;</span><br><span class="line">        console.log(loc)//打印区域码所对应的属性值即中文地址</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">     //也可以这样写</span><br><span class="line">    handleChange (value) &#123;</span><br><span class="line">        console.log(value)</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="Vue集成高德地图"><a href="#Vue集成高德地图" class="headerlink" title="Vue集成高德地图"></a>Vue集成高德地图</h1><h2 id="首先创建一个高德地图的应用"><a href="#首先创建一个高德地图的应用" class="headerlink" title="首先创建一个高德地图的应用"></a>首先创建一个高德地图的应用</h2><p>高德地图的官网网址上有很详细的介绍，自行观看。<a target="_blank" rel="noopener" href="https://lbs.amap.com/api/jsapi-v2/guide/webcli/map-vue1">https://lbs.amap.com/api/jsapi-v2/guide/webcli/map-vue1</a></p>
+<p>建议先将官网上的代码跑出来在看下面的。</p>
+<h2 id="获取高德地图的api"><a href="#获取高德地图的api" class="headerlink" title="获取高德地图的api"></a>获取高德地图的api</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i @amap/amap-jsapi-loader --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="实现路线规划"><a href="#实现路线规划" class="headerlink" title="实现路线规划"></a>实现路线规划</h2><p>官方api：<a target="_blank" rel="noopener" href="https://lbs.amap.com/api/javascript-api/guide/services/navigation">https://lbs.amap.com/api/javascript-api/guide/services/navigation</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;el-form :model=&quot;diaform&quot; :inline=&quot;true&quot; &gt;</span><br><span class="line">            &lt;el-form-item label=&quot;派送地点&quot; &gt;</span><br><span class="line">                &lt;el-cascader</span><br><span class="line">                    size=&quot;large&quot;</span><br><span class="line">                    :options=&quot;diaform.options&quot;</span><br><span class="line">                    v-model=&quot;diaform.selectedOptions&quot;</span><br><span class="line">                    @change=&quot;handleChange&quot;&gt;</span><br><span class="line">                &lt;/el-cascader&gt;</span><br><span class="line">            &lt;/el-form-item&gt;</span><br><span class="line">            &lt;el-form-item&gt;</span><br><span class="line">                &lt;el-button @click=&quot;goView&quot;&gt;</span><br><span class="line">                    查看路线图</span><br><span class="line">                &lt;/el-button&gt;</span><br><span class="line">            &lt;/el-form-item&gt;</span><br><span class="line">            &lt;el-form-item&gt;</span><br><span class="line">                &lt;el-button&gt;</span><br><span class="line">                    确认派送</span><br><span class="line">                &lt;/el-button&gt;</span><br><span class="line">            &lt;/el-form-item&gt;</span><br><span class="line">        &lt;/el-form&gt;</span><br><span class="line">      &lt;div id=&quot;container&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;script&gt;</span><br><span class="line">  import AMapLoader from &#x27;@amap/amap-jsapi-loader&#x27;</span><br><span class="line">  import &#123; regionData , CodeToText   &#125; from &#x27;element-china-area-data&#x27;</span><br><span class="line">  export default &#123;</span><br><span class="line">    name: &#x27;AMapView&#x27;,</span><br><span class="line">    data() &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        map: null,</span><br><span class="line">        startName: &#x27;北京市&#x27;,</span><br><span class="line">        endName: &#x27;&#x27;,</span><br><span class="line">        driving: null,</span><br><span class="line">        diaform: &#123;</span><br><span class="line">            options: regionData ,</span><br><span class="line">            selectedOptions: [],</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    mounted() &#123;</span><br><span class="line">      window._AMapSecurityConfig = &#123;</span><br><span class="line">        securityJsCode: &#x27;22ab9c534d1fef92d2d9b667830f3613&#x27; // 申请key对应的秘钥</span><br><span class="line">      &#125;</span><br><span class="line">      // DOM初始化完成进行地图初始化</span><br><span class="line">      this.initMap()</span><br><span class="line">    &#125;, </span><br><span class="line">    methods: &#123;</span><br><span class="line">        initMap() &#123;</span><br><span class="line">            AMapLoader.load(&#123;</span><br><span class="line">            key: &#x27;a13639d2a316c45690b8dac7d0cc9428&#x27;, // 申请好的Web端开发者Key，首次调用 load 时必填</span><br><span class="line">            version: &#x27;2.0&#x27;, // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15</span><br><span class="line">            plugins: [&#x27;AMap.ToolBar&#x27;, &#x27;AMap.Driving&#x27;, &#x27;AMap.AutoComplete&#x27;] // 需要使用的的插件列表，如比例尺&#x27;AMap.Scale&#x27;等</span><br><span class="line">            &#125;).then(AMap =&gt; &#123;</span><br><span class="line">            this.map = new AMap.Map(&#x27;container&#x27;, &#123; // 设置地图容器id</span><br><span class="line">                viewMode: &#x27;3D&#x27;, // 是否为3D地图模式</span><br><span class="line">                zoom: 5, // 初始化地图级别</span><br><span class="line">                center: [105.602725, 37.076636] // 初始化地图中心点位置</span><br><span class="line">            &#125;)</span><br><span class="line">            const autoOptions = &#123;</span><br><span class="line">                // city 限定城市，默认全国</span><br><span class="line">                city: &#x27;全国&#x27;,</span><br><span class="line">                input: &#x27;start&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">            // 实例化AutoComplete</span><br><span class="line">            const autoComplete = new AMap.AutoComplete(autoOptions)</span><br><span class="line">            const autoOptions2 = &#123;</span><br><span class="line">                // city 限定城市，默认全国</span><br><span class="line">                city: &#x27;全国&#x27;,</span><br><span class="line">                input: &#x27;end&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">            // 实例化AutoComplete</span><br><span class="line">            const autoComplete2 = new AMap.AutoComplete(autoOptions2)</span><br><span class="line">            // 根据关键字进行搜索</span><br><span class="line">            /* autoComplete.search(this.startName, (status, result) =&gt; &#123;</span><br><span class="line">                // 搜索成功时，result即是对应的匹配数据</span><br><span class="line">                console.log(result)</span><br><span class="line">            &#125;) */</span><br><span class="line">            &#125;).catch(e =&gt; &#123;</span><br><span class="line">            console.log(e)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;,</span><br><span class="line">        // 根据 startName 和 endName 来选择路线</span><br><span class="line">        goView() &#123;</span><br><span class="line">            // eslint-disable-next-line no-undef</span><br><span class="line">            // 清除上一次规划的路线</span><br><span class="line">            if(this.driving)&#123;</span><br><span class="line">                this.driving.clear()</span><br><span class="line">            &#125;</span><br><span class="line">            this.driving = new AMap.Driving(&#123;</span><br><span class="line">                </span><br><span class="line">                map: this.map,</span><br><span class="line">                // 驾车路线规划策略，AMap.DrivingPolicy.LEAST_TIME是最快捷模式</span><br><span class="line">                // eslint-disable-next-line no-undef</span><br><span class="line">                policy: AMap.DrivingPolicy.LEAST_TIME</span><br><span class="line">            &#125;)</span><br><span class="line"></span><br><span class="line">            const points = [</span><br><span class="line">                &#123; keyword: this.startName, city: &#x27;全国&#x27; &#125;,</span><br><span class="line">                &#123; keyword: this.endName, city: &#x27;全国&#x27; &#125;</span><br><span class="line">            ]</span><br><span class="line"></span><br><span class="line">            var opts = &#123;</span><br><span class="line">                // 途经点参数，最多支持传入16个途经点</span><br><span class="line">                waypoints: [</span><br><span class="line">                    &#123; keyword: &#x27;北京站&#x27;, city:&#x27;北京&#x27; &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">    </span><br><span class="line">            this.driving.search(points, (status, result) =&gt; &#123;</span><br><span class="line">                // 未出错时，result即是对应的路线规划方案</span><br><span class="line">                console.log(&#x27;status=&#x27;, status)</span><br><span class="line">                console.log(&#x27;result=&#x27;, result)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        // 获取选取的地址</span><br><span class="line">        handleChange () &#123;</span><br><span class="line">            var loc = &quot;&quot;;</span><br><span class="line">            for (let i = 0; i &lt; this.diaform.selectedOptions.length; i++) &#123;</span><br><span class="line">                loc += CodeToText[this.diaform.selectedOptions[i]];</span><br><span class="line">            &#125;</span><br><span class="line">            this.endName = loc</span><br><span class="line">            console.log(loc)//打印区域码所对应的属性值即中文地址</span><br><span class="line">        &#125;,  </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">  &lt;style  scoped&gt;</span><br><span class="line"></span><br><span class="line"> * &#123;</span><br><span class="line">    line-height: normal;</span><br><span class="line">    text-align: left;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">  #container&#123;</span><br><span class="line">    padding:0px;</span><br><span class="line">    margin: 0px;</span><br><span class="line">    width: 100%;</span><br><span class="line">    height: 400px;</span><br><span class="line">  &#125;</span><br><span class="line">  #panel &#123;</span><br><span class="line">    position: fixed;</span><br><span class="line">    background-color: white;</span><br><span class="line">    max-height: 90%;</span><br><span class="line">    overflow-y: auto;</span><br><span class="line">    top: 10px;</span><br><span class="line">    right: 10px;</span><br><span class="line">    width: 280px;</span><br><span class="line">  &#125;</span><br><span class="line">  #panel .amap-call &#123;</span><br><span class="line">    background-color: #009cf9;</span><br><span class="line">    border-top-left-radius: 4px;</span><br><span class="line">    border-top-right-radius: 4px;</span><br><span class="line">  &#125;</span><br><span class="line">  #panel .amap-lib-driving &#123;</span><br><span class="line">    border-bottom-left-radius: 4px;</span><br><span class="line">    border-bottom-right-radius: 4px;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">  &#125;</span><br><span class="line">  &lt;/style&gt;</span><br><span class="line">  </span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>li kunsong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.nan-bluesky.top/2023/02/17/vue%E9%9B%86%E6%88%90%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE/" title="Vue集成高德地图">http://www.nan-bluesky.top/2023/02/17/vue集成高德地图/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/10/30/SpringBoot%20%E6%95%B4%E5%90%88%20shiro/" rel="prev" title="springboot整合shiro">
+      <i class="fa fa-chevron-left"></i> springboot整合shiro
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-ElementUi%E4%B8%AD%E5%9B%BD%E7%9C%81%E5%B8%82%E5%8C%BA-%E7%9C%81%E5%B8%82%EF%BC%8C%E4%B8%89%E7%BA%A7-%E4%B8%A4%E7%BA%A7%E8%81%94%E5%8A%A8%E9%80%89%E6%8B%A9"><span class="nav-number">1.</span> <span class="nav-text">Vue+ElementUi中国省市区&#x2F;省市，三级&#x2F;两级联动选择</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%9F%8E%E5%B8%82%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.</span> <span class="nav-text">安装城市数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9C%81%E5%B8%82%E4%B8%8D%E5%B8%A6%E2%80%9C%E5%85%A8%E9%83%A8%E2%80%9D%E7%9A%84%E4%BA%8C%E7%BA%A7%E8%81%94%E5%8A%A8"><span class="nav-number">1.2.</span> <span class="nav-text">省市不带“全部”的二级联动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9C%81%E5%B8%82%E5%B8%A6%E2%80%9C%E5%85%A8%E9%83%A8%E2%80%9D%E7%9A%84%E4%BA%8C%E7%BA%A7%E8%81%94%E5%8A%A8"><span class="nav-number">1.3.</span> <span class="nav-text">省市带“全部”的二级联动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9C%81%E5%B8%82%E4%B8%8D%E5%B8%A6%E5%85%A8%E9%83%A8%E7%9A%84%E4%B8%89%E7%BA%A7%E8%81%94%E5%8A%A8"><span class="nav-number">1.4.</span> <span class="nav-text">省市不带全部的三级联动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9C%81%E5%B8%82%E5%B8%A6%E5%85%A8%E9%83%A8%E7%9A%84%E4%B8%89%E7%BA%A7%E8%81%94%E5%8A%A8"><span class="nav-number">1.5.</span> <span class="nav-text">省市带全部的三级联动</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue%E9%9B%86%E6%88%90%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE"><span class="nav-number">2.</span> <span class="nav-text">Vue集成高德地图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A6%96%E5%85%88%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">2.1.</span> <span class="nav-text">首先创建一个高德地图的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E7%9A%84api"><span class="nav-number">2.2.</span> <span class="nav-text">获取高德地图的api</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%BA%BF%E8%A7%84%E5%88%92"><span class="nav-number">2.3.</span> <span class="nav-text">实现路线规划</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">li kunsong</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wuwei1636" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wuwei1636" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1537628435@qq.com" title="E-Mail → mailto:1537628435@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/streams_star?spm=1000.2115.3001.5343" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;streams_star?spm&#x3D;1000.2115.3001.5343" rel="noopener" target="_blank">CSDN</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">li kunsong</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+<script>
+!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+</script>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</html>
