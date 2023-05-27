@@ -1,168 +1,272 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>mysql安装和简单使用 | 南的个人博客</title><meta name="author" content="li kunsong"><meta name="copyright" content="li kunsong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="mysql的安装和基本使用方法">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.nan-bluesky.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":false,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="mysql的安装和基本使用方法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql安装和简单使用">
 <meta property="og:url" content="http://www.nan-bluesky.top/2022/04/28/mysql%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="南的个人博客">
 <meta property="og:description" content="mysql的安装和基本使用方法">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/avatar.jpg">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202204281826493.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202204281826495.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202204281826496.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202204281826497.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202205081406568.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202205081407022.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202205152356754.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202205152356756.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202205152356757.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202205152356758.png">
 <meta property="article:published_time" content="2022-04-28T08:56:28.000Z">
 <meta property="article:modified_time" content="2022-10-13T02:50:58.425Z">
 <meta property="article:author" content="li kunsong">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.nan-bluesky.top/2022/04/28/mysql%E5%AE%89%E8%A3%85/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  dateSuffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  source: {
-    justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isAnchor: false,
-  percent: {
-    toc: true,
-    rightside: false,
-  },
-  autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'mysql安装和简单使用',
-  isPost: true,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: true,
-  postUpdate: '2022-10-13 10:50:58'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
+<meta name="twitter:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202204281826493.png">
+
+<link rel="canonical" href="http://www.nan-bluesky.top/2022/04/28/mysql%E5%AE%89%E8%A3%85/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>mysql安装和简单使用 | 南的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
   }
 
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
+</head>
 
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">
+    <a target="_blank" rel="noopener" href="https://github.com/wuwei1636" class="github-corner" aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+    </path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+    </path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+    </svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    </div>
 
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
-      const link = document.createElement('link')
-      link.rel = 'stylesheet'
-      link.href = url
-      if (id) link.id = id
-      link.onerror = reject
-      link.onload = link.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        link.onload = link.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(link)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">南的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">遇事不决，但问春风</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
     
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
-        
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
     
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: transparent"><nav id="nav"><span id="blog-info"><a href="/" title="南的个人博客"><span class="site-name">南的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">mysql安装和简单使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-28T08:56:28.000Z" title="发表于 2022-04-28 16:56:28">2022-04-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-13T02:50:58.425Z" title="更新于 2022-10-13 10:50:58">2022-10-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/java/">java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="mysql安装和简单使用"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.nan-bluesky.top/2022/04/28/mysql%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="li kunsong">
+      <meta itemprop="description" content="遇事不决，但问春风">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mysql安装和简单使用
+        </h1>
+
+        <div class="post-meta">
+	
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-28 16:56:28" itemprop="dateCreated datePublished" datetime="2022-04-28T16:56:28+08:00">2022-04-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-13 10:50:58" itemprop="dateModified" datetime="2022-10-13T10:50:58+08:00">2022-10-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">mysql的安装和基本使用方法</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
 <p>之前学习php的时候，卸载了mysql，现在学习javaweb发现忘了怎么安装mysql，安装完了来记录一下，为了防止自己以后再次重新安装mysql不知道怎么办</p>
 </blockquote>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>我是下载的mysql安装包，不是下载的软件。<a target="_blank" rel="noopener" href="https://downloads.mysql.com/archives/community/">mysql安装包</a>，选择自己想要安装的版本，这里我选择的是5.7.27.</p>
@@ -239,4 +343,275 @@
 <p>下面是一个实例，可以作为参考</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.content.Intent;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.os.Looper;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.widget.Button;</span><br><span class="line"><span class="keyword">import</span> android.widget.EditText;</span><br><span class="line"><span class="keyword">import</span> android.widget.TextView;</span><br><span class="line"><span class="keyword">import</span> android.widget.Toast;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> androidx.appcompat.app.AppCompatActivity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.henu.eltfood.DataSystem.MySQLConnections;</span><br><span class="line"><span class="keyword">import</span> com.henu.eltfood.Main.register_view;</span><br><span class="line"><span class="keyword">import</span> com.henu.eltfood.R;</span><br><span class="line"><span class="keyword">import</span> com.henu.eltfood.util.Constant;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Myinfoname</span> <span class="keyword">extends</span> <span class="title class_">AppCompatActivity</span>  &#123;</span><br><span class="line">    Connection con;</span><br><span class="line">    <span class="type">PreparedStatement</span> <span class="variable">stmt</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">sql1</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(Bundle savedInstanceState)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_myinfoname);</span><br><span class="line"></span><br><span class="line">        <span class="type">EditText</span> <span class="variable">editq</span> <span class="operator">=</span> <span class="built_in">super</span>.findViewById(R.id.edit1);</span><br><span class="line">        <span class="type">TextView</span> <span class="variable">back4</span> <span class="operator">=</span> <span class="built_in">super</span>.findViewById(R.id.back4);</span><br><span class="line">        <span class="type">Button</span> <span class="variable">btn2</span> <span class="operator">=</span> <span class="built_in">super</span>.findViewById(R.id.mbtn2);</span><br><span class="line"></span><br><span class="line">        editq.setText(Constant.username);</span><br><span class="line">        back4.setOnClickListener(<span class="keyword">new</span> <span class="title class_">View</span>.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClick</span><span class="params">(View view)</span> &#123;</span><br><span class="line">                <span class="type">Intent</span> <span class="variable">i</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Intent</span>();</span><br><span class="line">                finish();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">		</span><br><span class="line">        btn2.setOnClickListener(<span class="keyword">new</span> <span class="title class_">View</span>.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClick</span><span class="params">(View view)</span> &#123;</span><br><span class="line">                <span class="comment">// 新建一个线程</span></span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">                        <span class="keyword">try</span>&#123;</span><br><span class="line">                            con = MySQLConnections.getConnection();</span><br><span class="line">                        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">                            Looper.prepare();</span><br><span class="line">                            Toast.makeText(Myinfoname.<span class="built_in">this</span>, <span class="string">&quot;连接数据库失败&quot;</span>, Toast.LENGTH_LONG).show();</span><br><span class="line">                            Looper.loop();</span><br><span class="line">                            e.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">try</span>&#123;</span><br><span class="line">                            <span class="comment">// sql语句</span></span><br><span class="line">                            sql1 = <span class="string">&quot;update account set username = ? where id = ?&quot;</span>;</span><br><span class="line">                            sql = <span class="string">&quot;select count(1) as sl from text&quot;</span>;</span><br><span class="line">                            stmt = con.prepareStatement(sql1);</span><br><span class="line">                        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">                            Looper.prepare();</span><br><span class="line">                            Toast.makeText(Myinfoname.<span class="built_in">this</span>, <span class="string">&quot;预编译失败&quot;</span>, Toast.LENGTH_LONG).show();</span><br><span class="line">                            Looper.loop();</span><br><span class="line">                            e.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">try</span>&#123;</span><br><span class="line">                            <span class="type">String</span> <span class="variable">fir</span> <span class="operator">=</span> editq.getText().toString();</span><br><span class="line">                            stmt.setString(<span class="number">1</span>,fir);</span><br><span class="line">                            <span class="comment">// Constant 是我自己写的一个静态类，用来存储登录进来用户的各种数据</span></span><br><span class="line">                            stmt.setInt(<span class="number">2</span>, Constant.id);</span><br><span class="line">                            <span class="type">int</span> <span class="variable">rs</span> <span class="operator">=</span> stmt.executeUpdate();</span><br><span class="line">                            <span class="keyword">if</span>(rs &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                                Looper.prepare();</span><br><span class="line">                                Toast.makeText(Myinfoname.<span class="built_in">this</span>,<span class="string">&quot;修改成功&quot;</span>, Toast.LENGTH_LONG).show();</span><br><span class="line">                                Looper.loop();</span><br><span class="line">                            &#125;</span><br><span class="line">                            <span class="keyword">else</span>&#123;</span><br><span class="line">                                Looper.prepare();</span><br><span class="line">                                Toast.makeText(Myinfoname.<span class="built_in">this</span>, <span class="string">&quot;修改失败&quot;</span>, Toast.LENGTH_LONG).show();</span><br><span class="line">                                Looper.loop();</span><br><span class="line">                            &#125;</span><br><span class="line"></span><br><span class="line">                        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">                            Looper.prepare();</span><br><span class="line">                            Toast.makeText(Myinfoname.<span class="built_in">this</span>, <span class="string">&quot;获取失败&quot;</span>, Toast.LENGTH_LONG).show();</span><br><span class="line">                            Looper.loop();</span><br><span class="line">                            e.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                    MySQLConnections.closeResource(con,<span class="literal">null</span>,<span class="literal">null</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;).start();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://www.nan-bluesky.top">li kunsong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.nan-bluesky.top/2022/04/28/mysql%E5%AE%89%E8%A3%85/">http://www.nan-bluesky.top/2022/04/28/mysql%E5%AE%89%E8%A3%85/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.nan-bluesky.top" target="_blank">南的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/java/">java</a></div><div class="post_share"><div class="social-share" data-image="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/05/01/coding/" title="huffman-coding"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">huffman-coding</div></div></a></div><div class="next-post pull-right"><a href="/2022/04/23/javaweb%E5%AD%A6%E4%B9%A0/" title="javaweb学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">javaweb学习</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/07/02/web%E5%AD%A6%E4%B9%A0%E4%B8%AD%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98/" title="web学习中各种问题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-02</div><div class="title">web学习中各种问题</div></div></a></div><div><a href="/2022/10/30/SpringBoot%20%E6%95%B4%E5%90%88%20shiro/" title="springboot整合shiro"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-30</div><div class="title">springboot整合shiro</div></div></a></div><div><a href="/2022/07/07/springcloud/" title="springcloud"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-07</div><div class="title">springcloud</div></div></a></div><div><a href="/2022/07/01/springboot/" title="springboot"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-01</div><div class="title">springboot</div></div></a></div><div><a href="/2022/06/14/springmvc/" title="springmvc"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-14</div><div class="title">springmvc</div></div></a></div><div><a href="/2022/06/06/spring/" title="spring"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-06</div><div class="title">spring</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">li kunsong</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wuwei1636" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1537628435@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">1.1.</span> <span class="toc-text">配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96mysql"><span class="toc-number">1.2.</span> <span class="toc-text">初始化mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8mysql"><span class="toc-number">1.3.</span> <span class="toc-text">启动mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9mysql%E5%AF%86%E7%A0%81"><span class="toc-number">1.4.</span> <span class="toc-text">修改mysql密码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">MySQL简单使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">2.1.</span> <span class="toc-text">MySQL数据库的操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E8%A1%A8%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">2.2.</span> <span class="toc-text">MySQL表的操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%9A%84%E5%85%B7%E4%BD%93%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.3.</span> <span class="toc-text">MySQL创建表的具体类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.4.</span> <span class="toc-text">MySQL查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.5.</span> <span class="toc-text">连接查询和聚合查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL-CRUD%E6%93%8D%E4%BD%9C"><span class="toc-number">2.6.</span> <span class="toc-text">MySQL-CRUD操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%A2%9E%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="toc-number">2.6.1.</span> <span class="toc-text">1.增加数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="toc-number">2.6.2.</span> <span class="toc-text">2.修改数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="toc-number">2.6.3.</span> <span class="toc-text">3.删除数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E6%95%B0%E6%8D%AE-%E5%A4%87%E4%BB%BD%E5%AF%BC%E5%87%BA"><span class="toc-number">2.7.</span> <span class="toc-text">MySQL数据-备份导出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E6%95%B0%E6%8D%AE-%E6%81%A2%E5%A4%8D%E5%AF%BC%E5%85%A5"><span class="toc-number">2.8.</span> <span class="toc-text">MySQL数据-恢复导入</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8Java%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88javaweb-Android%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">在Java中使用数据库（javaweb  Android）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#idea%E8%BF%9E%E6%8E%A5mysql"><span class="toc-number">3.1.</span> <span class="toc-text">idea连接mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-Studio-%E8%BF%9E%E6%8E%A5Mysql"><span class="toc-number">3.2.</span> <span class="toc-text">Android Studio 连接Mysql</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8mainifests-AndroidManifest-xml%E4%B8%8B%E5%8A%A0%E5%85%A5%E4%B8%80%E4%B8%8B%E4%B8%A4%E8%A1%8C%E4%BB%A3%E7%A0%81"><span class="toc-number">3.2.1.</span> <span class="toc-text">在mainifests&#x2F;AndroidManifest.xml下加入一下两行代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E5%B7%A5%E7%A8%8B%E5%AF%BC%E5%85%A5mysql-jar%E5%8C%85"><span class="toc-number">3.2.2.</span> <span class="toc-text">为工程导入mysql.jar包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%8C%E4%BD%BF%E7%94%A8jdbc"><span class="toc-number">3.2.3.</span> <span class="toc-text">连接数据库，使用jdbc</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8Android%E6%B4%BB%E5%8A%A8%E4%B8%8B%E7%BC%96%E5%86%99%E6%B4%BB%E5%8A%A8%E7%9A%84%E7%B1%BB%EF%BC%8C%E8%B0%83%E7%94%A8mysql"><span class="toc-number">3.2.4.</span> <span class="toc-text">在Android活动下编写活动的类，调用mysql</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/" title="数据结构复习">数据结构复习</a><time datetime="2023-05-21T14:16:43.000Z" title="发表于 2023-05-21 22:16:43">2023-05-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/21/Vue%E7%BB%93%E5%90%88Springboot%E5%AE%9E%E7%8E%B0%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/" title="Vue+Springboot实现完整项目记录">Vue+Springboot实现完整项目记录</a><time datetime="2023-02-21T02:53:54.000Z" title="发表于 2023-02-21 10:53:54">2023-02-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/17/vue%E9%9B%86%E6%88%90%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE/" title="Vue集成高德地图">Vue集成高德地图</a><time datetime="2023-02-17T12:09:48.000Z" title="发表于 2023-02-17 20:09:48">2023-02-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/10/30/SpringBoot%20%E6%95%B4%E5%90%88%20shiro/" title="springboot整合shiro">springboot整合shiro</a><time datetime="2022-10-30T14:12:35.000Z" title="发表于 2022-10-30 22:12:35">2022-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/28/vue3%E4%BD%BF%E7%94%A8element-plus/" title="vue3使用element-plus">vue3使用element-plus</a><time datetime="2022-09-28T11:57:15.000Z" title="发表于 2022-09-28 19:57:15">2022-09-28</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By li kunsong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>li kunsong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.nan-bluesky.top/2022/04/28/mysql%E5%AE%89%E8%A3%85/" title="mysql安装和简单使用">http://www.nan-bluesky.top/2022/04/28/mysql安装/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/23/javaweb%E5%AD%A6%E4%B9%A0/" rel="prev" title="javaweb学习">
+      <i class="fa fa-chevron-left"></i> javaweb学习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/01/coding/" rel="next" title="huffman-coding">
+      huffman-coding <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.1.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96mysql"><span class="nav-number">1.2.</span> <span class="nav-text">初始化mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8mysql"><span class="nav-number">1.3.</span> <span class="nav-text">启动mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9mysql%E5%AF%86%E7%A0%81"><span class="nav-number">1.4.</span> <span class="nav-text">修改mysql密码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">MySQL简单使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">MySQL数据库的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL%E8%A1%A8%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">2.2.</span> <span class="nav-text">MySQL表的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%9A%84%E5%85%B7%E4%BD%93%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.3.</span> <span class="nav-text">MySQL创建表的具体类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.4.</span> <span class="nav-text">MySQL查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2%E5%92%8C%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.5.</span> <span class="nav-text">连接查询和聚合查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL-CRUD%E6%93%8D%E4%BD%9C"><span class="nav-number">2.6.</span> <span class="nav-text">MySQL-CRUD操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%A2%9E%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="nav-number">2.6.1.</span> <span class="nav-text">1.增加数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="nav-number">2.6.2.</span> <span class="nav-text">2.修改数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-number">2.6.3.</span> <span class="nav-text">3.删除数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL%E6%95%B0%E6%8D%AE-%E5%A4%87%E4%BB%BD%E5%AF%BC%E5%87%BA"><span class="nav-number">2.7.</span> <span class="nav-text">MySQL数据-备份导出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL%E6%95%B0%E6%8D%AE-%E6%81%A2%E5%A4%8D%E5%AF%BC%E5%85%A5"><span class="nav-number">2.8.</span> <span class="nav-text">MySQL数据-恢复导入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8Java%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88javaweb-Android%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">在Java中使用数据库（javaweb  Android）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#idea%E8%BF%9E%E6%8E%A5mysql"><span class="nav-number">3.1.</span> <span class="nav-text">idea连接mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-Studio-%E8%BF%9E%E6%8E%A5Mysql"><span class="nav-number">3.2.</span> <span class="nav-text">Android Studio 连接Mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8mainifests-AndroidManifest-xml%E4%B8%8B%E5%8A%A0%E5%85%A5%E4%B8%80%E4%B8%8B%E4%B8%A4%E8%A1%8C%E4%BB%A3%E7%A0%81"><span class="nav-number">3.2.1.</span> <span class="nav-text">在mainifests&#x2F;AndroidManifest.xml下加入一下两行代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E5%B7%A5%E7%A8%8B%E5%AF%BC%E5%85%A5mysql-jar%E5%8C%85"><span class="nav-number">3.2.2.</span> <span class="nav-text">为工程导入mysql.jar包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%8C%E4%BD%BF%E7%94%A8jdbc"><span class="nav-number">3.2.3.</span> <span class="nav-text">连接数据库，使用jdbc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8Android%E6%B4%BB%E5%8A%A8%E4%B8%8B%E7%BC%96%E5%86%99%E6%B4%BB%E5%8A%A8%E7%9A%84%E7%B1%BB%EF%BC%8C%E8%B0%83%E7%94%A8mysql"><span class="nav-number">3.2.4.</span> <span class="nav-text">在Android活动下编写活动的类，调用mysql</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="li kunsong"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">li kunsong</p>
+  <div class="site-description" itemprop="description">遇事不决，但问春风</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wuwei1636" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wuwei1636" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1537628435@qq.com" title="E-Mail → mailto:1537628435@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/streams_star?spm=1000.2115.3001.5343" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;streams_star?spm&#x3D;1000.2115.3001.5343" rel="noopener" target="_blank">CSDN</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">li kunsong</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+<script>
+!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+</script>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+<script src="/js/jquery-3.7.0.min.js"></script>
+
+<script src="/js/code-unfold.js"></script>
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</html>

@@ -1,168 +1,285 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Vue | 南的个人博客</title><meta name="author" content="li kunsong"><meta name="copyright" content="li kunsong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Vue学习">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.nan-bluesky.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":false,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="Vue学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue">
 <meta property="og:url" content="http://www.nan-bluesky.top/2022/09/20/vue/index.html">
 <meta property="og:site_name" content="南的个人博客">
 <meta property="og:description" content="Vue学习">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/avatar.jpg">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202301091935149.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202301101123673.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202301101144652.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202301121147131.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202301121215502.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202301121425830.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202302112249443.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202209202231712.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202209202231714.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202209202231715.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202209202231716.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202209241010116.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202209251659290.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202209251659292.png">
+<meta property="og:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202209251659293.png">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f84e4e2c02424d9a99862ade0a2e4114~tplv-k3u1fbpfcp-watermark.image">
+<meta property="og:image" content="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e5ac7e20d1784887a826f6360768a368~tplv-k3u1fbpfcp-watermark.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bc0be8211fc54b6c941c036791ba4efe~tplv-k3u1fbpfcp-watermark.image">
+<meta property="og:image" content="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6cc55165c0e34069a75fe36f8712eb80~tplv-k3u1fbpfcp-watermark.image">
 <meta property="article:published_time" content="2022-09-20T07:39:26.000Z">
 <meta property="article:modified_time" content="2023-02-11T14:51:36.573Z">
 <meta property="article:author" content="li kunsong">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.nan-bluesky.top/2022/09/20/vue/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  dateSuffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  source: {
-    justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isAnchor: false,
-  percent: {
-    toc: true,
-    rightside: false,
-  },
-  autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'Vue',
-  isPost: true,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: true,
-  postUpdate: '2023-02-11 22:51:36'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
+<meta name="twitter:image" content="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/202301091935149.png">
+
+<link rel="canonical" href="http://www.nan-bluesky.top/2022/09/20/vue/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Vue | 南的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
   }
 
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
+</head>
 
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">
+    <a target="_blank" rel="noopener" href="https://github.com/wuwei1636" class="github-corner" aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+    </path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+    </path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+    </svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    </div>
 
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
-      const link = document.createElement('link')
-      link.rel = 'stylesheet'
-      link.href = url
-      if (id) link.id = id
-      link.onerror = reject
-      link.onload = link.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        link.onload = link.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(link)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">南的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">遇事不决，但问春风</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
     
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
-        
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
     
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: transparent"><nav id="nav"><span id="blog-info"><a href="/" title="南的个人博客"><span class="site-name">南的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Vue</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-20T07:39:26.000Z" title="发表于 2022-09-20 15:39:26">2022-09-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-11T14:51:36.573Z" title="更新于 2023-02-11 22:51:36">2023-02-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Vue/">Vue</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Vue"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Vue2"><a href="#Vue2" class="headerlink" title="Vue2"></a>Vue2</h1><h2 id="基础方法"><a href="#基础方法" class="headerlink" title="基础方法"></a>基础方法</h2><h3 id="事件的基本使用"><a href="#事件的基本使用" class="headerlink" title="事件的基本使用"></a>事件的基本使用</h3><h4 id="绑定监听"><a href="#绑定监听" class="headerlink" title="绑定监听"></a>绑定监听</h4><ul>
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.nan-bluesky.top/2022/09/20/vue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="li kunsong">
+      <meta itemprop="description" content="遇事不决，但问春风">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue
+        </h1>
+
+        <div class="post-meta">
+	
+    		<i class="fa fa-thumbtack"></i>
+    		<font color=#999>置顶</font>
+          	<span class="post-meta-divider">|</span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-09-20 15:39:26" itemprop="dateCreated datePublished" datetime="2022-09-20T15:39:26+08:00">2022-09-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-11 22:51:36" itemprop="dateModified" datetime="2023-02-11T22:51:36+08:00">2023-02-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">Vue学习</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Vue2"><a href="#Vue2" class="headerlink" title="Vue2"></a>Vue2</h1><h2 id="基础方法"><a href="#基础方法" class="headerlink" title="基础方法"></a>基础方法</h2><h3 id="事件的基本使用"><a href="#事件的基本使用" class="headerlink" title="事件的基本使用"></a>事件的基本使用</h3><h4 id="绑定监听"><a href="#绑定监听" class="headerlink" title="绑定监听"></a>绑定监听</h4><ul>
 <li>使用 <code>v-on:xxx</code> 或者 <code>@xxx</code> 绑定事件， xxx是事件名</li>
 <li>事件的回调需要配置在methods对象中</li>
 <li><code>@click = &quot;demo&quot;</code> 和 <code>@click = &quot;demo($event)&quot;</code>效果一样，后者可以传参</li>
@@ -1033,4 +1150,275 @@
 <li><p>……</p>
 </li>
 </ul>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://www.nan-bluesky.top">li kunsong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.nan-bluesky.top/2022/09/20/vue/">http://www.nan-bluesky.top/2022/09/20/vue/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.nan-bluesky.top" target="_blank">南的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Vue/">Vue</a></div><div class="post_share"><div class="social-share" data-image="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/09/28/vue3%E4%BD%BF%E7%94%A8element-plus/" title="vue3使用element-plus"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">vue3使用element-plus</div></div></a></div><div class="next-post pull-right"><a href="/2022/07/07/springcloud/" title="springcloud"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">springcloud</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/02/17/vue%E9%9B%86%E6%88%90%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE/" title="Vue集成高德地图"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-17</div><div class="title">Vue集成高德地图</div></div></a></div><div><a href="/2022/09/28/vue3%E4%BD%BF%E7%94%A8element-plus/" title="vue3使用element-plus"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-28</div><div class="title">vue3使用element-plus</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://github-1308115823.cos.ap-nanjing.myqcloud.com/images/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">li kunsong</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">32</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wuwei1636" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1537628435@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue2"><span class="toc-number">1.</span> <span class="toc-text">Vue2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">基础方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.1.</span> <span class="toc-text">事件的基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E7%9B%91%E5%90%AC"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">绑定监听</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">事件修饰符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E9%94%AE%E4%BF%AE%E9%A5%B0"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">按键修饰</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7"><span class="toc-number">1.1.2.</span> <span class="toc-text">计算属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E5%86%99%EF%BC%88%E5%8F%AA%E6%9C%89get%EF%BC%89"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">简写（只有get）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%91%E8%A7%86%E5%B1%9E%E6%80%A7"><span class="toc-number">1.1.3.</span> <span class="toc-text">监视属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E7%9B%91%E8%A7%86"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">深度监视</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%91%E8%A7%86%E5%B1%9E%E6%80%A7%E7%9A%84%E7%AE%80%E5%86%99%E5%BD%A2%E5%BC%8F"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">监视属性的简写形式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E5%92%8C%E7%9B%91%E8%A7%86%E5%B1%9E%E6%80%A7%E5%AF%B9%E6%AF%94"><span class="toc-number">1.1.4.</span> <span class="toc-text">计算属性和监视属性对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93"><span class="toc-number">1.1.5.</span> <span class="toc-text">条件渲染</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93"><span class="toc-number">1.1.6.</span> <span class="toc-text">列表渲染</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vue%E6%A3%80%E6%B5%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.7.</span> <span class="toc-text">vue检测数据的原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B6%E9%9B%86%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE"><span class="toc-number">1.1.8.</span> <span class="toc-text">收集表单数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4"><span class="toc-number">1.1.9.</span> <span class="toc-text">自定义指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.1.10.</span> <span class="toc-text">生命周期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue%E8%84%9A%E6%89%8B%E6%9E%B6"><span class="toc-number">1.2.</span> <span class="toc-text">Vue脚手架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.2.1.</span> <span class="toc-text">组件的自定义事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF"><span class="toc-number">1.2.2.</span> <span class="toc-text">全局事件总线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E4%B8%8E%E5%8F%91%E5%B8%83-pubsub"><span class="toc-number">1.2.3.</span> <span class="toc-text">消息订阅与发布(pubsub)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nextTick"><span class="toc-number">1.2.4.</span> <span class="toc-text">nextTick</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue%E7%9A%84%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C"><span class="toc-number">1.2.5.</span> <span class="toc-text">Vue的动画效果</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8css%E5%8A%A8%E7%94%BB"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">使用css动画</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Vue%E6%8F%90%E4%BE%9B%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.5.2.</span> <span class="toc-text">使用Vue提供的三种方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93"><span class="toc-number">1.2.5.3.</span> <span class="toc-text">使用第三方库</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue%E4%B8%AD%E7%9A%84ajax"><span class="toc-number">1.3.</span> <span class="toc-text">Vue中的ajax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="toc-number">1.3.1.</span> <span class="toc-text">Vue配置代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3axios%E7%9A%84%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-number">1.3.2.</span> <span class="toc-text">解决axios的跨域问题：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GitHub%E6%A1%88%E4%BE%8B%E6%BC%94%E7%A4%BA"><span class="toc-number">1.3.3.</span> <span class="toc-text">GitHub案例演示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#main-js%E6%B7%BB%E5%8A%A0-bus"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">main.js添加 $bus</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#App-Vue"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">App.Vue</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Search-vue"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">Search.vue</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#List-vue"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">List.vue</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%95%8C%E9%9D%A2"><span class="toc-number">1.3.3.5.</span> <span class="toc-text">运行界面</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E6%A7%BD"><span class="toc-number">1.3.4.</span> <span class="toc-text">插槽</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E6%8F%92%E6%A7%BD"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">默认插槽</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E5%90%8D%E6%8F%92%E6%A7%BD"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">具名插槽</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD"><span class="toc-number">1.3.4.3.</span> <span class="toc-text">作用域插槽</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vuex"><span class="toc-number">1.4.</span> <span class="toc-text">Vuex</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%AD%E5%BB%BAvue%E7%8E%AF%E5%A2%83"><span class="toc-number">1.4.1.</span> <span class="toc-text">搭建vue环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vuex%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">1.4.2.</span> <span class="toc-text">vuex的基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getters%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.4.3.</span> <span class="toc-text">getters的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E4%B8%AAmap%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.4.4.</span> <span class="toc-text">四个map方法的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="toc-number">1.4.5.</span> <span class="toc-text">模块化+命名空间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E4%BD%BF%E7%94%A8"><span class="toc-number">1.4.5.1.</span> <span class="toc-text">具体使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9store-js"><span class="toc-number">1.4.5.2.</span> <span class="toc-text">修改store.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-number">1.4.5.3.</span> <span class="toc-text">组件获取数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#store%E7%BB%84%E4%BB%B6%E5%8C%96%E6%A1%88%E4%BE%8B"><span class="toc-number">1.4.5.4.</span> <span class="toc-text">store组件化案例</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#main-js"><span class="toc-number">1.4.5.4.1.</span> <span class="toc-text">main.js</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#App-vue"><span class="toc-number">1.4.5.4.2.</span> <span class="toc-text">App.vue</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Count-vue"><span class="toc-number">1.4.5.4.3.</span> <span class="toc-text">Count.vue</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Person-vue"><span class="toc-number">1.4.5.4.4.</span> <span class="toc-text">Person.vue</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#store%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%9A%84index-js"><span class="toc-number">1.4.5.4.5.</span> <span class="toc-text">store文件夹下的index.js</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#store%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%9A%84count-js"><span class="toc-number">1.4.5.4.6.</span> <span class="toc-text">store文件夹下的count.js</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#store%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%9A%84person-js"><span class="toc-number">1.4.5.4.7.</span> <span class="toc-text">store文件夹下的person.js</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue-router"><span class="toc-number">1.5.</span> <span class="toc-text">vue-router</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%B7%AF%E7%94%B1"><span class="toc-number">1.5.1.</span> <span class="toc-text">基本路由</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">基本使用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%A0%E4%B8%AA%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-number">1.5.2.</span> <span class="toc-text">几个注意点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1"><span class="toc-number">1.5.3.</span> <span class="toc-text">嵌套路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82"><span class="toc-number">1.5.4.</span> <span class="toc-text">路由传参</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#query%E4%BC%A0%E5%8F%82"><span class="toc-number">1.5.4.1.</span> <span class="toc-text">query传参</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1"><span class="toc-number">1.5.4.2.</span> <span class="toc-text">命名路由</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#params%E4%BC%A0%E5%8F%82"><span class="toc-number">1.5.4.3.</span> <span class="toc-text">params传参</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E7%9A%84props%E9%85%8D%E7%BD%AE"><span class="toc-number">1.5.4.4.</span> <span class="toc-text">路由的props配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E5%BC%8F%E8%B7%AF%E7%94%B1%E5%AF%BC%E8%88%AA"><span class="toc-number">1.5.5.</span> <span class="toc-text">编程式路由导航</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E8%B7%AF%E7%94%B1%E7%BB%84%E4%BB%B6"><span class="toc-number">1.5.6.</span> <span class="toc-text">缓存路由组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90"><span class="toc-number">1.5.7.</span> <span class="toc-text">路由的生命周期钩子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB"><span class="toc-number">1.5.8.</span> <span class="toc-text">路由守卫</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E5%AE%88%E5%8D%AB"><span class="toc-number">1.5.8.1.</span> <span class="toc-text">全局守卫</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8B%AC%E4%BA%AB%E5%AE%88%E5%8D%AB"><span class="toc-number">1.5.8.2.</span> <span class="toc-text">独享守卫</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E5%86%85%E5%AE%88%E5%8D%AB"><span class="toc-number">1.5.8.3.</span> <span class="toc-text">组件内守卫</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8%E5%B7%A5%E4%BD%9C%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">1.5.9.</span> <span class="toc-text">路由器工作的两种方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue-UI-%E7%BB%84%E4%BB%B6%E5%BA%93"><span class="toc-number">1.6.</span> <span class="toc-text">Vue UI 组件库</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue3"><span class="toc-number">2.</span> <span class="toc-text">Vue3</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue3%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B"><span class="toc-number">2.1.</span> <span class="toc-text">Vue3快速上手</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Vue3%E7%AE%80%E4%BB%8B"><span class="toc-number">2.1.1.</span> <span class="toc-text">1.Vue3简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Vue3%E5%B8%A6%E6%9D%A5%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.Vue3带来了什么</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%80%A7%E8%83%BD%E7%9A%84%E6%8F%90%E5%8D%87"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">1.性能的提升</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%BA%90%E7%A0%81%E7%9A%84%E5%8D%87%E7%BA%A7"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">2.源码的升级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%8B%A5%E6%8A%B1TypeScript"><span class="toc-number">2.1.2.3.</span> <span class="toc-text">3.拥抱TypeScript</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%96%B0%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-number">2.1.2.4.</span> <span class="toc-text">4.新的特性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BAVue3-0%E5%B7%A5%E7%A8%8B"><span class="toc-number">2.2.</span> <span class="toc-text">一、创建Vue3.0工程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BD%BF%E7%94%A8-vue-cli-%E5%88%9B%E5%BB%BA"><span class="toc-number">2.2.1.</span> <span class="toc-text">1.使用 vue-cli 创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8-vite-%E5%88%9B%E5%BB%BA"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.使用 vite 创建</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%B8%B8%E7%94%A8-Composition-API"><span class="toc-number">2.3.</span> <span class="toc-text">二、常用 Composition API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%8B%89%E5%BC%80%E5%BA%8F%E5%B9%95%E7%9A%84setup"><span class="toc-number">2.3.1.</span> <span class="toc-text">1.拉开序幕的setup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-ref%E5%87%BD%E6%95%B0"><span class="toc-number">2.3.2.</span> <span class="toc-text">2.ref函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-reactive%E5%87%BD%E6%95%B0"><span class="toc-number">2.3.3.</span> <span class="toc-text">3.reactive函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Vue3-0%E4%B8%AD%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86"><span class="toc-number">2.3.4.</span> <span class="toc-text">4.Vue3.0中的响应式原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#vue2-x%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F"><span class="toc-number">2.3.4.1.</span> <span class="toc-text">vue2.x的响应式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Vue3-0%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F"><span class="toc-number">2.3.4.2.</span> <span class="toc-text">Vue3.0的响应式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-reactive%E5%AF%B9%E6%AF%94ref"><span class="toc-number">2.3.5.</span> <span class="toc-text">5.reactive对比ref</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-setup%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-number">2.3.6.</span> <span class="toc-text">6.setup的两个注意点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E4%B8%8E%E7%9B%91%E8%A7%86"><span class="toc-number">2.3.7.</span> <span class="toc-text">7.计算属性与监视</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-computed%E5%87%BD%E6%95%B0"><span class="toc-number">2.3.7.1.</span> <span class="toc-text">1.computed函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-watch%E5%87%BD%E6%95%B0"><span class="toc-number">2.3.7.2.</span> <span class="toc-text">2.watch函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-watchEffect%E5%87%BD%E6%95%B0"><span class="toc-number">2.3.7.3.</span> <span class="toc-text">3.watchEffect函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">2.3.8.</span> <span class="toc-text">8.生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E8%87%AA%E5%AE%9A%E4%B9%89hook%E5%87%BD%E6%95%B0"><span class="toc-number">2.3.9.</span> <span class="toc-text">9.自定义hook函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-toRef"><span class="toc-number">2.3.10.</span> <span class="toc-text">10.toRef</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%85%B6%E5%AE%83-Composition-API"><span class="toc-number">2.4.</span> <span class="toc-text">三、其它 Composition API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-shallowReactive-%E4%B8%8E-shallowRef"><span class="toc-number">2.4.1.</span> <span class="toc-text">1.shallowReactive 与 shallowRef</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-readonly-%E4%B8%8E-shallowReadonly"><span class="toc-number">2.4.2.</span> <span class="toc-text">2.readonly 与 shallowReadonly</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-toRaw-%E4%B8%8E-markRaw"><span class="toc-number">2.4.3.</span> <span class="toc-text">3.toRaw 与 markRaw</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-customRef"><span class="toc-number">2.4.4.</span> <span class="toc-text">4.customRef</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-provide-%E4%B8%8E-inject"><span class="toc-number">2.4.5.</span> <span class="toc-text">5.provide 与 inject</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E5%88%A4%E6%96%AD"><span class="toc-number">2.4.6.</span> <span class="toc-text">6.响应式数据的判断</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Composition-API-%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">2.5.</span> <span class="toc-text">四、Composition API 的优势</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Options-API-%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">2.5.1.</span> <span class="toc-text">1.Options API 存在的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Composition-API-%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">2.5.2.</span> <span class="toc-text">2.Composition API 的优势</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%96%B0%E7%9A%84%E7%BB%84%E4%BB%B6"><span class="toc-number">2.6.</span> <span class="toc-text">五、新的组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Fragment"><span class="toc-number">2.6.1.</span> <span class="toc-text">1.Fragment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Teleport"><span class="toc-number">2.6.2.</span> <span class="toc-text">2.Teleport</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Suspense"><span class="toc-number">2.6.3.</span> <span class="toc-text">3.Suspense</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%85%B6%E4%BB%96"><span class="toc-number">2.7.</span> <span class="toc-text">六、其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%A8%E5%B1%80API%E7%9A%84%E8%BD%AC%E7%A7%BB"><span class="toc-number">2.7.1.</span> <span class="toc-text">1.全局API的转移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%85%B6%E4%BB%96%E6%94%B9%E5%8F%98"><span class="toc-number">2.7.2.</span> <span class="toc-text">2.其他改变</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/" title="数据结构复习">数据结构复习</a><time datetime="2023-05-21T14:16:43.000Z" title="发表于 2023-05-21 22:16:43">2023-05-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/21/Vue%E7%BB%93%E5%90%88Springboot%E5%AE%9E%E7%8E%B0%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/" title="Vue+Springboot实现完整项目记录">Vue+Springboot实现完整项目记录</a><time datetime="2023-02-21T02:53:54.000Z" title="发表于 2023-02-21 10:53:54">2023-02-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/02/17/vue%E9%9B%86%E6%88%90%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE/" title="Vue集成高德地图">Vue集成高德地图</a><time datetime="2023-02-17T12:09:48.000Z" title="发表于 2023-02-17 20:09:48">2023-02-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/10/30/SpringBoot%20%E6%95%B4%E5%90%88%20shiro/" title="springboot整合shiro">springboot整合shiro</a><time datetime="2022-10-30T14:12:35.000Z" title="发表于 2022-10-30 22:12:35">2022-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/28/vue3%E4%BD%BF%E7%94%A8element-plus/" title="vue3使用element-plus">vue3使用element-plus</a><time datetime="2022-09-28T11:57:15.000Z" title="发表于 2022-09-28 19:57:15">2022-09-28</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By li kunsong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>li kunsong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.nan-bluesky.top/2022/09/20/vue/" title="Vue">http://www.nan-bluesky.top/2022/09/20/vue/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/07/springcloud/" rel="prev" title="springcloud">
+      <i class="fa fa-chevron-left"></i> springcloud
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/09/28/vue3%E4%BD%BF%E7%94%A8element-plus/" rel="next" title="vue3使用element-plus">
+      vue3使用element-plus <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue2"><span class="nav-number">1.</span> <span class="nav-text">Vue2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">基础方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">事件的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E7%9B%91%E5%90%AC"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">绑定监听</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">事件修饰符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E9%94%AE%E4%BF%AE%E9%A5%B0"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">按键修饰</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7"><span class="nav-number">1.1.2.</span> <span class="nav-text">计算属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%86%99%EF%BC%88%E5%8F%AA%E6%9C%89get%EF%BC%89"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">简写（只有get）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%91%E8%A7%86%E5%B1%9E%E6%80%A7"><span class="nav-number">1.1.3.</span> <span class="nav-text">监视属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E7%9B%91%E8%A7%86"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">深度监视</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%91%E8%A7%86%E5%B1%9E%E6%80%A7%E7%9A%84%E7%AE%80%E5%86%99%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">监视属性的简写形式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E5%92%8C%E7%9B%91%E8%A7%86%E5%B1%9E%E6%80%A7%E5%AF%B9%E6%AF%94"><span class="nav-number">1.1.4.</span> <span class="nav-text">计算属性和监视属性对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93"><span class="nav-number">1.1.5.</span> <span class="nav-text">条件渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93"><span class="nav-number">1.1.6.</span> <span class="nav-text">列表渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vue%E6%A3%80%E6%B5%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.7.</span> <span class="nav-text">vue检测数据的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B6%E9%9B%86%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.8.</span> <span class="nav-text">收集表单数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4"><span class="nav-number">1.1.9.</span> <span class="nav-text">自定义指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.1.10.</span> <span class="nav-text">生命周期</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue%E8%84%9A%E6%89%8B%E6%9E%B6"><span class="nav-number">1.2.</span> <span class="nav-text">Vue脚手架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.2.1.</span> <span class="nav-text">组件的自定义事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF"><span class="nav-number">1.2.2.</span> <span class="nav-text">全局事件总线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E4%B8%8E%E5%8F%91%E5%B8%83-pubsub"><span class="nav-number">1.2.3.</span> <span class="nav-text">消息订阅与发布(pubsub)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nextTick"><span class="nav-number">1.2.4.</span> <span class="nav-text">nextTick</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue%E7%9A%84%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C"><span class="nav-number">1.2.5.</span> <span class="nav-text">Vue的动画效果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8css%E5%8A%A8%E7%94%BB"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">使用css动画</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Vue%E6%8F%90%E4%BE%9B%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">使用Vue提供的三种方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93"><span class="nav-number">1.2.5.3.</span> <span class="nav-text">使用第三方库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue%E4%B8%AD%E7%9A%84ajax"><span class="nav-number">1.3.</span> <span class="nav-text">Vue中的ajax</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="nav-number">1.3.1.</span> <span class="nav-text">Vue配置代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3axios%E7%9A%84%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">1.3.2.</span> <span class="nav-text">解决axios的跨域问题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub%E6%A1%88%E4%BE%8B%E6%BC%94%E7%A4%BA"><span class="nav-number">1.3.3.</span> <span class="nav-text">GitHub案例演示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#main-js%E6%B7%BB%E5%8A%A0-bus"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">main.js添加 $bus</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#App-Vue"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">App.Vue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Search-vue"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">Search.vue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#List-vue"><span class="nav-number">1.3.3.4.</span> <span class="nav-text">List.vue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%95%8C%E9%9D%A2"><span class="nav-number">1.3.3.5.</span> <span class="nav-text">运行界面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E6%A7%BD"><span class="nav-number">1.3.4.</span> <span class="nav-text">插槽</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E6%8F%92%E6%A7%BD"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">默认插槽</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B7%E5%90%8D%E6%8F%92%E6%A7%BD"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">具名插槽</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD"><span class="nav-number">1.3.4.3.</span> <span class="nav-text">作用域插槽</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vuex"><span class="nav-number">1.4.</span> <span class="nav-text">Vuex</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%AD%E5%BB%BAvue%E7%8E%AF%E5%A2%83"><span class="nav-number">1.4.1.</span> <span class="nav-text">搭建vue环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vuex%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">1.4.2.</span> <span class="nav-text">vuex的基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getters%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.4.3.</span> <span class="nav-text">getters的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E4%B8%AAmap%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.4.4.</span> <span class="nav-text">四个map方法的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="nav-number">1.4.5.</span> <span class="nav-text">模块化+命名空间</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E4%BD%BF%E7%94%A8"><span class="nav-number">1.4.5.1.</span> <span class="nav-text">具体使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9store-js"><span class="nav-number">1.4.5.2.</span> <span class="nav-text">修改store.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="nav-number">1.4.5.3.</span> <span class="nav-text">组件获取数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#store%E7%BB%84%E4%BB%B6%E5%8C%96%E6%A1%88%E4%BE%8B"><span class="nav-number">1.4.5.4.</span> <span class="nav-text">store组件化案例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#main-js"><span class="nav-number">1.4.5.4.1.</span> <span class="nav-text">main.js</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#App-vue"><span class="nav-number">1.4.5.4.2.</span> <span class="nav-text">App.vue</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Count-vue"><span class="nav-number">1.4.5.4.3.</span> <span class="nav-text">Count.vue</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Person-vue"><span class="nav-number">1.4.5.4.4.</span> <span class="nav-text">Person.vue</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#store%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%9A%84index-js"><span class="nav-number">1.4.5.4.5.</span> <span class="nav-text">store文件夹下的index.js</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#store%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%9A%84count-js"><span class="nav-number">1.4.5.4.6.</span> <span class="nav-text">store文件夹下的count.js</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#store%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%9A%84person-js"><span class="nav-number">1.4.5.4.7.</span> <span class="nav-text">store文件夹下的person.js</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-router"><span class="nav-number">1.5.</span> <span class="nav-text">vue-router</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%B7%AF%E7%94%B1"><span class="nav-number">1.5.1.</span> <span class="nav-text">基本路由</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">基本使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-number">1.5.2.</span> <span class="nav-text">几个注意点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1"><span class="nav-number">1.5.3.</span> <span class="nav-text">嵌套路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82"><span class="nav-number">1.5.4.</span> <span class="nav-text">路由传参</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#query%E4%BC%A0%E5%8F%82"><span class="nav-number">1.5.4.1.</span> <span class="nav-text">query传参</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1"><span class="nav-number">1.5.4.2.</span> <span class="nav-text">命名路由</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#params%E4%BC%A0%E5%8F%82"><span class="nav-number">1.5.4.3.</span> <span class="nav-text">params传参</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E7%9A%84props%E9%85%8D%E7%BD%AE"><span class="nav-number">1.5.4.4.</span> <span class="nav-text">路由的props配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E5%BC%8F%E8%B7%AF%E7%94%B1%E5%AF%BC%E8%88%AA"><span class="nav-number">1.5.5.</span> <span class="nav-text">编程式路由导航</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E8%B7%AF%E7%94%B1%E7%BB%84%E4%BB%B6"><span class="nav-number">1.5.6.</span> <span class="nav-text">缓存路由组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90"><span class="nav-number">1.5.7.</span> <span class="nav-text">路由的生命周期钩子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB"><span class="nav-number">1.5.8.</span> <span class="nav-text">路由守卫</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%AE%88%E5%8D%AB"><span class="nav-number">1.5.8.1.</span> <span class="nav-text">全局守卫</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8B%AC%E4%BA%AB%E5%AE%88%E5%8D%AB"><span class="nav-number">1.5.8.2.</span> <span class="nav-text">独享守卫</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E5%86%85%E5%AE%88%E5%8D%AB"><span class="nav-number">1.5.8.3.</span> <span class="nav-text">组件内守卫</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8%E5%B7%A5%E4%BD%9C%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="nav-number">1.5.9.</span> <span class="nav-text">路由器工作的两种方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-UI-%E7%BB%84%E4%BB%B6%E5%BA%93"><span class="nav-number">1.6.</span> <span class="nav-text">Vue UI 组件库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue3"><span class="nav-number">2.</span> <span class="nav-text">Vue3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue3%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B"><span class="nav-number">2.1.</span> <span class="nav-text">Vue3快速上手</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Vue3%E7%AE%80%E4%BB%8B"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.Vue3简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Vue3%E5%B8%A6%E6%9D%A5%E4%BA%86%E4%BB%80%E4%B9%88"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.Vue3带来了什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%80%A7%E8%83%BD%E7%9A%84%E6%8F%90%E5%8D%87"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">1.性能的提升</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%BA%90%E7%A0%81%E7%9A%84%E5%8D%87%E7%BA%A7"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">2.源码的升级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%8B%A5%E6%8A%B1TypeScript"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">3.拥抱TypeScript</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%96%B0%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">2.1.2.4.</span> <span class="nav-text">4.新的特性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BAVue3-0%E5%B7%A5%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">一、创建Vue3.0工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BD%BF%E7%94%A8-vue-cli-%E5%88%9B%E5%BB%BA"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.使用 vue-cli 创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8-vite-%E5%88%9B%E5%BB%BA"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.使用 vite 创建</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%B8%B8%E7%94%A8-Composition-API"><span class="nav-number">2.3.</span> <span class="nav-text">二、常用 Composition API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%8B%89%E5%BC%80%E5%BA%8F%E5%B9%95%E7%9A%84setup"><span class="nav-number">2.3.1.</span> <span class="nav-text">1.拉开序幕的setup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-ref%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.2.</span> <span class="nav-text">2.ref函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-reactive%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.3.</span> <span class="nav-text">3.reactive函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Vue3-0%E4%B8%AD%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86"><span class="nav-number">2.3.4.</span> <span class="nav-text">4.Vue3.0中的响应式原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vue2-x%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F"><span class="nav-number">2.3.4.1.</span> <span class="nav-text">vue2.x的响应式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vue3-0%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F"><span class="nav-number">2.3.4.2.</span> <span class="nav-text">Vue3.0的响应式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-reactive%E5%AF%B9%E6%AF%94ref"><span class="nav-number">2.3.5.</span> <span class="nav-text">5.reactive对比ref</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-setup%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-number">2.3.6.</span> <span class="nav-text">6.setup的两个注意点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E4%B8%8E%E7%9B%91%E8%A7%86"><span class="nav-number">2.3.7.</span> <span class="nav-text">7.计算属性与监视</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-computed%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.7.1.</span> <span class="nav-text">1.computed函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-watch%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.7.2.</span> <span class="nav-text">2.watch函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-watchEffect%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.7.3.</span> <span class="nav-text">3.watchEffect函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">2.3.8.</span> <span class="nav-text">8.生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E8%87%AA%E5%AE%9A%E4%B9%89hook%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.9.</span> <span class="nav-text">9.自定义hook函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-toRef"><span class="nav-number">2.3.10.</span> <span class="nav-text">10.toRef</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%85%B6%E5%AE%83-Composition-API"><span class="nav-number">2.4.</span> <span class="nav-text">三、其它 Composition API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-shallowReactive-%E4%B8%8E-shallowRef"><span class="nav-number">2.4.1.</span> <span class="nav-text">1.shallowReactive 与 shallowRef</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-readonly-%E4%B8%8E-shallowReadonly"><span class="nav-number">2.4.2.</span> <span class="nav-text">2.readonly 与 shallowReadonly</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-toRaw-%E4%B8%8E-markRaw"><span class="nav-number">2.4.3.</span> <span class="nav-text">3.toRaw 与 markRaw</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-customRef"><span class="nav-number">2.4.4.</span> <span class="nav-text">4.customRef</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-provide-%E4%B8%8E-inject"><span class="nav-number">2.4.5.</span> <span class="nav-text">5.provide 与 inject</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E5%88%A4%E6%96%AD"><span class="nav-number">2.4.6.</span> <span class="nav-text">6.响应式数据的判断</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Composition-API-%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-number">2.5.</span> <span class="nav-text">四、Composition API 的优势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Options-API-%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.5.1.</span> <span class="nav-text">1.Options API 存在的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Composition-API-%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-number">2.5.2.</span> <span class="nav-text">2.Composition API 的优势</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%96%B0%E7%9A%84%E7%BB%84%E4%BB%B6"><span class="nav-number">2.6.</span> <span class="nav-text">五、新的组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Fragment"><span class="nav-number">2.6.1.</span> <span class="nav-text">1.Fragment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Teleport"><span class="nav-number">2.6.2.</span> <span class="nav-text">2.Teleport</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Suspense"><span class="nav-number">2.6.3.</span> <span class="nav-text">3.Suspense</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%85%B6%E4%BB%96"><span class="nav-number">2.7.</span> <span class="nav-text">六、其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%85%A8%E5%B1%80API%E7%9A%84%E8%BD%AC%E7%A7%BB"><span class="nav-number">2.7.1.</span> <span class="nav-text">1.全局API的转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%85%B6%E4%BB%96%E6%94%B9%E5%8F%98"><span class="nav-number">2.7.2.</span> <span class="nav-text">2.其他改变</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="li kunsong"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">li kunsong</p>
+  <div class="site-description" itemprop="description">遇事不决，但问春风</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wuwei1636" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wuwei1636" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1537628435@qq.com" title="E-Mail → mailto:1537628435@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/streams_star?spm=1000.2115.3001.5343" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;streams_star?spm&#x3D;1000.2115.3001.5343" rel="noopener" target="_blank">CSDN</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">li kunsong</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+<script>
+!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+</script>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+<script src="/js/jquery-3.7.0.min.js"></script>
+
+<script src="/js/code-unfold.js"></script>
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</html>
