@@ -1,175 +1,280 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>移动应用开发技术实验代码 | 南的个人博客</title><meta name="author" content="li kunsong"><meta name="copyright" content="li kunsong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="记录移动应用开发实验代码">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.nan-bluesky.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":false,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="记录移动应用开发实验代码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="移动应用开发技术实验代码">
 <meta property="og:url" content="http://www.nan-bluesky.top/2022/04/06/%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81/index.html">
 <meta property="og:site_name" content="南的个人博客">
 <meta property="og:description" content="记录移动应用开发实验代码">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202312292334622.png">
+<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172326372.png">
+<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172326530.png">
+<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172326244.png">
+<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172326248.png">
+<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172326568.png">
+<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172326193.png">
+<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172326721.png">
+<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172326935.png">
+<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172327744.png">
+<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172327315.png">
+<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172327572.png">
+<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172327509.png">
+<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172327113.png">
+<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172327660.png">
+<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172327168.png">
+<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172327043.png">
+<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172327019.png">
+<meta property="og:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172327597.png">
 <meta property="article:published_time" content="2022-04-06T02:02:49.000Z">
 <meta property="article:modified_time" content="2023-06-17T15:27:27.868Z">
 <meta property="article:author" content="li kunsong">
 <meta property="article:tag" content="android">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202312292334622.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.nan-bluesky.top/2022/04/06/%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  dateSuffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  source: {
-    justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isAnchor: false,
-  percent: {
-    toc: true,
-    rightside: true,
-  },
-  autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '移动应用开发技术实验代码',
-  isPost: true,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: true,
-  postUpdate: '2023-06-17 23:27:27'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
+<meta name="twitter:image" content="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172326372.png">
+
+<link rel="canonical" href="http://www.nan-bluesky.top/2022/04/06/%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>移动应用开发技术实验代码 | 南的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
   }
 
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
+</head>
 
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">
+    <a target="_blank" rel="noopener" href="https://github.com/wuwei1636" class="github-corner" aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+    </path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+    </path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+    </svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    </div>
 
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
-      const link = document.createElement('link')
-      link.rel = 'stylesheet'
-      link.href = url
-      if (id) link.id = id
-      link.onerror = reject
-      link.onload = link.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        link.onload = link.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(link)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">南的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">遇事不决，但问春风</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
     
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
-        
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.1"></head><body><script>window.paceOptions = {
-  restartOnPushState: false
-}
 
-document.addEventListener('pjax:send', () => {
-  Pace.restart()
-})
-</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js/themes/blue/pace-theme-minimal.min.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">31</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gihub.oss-cn-nanjing.aliyuncs.com/images/202312292334622.png')"><nav id="nav"><span id="blog-info"><a href="/" title="南的个人博客"><span class="site-name">南的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">移动应用开发技术实验代码</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-06T02:02:49.000Z" title="发表于 2022-04-06 10:02:49">2022-04-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-17T15:27:27.868Z" title="更新于 2023-06-17 23:27:27">2023-06-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/android/">android</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="移动应用开发技术实验代码"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="实验二"><a href="#实验二" class="headerlink" title="实验二"></a>实验二</h1><h2 id="实验2-1"><a href="#实验2-1" class="headerlink" title="实验2.1"></a>实验2.1</h2><h3 id="main-activity-java"><a href="#main-activity-java" class="headerlink" title="main_activity.java"></a>main_activity.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.text2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> androidx.appcompat.app.AlertDialog;</span><br><span class="line"><span class="keyword">import</span> androidx.appcompat.app.AppCompatActivity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.widget.Button;</span><br><span class="line"><span class="keyword">import</span> android.widget.CheckBox;</span><br><span class="line"><span class="keyword">import</span> android.widget.EditText;</span><br><span class="line"><span class="keyword">import</span> android.widget.RadioGroup;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MainActivity</span> <span class="keyword">extends</span> <span class="title class_">AppCompatActivity</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">EditText</span> <span class="variable">name</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">Button</span> <span class="variable">tixing</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">private</span> CheckBox box1 , box2 , box3, box4;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;CheckBox&gt; checkBoxList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;CheckBox&gt;();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(Bundle savedInstanceState)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        <span class="built_in">this</span>.name = (EditText)<span class="built_in">super</span>.findViewById(R.id.edit1);</span><br><span class="line">        <span class="built_in">this</span>.tixing = (Button)<span class="built_in">super</span>.findViewById((R.id.tixing));</span><br><span class="line">        box1 = (CheckBox)<span class="built_in">super</span>.findViewById((R.id.box1));</span><br><span class="line">        box2 = (CheckBox)<span class="built_in">super</span>.findViewById((R.id.box2));</span><br><span class="line">        box3 = (CheckBox)<span class="built_in">super</span>.findViewById((R.id.box3));</span><br><span class="line">        box4 = (CheckBox)<span class="built_in">super</span>.findViewById((R.id.box4));</span><br><span class="line"></span><br><span class="line">        checkBoxList.add(box1);</span><br><span class="line">        checkBoxList.add(box2);</span><br><span class="line">        checkBoxList.add(box3);</span><br><span class="line">        checkBoxList.add(box4);</span><br><span class="line"></span><br><span class="line">        tixing.setOnClickListener(<span class="keyword">new</span> <span class="title class_">ShowListerer</span>());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">ShowListerer</span> <span class="keyword">implements</span> <span class="title class_">View</span>.OnClickListener &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClick</span><span class="params">(View v)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">StringBuffer</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuffer</span>();</span><br><span class="line">            <span class="keyword">for</span> (CheckBox checkbox : checkBoxList) &#123;</span><br><span class="line">                <span class="keyword">if</span> (checkbox.isChecked())&#123;</span><br><span class="line">                    sb.append(checkbox.getText().toString() + <span class="string">&quot; &quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">String</span> <span class="variable">info</span> <span class="operator">=</span> name.getText().toString();</span><br><span class="line">            AlertDialog.Builder builder= <span class="keyword">new</span> <span class="title class_">AlertDialog</span>.Builder(MainActivity.<span class="built_in">this</span>);<span class="comment">//MainActivity.this为当前环境</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(info.trim().equals(<span class="string">&quot;&quot;</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                builder.setMessage(<span class="string">&quot;请输入姓名&quot;</span>);<span class="comment">//提示内容</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                builder.setMessage(<span class="string">&quot;姓名是: &quot;</span>+info+<span class="string">&quot;\n&quot;</span>+<span class="string">&quot;性别&quot;</span>+<span class="string">&quot;\n&quot;</span>+<span class="string">&quot;专业&quot;</span>+<span class="string">&quot;\n&quot;</span>+<span class="string">&quot;兴趣爱好 &quot;</span>+<span class="string">&quot;&quot;</span>+sb.toString());<span class="comment">//提示内容</span></span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            builder.setPositiveButton(<span class="string">&quot;确认&quot;</span>, <span class="literal">null</span>);<span class="comment">//确定按钮</span></span><br><span class="line"></span><br><span class="line">            builder.create().show();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.nan-bluesky.top/2022/04/06/%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="li kunsong">
+      <meta itemprop="description" content="世事漫随流水，算来一梦浮生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          移动应用开发技术实验代码
+        </h1>
+
+        <div class="post-meta">
+	
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-06 10:02:49" itemprop="dateCreated datePublished" datetime="2022-04-06T10:02:49+08:00">2022-04-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-17 23:27:27" itemprop="dateModified" datetime="2023-06-17T23:27:27+08:00">2023-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">记录移动应用开发实验代码</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="实验二"><a href="#实验二" class="headerlink" title="实验二"></a>实验二</h1><h2 id="实验2-1"><a href="#实验2-1" class="headerlink" title="实验2.1"></a>实验2.1</h2><h3 id="main-activity-java"><a href="#main-activity-java" class="headerlink" title="main_activity.java"></a>main_activity.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.text2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> androidx.appcompat.app.AlertDialog;</span><br><span class="line"><span class="keyword">import</span> androidx.appcompat.app.AppCompatActivity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.widget.Button;</span><br><span class="line"><span class="keyword">import</span> android.widget.CheckBox;</span><br><span class="line"><span class="keyword">import</span> android.widget.EditText;</span><br><span class="line"><span class="keyword">import</span> android.widget.RadioGroup;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MainActivity</span> <span class="keyword">extends</span> <span class="title class_">AppCompatActivity</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">EditText</span> <span class="variable">name</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">Button</span> <span class="variable">tixing</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">private</span> CheckBox box1 , box2 , box3, box4;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;CheckBox&gt; checkBoxList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;CheckBox&gt;();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(Bundle savedInstanceState)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        <span class="built_in">this</span>.name = (EditText)<span class="built_in">super</span>.findViewById(R.id.edit1);</span><br><span class="line">        <span class="built_in">this</span>.tixing = (Button)<span class="built_in">super</span>.findViewById((R.id.tixing));</span><br><span class="line">        box1 = (CheckBox)<span class="built_in">super</span>.findViewById((R.id.box1));</span><br><span class="line">        box2 = (CheckBox)<span class="built_in">super</span>.findViewById((R.id.box2));</span><br><span class="line">        box3 = (CheckBox)<span class="built_in">super</span>.findViewById((R.id.box3));</span><br><span class="line">        box4 = (CheckBox)<span class="built_in">super</span>.findViewById((R.id.box4));</span><br><span class="line"></span><br><span class="line">        checkBoxList.add(box1);</span><br><span class="line">        checkBoxList.add(box2);</span><br><span class="line">        checkBoxList.add(box3);</span><br><span class="line">        checkBoxList.add(box4);</span><br><span class="line"></span><br><span class="line">        tixing.setOnClickListener(<span class="keyword">new</span> <span class="title class_">ShowListerer</span>());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">ShowListerer</span> <span class="keyword">implements</span> <span class="title class_">View</span>.OnClickListener &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClick</span><span class="params">(View v)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">StringBuffer</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuffer</span>();</span><br><span class="line">            <span class="keyword">for</span> (CheckBox checkbox : checkBoxList) &#123;</span><br><span class="line">                <span class="keyword">if</span> (checkbox.isChecked())&#123;</span><br><span class="line">                    sb.append(checkbox.getText().toString() + <span class="string">&quot; &quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">String</span> <span class="variable">info</span> <span class="operator">=</span> name.getText().toString();</span><br><span class="line">            AlertDialog.Builder builder= <span class="keyword">new</span> <span class="title class_">AlertDialog</span>.Builder(MainActivity.<span class="built_in">this</span>);<span class="comment">//MainActivity.this为当前环境</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(info.trim().equals(<span class="string">&quot;&quot;</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                builder.setMessage(<span class="string">&quot;请输入姓名&quot;</span>);<span class="comment">//提示内容</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                builder.setMessage(<span class="string">&quot;姓名是: &quot;</span>+info+<span class="string">&quot;\n&quot;</span>+<span class="string">&quot;性别&quot;</span>+<span class="string">&quot;\n&quot;</span>+<span class="string">&quot;专业&quot;</span>+<span class="string">&quot;\n&quot;</span>+<span class="string">&quot;兴趣爱好 &quot;</span>+<span class="string">&quot;&quot;</span>+sb.toString());<span class="comment">//提示内容</span></span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            builder.setPositiveButton(<span class="string">&quot;确认&quot;</span>, <span class="literal">null</span>);<span class="comment">//确定按钮</span></span><br><span class="line"></span><br><span class="line">            builder.create().show();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="activity-main-xml"><a href="#activity-main-xml" class="headerlink" title="activity_main.xml"></a>activity_main.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">&quot;vertical&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">&quot;.MainActivity&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:gravity</span>=<span class="string">&quot;left&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_marginLeft</span>=<span class="string">&quot;10dp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:orientation</span>=<span class="string">&quot;horizontal&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/name&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;姓名:&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:textSize</span>=<span class="string">&quot;20dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_weight</span>=<span class="string">&quot;1&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">EditText</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/edit1&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;李坤松 2012020047&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:textSize</span>=<span class="string">&quot;20dp&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:gravity</span>=<span class="string">&quot;left&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:orientation</span>=<span class="string">&quot;horizontal&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/gender&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_marginLeft</span>=<span class="string">&quot;10dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_marginTop</span>=<span class="string">&quot;19dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;性别&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:textSize</span>=<span class="string">&quot;20dp&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">RadioGroup</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/Radio1&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_gravity</span>=<span class="string">&quot;left&quot;</span></span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">            <span class="attr">android:orientation</span>=<span class="string">&quot;horizontal&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">RadioButton</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_margin</span>=<span class="string">&quot;10dp&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">&quot;男&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:textSize</span>=<span class="string">&quot;20dp&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">RadioButton</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_margin</span>=<span class="string">&quot;10dp&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">&quot;女&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:textSize</span>=<span class="string">&quot;20dp&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">RadioGroup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_gravity</span>=<span class="string">&quot;left&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:orientation</span>=<span class="string">&quot;horizontal&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_marginLeft</span>=<span class="string">&quot;10dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;专业&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:textSize</span>=<span class="string">&quot;20dp&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Spinner</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/chose&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_marginLeft</span>=<span class="string">&quot;15dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:prompt</span>=<span class="string">&quot;@string/eduprompt&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:entries</span>=<span class="string">&quot;@array/edu&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:spinnerMode</span>=<span class="string">&quot;dialog&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_gravity</span>=<span class="string">&quot;left&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_marginTop</span>=<span class="string">&quot;20dp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:orientation</span>=<span class="string">&quot;vertical&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;兴趣爱好&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:textSize</span>=<span class="string">&quot;20dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_marginLeft</span>=<span class="string">&quot;10dp&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">LinearLayout</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_gravity</span>=<span class="string">&quot;left&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:orientation</span>=<span class="string">&quot;horizontal&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">CheckBox</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:id</span>=<span class="string">&quot;@+id/box1&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">                <span class="attr">android:textSize</span>=<span class="string">&quot;18dp&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">&quot;音乐&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">CheckBox</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:id</span>=<span class="string">&quot;@+id/box2&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">                <span class="attr">android:textSize</span>=<span class="string">&quot;18dp&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">&quot;运动&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">LinearLayout</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_gravity</span>=<span class="string">&quot;left&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:orientation</span>=<span class="string">&quot;horizontal&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">CheckBox</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:id</span>=<span class="string">&quot;@+id/box3&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">                <span class="attr">android:textSize</span>=<span class="string">&quot;18dp&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">&quot;游泳&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">CheckBox</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:id</span>=<span class="string">&quot;@+id/box4&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">                <span class="attr">android:textSize</span>=<span class="string">&quot;18dp&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:text</span>=<span class="string">&quot;阅读&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:gravity</span>=<span class="string">&quot;center&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:orientation</span>=<span class="string">&quot;horizontal&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/tixing&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_margin</span>=<span class="string">&quot;10dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;提交&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_margin</span>=<span class="string">&quot;10dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;取消&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -296,4 +401,274 @@ document.addEventListener('pjax:send', () => {
 <h3 id="实验效果-3"><a href="#实验效果-3" class="headerlink" title="实验效果"></a>实验效果</h3><p><img src="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172327043.png" alt="img"></p>
 <p><img src="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172327019.png" alt="img"></p>
 <p><img src="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172327597.png" alt="img"></p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://www.nan-bluesky.top">li kunsong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.nan-bluesky.top/2022/04/06/%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81/">http://www.nan-bluesky.top/2022/04/06/%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.nan-bluesky.top" target="_blank">南的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/android/">android</a></div><div class="post_share"><div class="social-share" data-image="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202312292334622.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/04/13/sublime%E8%BF%90%E8%A1%8C%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" title="sublime运行出现问题解决"><img class="cover" src="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202312292334622.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">sublime运行出现问题解决</div></div></a></div><div class="next-post pull-right"><a href="/2022/04/04/mongoDB%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" title="mongoDB调研"><img class="cover" src="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202312292334622.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">mongoDB调研</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/05/05/android%E5%B8%B8%E8%A7%81%E6%8A%80%E5%B7%A7%E7%9A%84%E4%BD%BF%E7%94%A8/" title="android常见技巧的使用"><img class="cover" src="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202312292334622.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-05</div><div class="title">android常见技巧的使用</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/images/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">li kunsong</div><div class="author-info__description">世事漫随流水，算来一梦浮生</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">31</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/wuwei1636"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/wuwei1636" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1537628435@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%BA%8C"><span class="toc-number">1.</span> <span class="toc-text">实验二</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C2-1"><span class="toc-number">1.1.</span> <span class="toc-text">实验2.1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#main-activity-java"><span class="toc-number">1.1.1.</span> <span class="toc-text">main_activity.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#activity-main-xml"><span class="toc-number">1.1.2.</span> <span class="toc-text">activity_main.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strings-xml"><span class="toc-number">1.1.3.</span> <span class="toc-text">strings.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#edu-xml"><span class="toc-number">1.1.4.</span> <span class="toc-text">edu.xml</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C2-2-1"><span class="toc-number">1.2.</span> <span class="toc-text">实验2.2-1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MainActivity-java"><span class="toc-number">1.2.1.</span> <span class="toc-text">MainActivity.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#activity-main-xml-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">activity_main.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%95%88%E6%9E%9C"><span class="toc-number">1.2.3.</span> <span class="toc-text">实验效果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C2-2-2"><span class="toc-number">1.3.</span> <span class="toc-text">实验2.2-2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mainactivity-java"><span class="toc-number">1.3.1.</span> <span class="toc-text">Mainactivity.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#activity-xml"><span class="toc-number">1.3.2.</span> <span class="toc-text">activity.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#user-xml"><span class="toc-number">1.3.3.</span> <span class="toc-text">user.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%95%88%E6%9E%9C-1"><span class="toc-number">1.3.4.</span> <span class="toc-text">实验效果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C2-3"><span class="toc-number">1.4.</span> <span class="toc-text">实验2.3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mainactivity-java-1"><span class="toc-number">1.4.1.</span> <span class="toc-text">Mainactivity.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#buclick-java"><span class="toc-number">1.4.2.</span> <span class="toc-text">buclick.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#activity-main-xml-2"><span class="toc-number">1.4.3.</span> <span class="toc-text">activity_main.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dialog-xml"><span class="toc-number">1.4.4.</span> <span class="toc-text">dialog.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9button%E7%9A%84%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2"><span class="toc-number">1.4.5.</span> <span class="toc-text">修改button的背景颜色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E5%9B%BE"><span class="toc-number">1.4.6.</span> <span class="toc-text">效果图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TabHost"><span class="toc-number">1.5.</span> <span class="toc-text">TabHost</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#activity-main-xml-%E9%A1%B6%E9%83%A8%E5%AF%BC%E8%88%AA"><span class="toc-number">1.5.1.</span> <span class="toc-text">activity_main.xml(顶部导航)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#activity-three-xml%EF%BC%88%E5%BA%95%E9%83%A8%E5%AF%BC%E8%88%AA%EF%BC%89"><span class="toc-number">1.5.2.</span> <span class="toc-text">activity_three.xml（底部导航）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MainActivity-java-1"><span class="toc-number">1.5.3.</span> <span class="toc-text">MainActivity.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E5%9B%BE-1"><span class="toc-number">1.5.4.</span> <span class="toc-text">效果图</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%B8%89"><span class="toc-number">2.</span> <span class="toc-text">实验三</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C3-1"><span class="toc-number">2.1.</span> <span class="toc-text">实验3.1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MainActivity-java-2"><span class="toc-number">2.1.1.</span> <span class="toc-text">MainActivity.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MainActivity2-java"><span class="toc-number">2.1.2.</span> <span class="toc-text">MainActivity2.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#activity-main-xml-3"><span class="toc-number">2.1.3.</span> <span class="toc-text">activity_main.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#activity-main2-xml"><span class="toc-number">2.1.4.</span> <span class="toc-text">activity_main2.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C%EF%BC%9A"><span class="toc-number">2.1.5.</span> <span class="toc-text">实验结果：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashMap-%E5%92%8CMap%E5%8C%BA%E5%88%AB"><span class="toc-number">2.1.6.</span> <span class="toc-text">HashMap 和Map区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayList"><span class="toc-number">2.1.7.</span> <span class="toc-text">ArrayList</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C3-2"><span class="toc-number">2.2.</span> <span class="toc-text">实验3.2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MainActivity"><span class="toc-number">2.2.1.</span> <span class="toc-text">MainActivity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MyRecevier-java"><span class="toc-number">2.2.2.</span> <span class="toc-text">MyRecevier.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#activity-main-xml-4"><span class="toc-number">2.2.3.</span> <span class="toc-text">activity_main.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AndroidManifest-xml-%EF%BC%88%E5%9C%A8%E9%87%8C%E9%9D%A2%E6%B3%A8%E5%86%8C%E5%B9%BF%E6%92%AD%E5%92%8C%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%EF%BC%89"><span class="toc-number">2.2.4.</span> <span class="toc-text">AndroidManifest.xml （在里面注册广播和开机自启动）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">2.2.5.</span> <span class="toc-text">实验结果</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E5%B8%B8%E8%BF%90%E8%A1%8C"><span class="toc-number">2.2.5.1.</span> <span class="toc-text">正常运行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E5%90%8E"><span class="toc-number">2.2.5.2.</span> <span class="toc-text">开机启动后</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%82%B9%E5%87%BB%E5%8F%91%E9%80%81%E5%B9%BF%E6%92%AD%E5%90%8E"><span class="toc-number">2.2.5.3.</span> <span class="toc-text">点击发送广播后</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%9B%9B"><span class="toc-number">3.</span> <span class="toc-text">实验四</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C4-1"><span class="toc-number">3.1.</span> <span class="toc-text">实验4.1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MainActivity-java-3"><span class="toc-number">3.1.1.</span> <span class="toc-text">MainActivity.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MyService-java"><span class="toc-number">3.1.2.</span> <span class="toc-text">MyService.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#antivity-main-xml"><span class="toc-number">3.1.3.</span> <span class="toc-text">antivity_main.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C%EF%BC%9A-1"><span class="toc-number">3.1.4.</span> <span class="toc-text">实验结果：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C4-2"><span class="toc-number">3.2.</span> <span class="toc-text">实验4.2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MainActivity-java-4"><span class="toc-number">3.2.1.</span> <span class="toc-text">MainActivity.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MyService-java-1"><span class="toc-number">3.2.2.</span> <span class="toc-text">MyService.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#contant-java"><span class="toc-number">3.2.3.</span> <span class="toc-text">contant.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#activity-main-xml-5"><span class="toc-number">3.2.4.</span> <span class="toc-text">activity_main.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%95%88%E6%9E%9C-2"><span class="toc-number">3.2.5.</span> <span class="toc-text">实验效果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%BA%94"><span class="toc-number">4.</span> <span class="toc-text">实验五</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C5-1"><span class="toc-number">4.1.</span> <span class="toc-text">实验5.1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MainActivity-java-5"><span class="toc-number">4.1.1.</span> <span class="toc-text">MainActivity.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Database-java"><span class="toc-number">4.1.2.</span> <span class="toc-text">Database.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#activity-main-xml-6"><span class="toc-number">4.1.3.</span> <span class="toc-text">activity_main.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strings-xml-1"><span class="toc-number">4.1.4.</span> <span class="toc-text">strings.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#edu-xml-%E5%9C%A8res%E4%B8%AD%E7%9A%84values%E4%B8%AD%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AAedu-xml%E6%96%87%E4%BB%B6"><span class="toc-number">4.1.5.</span> <span class="toc-text">edu.xml(在res中的values中新建一个edu.xml文件)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%95%88%E6%9E%9C-3"><span class="toc-number">4.1.6.</span> <span class="toc-text">实验效果</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/12/27/vue3-study/" title="Vue3_study"><img src="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202312292334622.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vue3_study"/></a><div class="content"><a class="title" href="/2023/12/27/vue3-study/" title="Vue3_study">Vue3_study</a><time datetime="2023-12-27T03:35:07.000Z" title="发表于 2023-12-27 11:35:07">2023-12-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/31/Hamming-code-check/" title="Hamming code check"><img src="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202312292334622.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hamming code check"/></a><div class="content"><a class="title" href="/2023/10/31/Hamming-code-check/" title="Hamming code check">Hamming code check</a><time datetime="2023-10-31T10:45:12.000Z" title="发表于 2023-10-31 18:45:12">2023-10-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/06/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%80%BB%E7%BB%93/" title="操作系统总结"><img src="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202312292334622.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="操作系统总结"/></a><div class="content"><a class="title" href="/2023/08/06/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%80%BB%E7%BB%93/" title="操作系统总结">操作系统总结</a><time datetime="2023-08-06T05:19:15.000Z" title="发表于 2023-08-06 13:19:15">2023-08-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/28/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" title="计算机组成原理复习"><img src="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202312292334622.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机组成原理复习"/></a><div class="content"><a class="title" href="/2023/06/28/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" title="计算机组成原理复习">计算机组成原理复习</a><time datetime="2023-06-28T10:16:43.000Z" title="发表于 2023-06-28 18:16:43">2023-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/05/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/" title="数据结构复习"><img src="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202312292334622.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据结构复习"/></a><div class="content"><a class="title" href="/2023/05/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/" title="数据结构复习">数据结构复习</a><time datetime="2023-05-21T14:16:43.000Z" title="发表于 2023-05-21 22:16:43">2023-05-21</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://gihub.oss-cn-nanjing.aliyuncs.com/images/202312292334622.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By li kunsong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>li kunsong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.nan-bluesky.top/2022/04/06/%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81/" title="移动应用开发技术实验代码">http://www.nan-bluesky.top/2022/04/06/移动应用开发技术实验代码/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/android/" rel="tag"># android</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/04/mongoDB%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" rel="prev" title="mongoDB调研">
+      <i class="fa fa-chevron-left"></i> mongoDB调研
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/13/sublime%E8%BF%90%E8%A1%8C%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="next" title="sublime运行出现问题解决">
+      sublime运行出现问题解决 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%BA%8C"><span class="nav-number">1.</span> <span class="nav-text">实验二</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C2-1"><span class="nav-number">1.1.</span> <span class="nav-text">实验2.1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#main-activity-java"><span class="nav-number">1.1.1.</span> <span class="nav-text">main_activity.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#activity-main-xml"><span class="nav-number">1.1.2.</span> <span class="nav-text">activity_main.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strings-xml"><span class="nav-number">1.1.3.</span> <span class="nav-text">strings.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#edu-xml"><span class="nav-number">1.1.4.</span> <span class="nav-text">edu.xml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C2-2-1"><span class="nav-number">1.2.</span> <span class="nav-text">实验2.2-1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MainActivity-java"><span class="nav-number">1.2.1.</span> <span class="nav-text">MainActivity.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#activity-main-xml-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">activity_main.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%95%88%E6%9E%9C"><span class="nav-number">1.2.3.</span> <span class="nav-text">实验效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C2-2-2"><span class="nav-number">1.3.</span> <span class="nav-text">实验2.2-2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mainactivity-java"><span class="nav-number">1.3.1.</span> <span class="nav-text">Mainactivity.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#activity-xml"><span class="nav-number">1.3.2.</span> <span class="nav-text">activity.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#user-xml"><span class="nav-number">1.3.3.</span> <span class="nav-text">user.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%95%88%E6%9E%9C-1"><span class="nav-number">1.3.4.</span> <span class="nav-text">实验效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C2-3"><span class="nav-number">1.4.</span> <span class="nav-text">实验2.3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mainactivity-java-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">Mainactivity.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#buclick-java"><span class="nav-number">1.4.2.</span> <span class="nav-text">buclick.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#activity-main-xml-2"><span class="nav-number">1.4.3.</span> <span class="nav-text">activity_main.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dialog-xml"><span class="nav-number">1.4.4.</span> <span class="nav-text">dialog.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9button%E7%9A%84%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2"><span class="nav-number">1.4.5.</span> <span class="nav-text">修改button的背景颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%88%E6%9E%9C%E5%9B%BE"><span class="nav-number">1.4.6.</span> <span class="nav-text">效果图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TabHost"><span class="nav-number">1.5.</span> <span class="nav-text">TabHost</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#activity-main-xml-%E9%A1%B6%E9%83%A8%E5%AF%BC%E8%88%AA"><span class="nav-number">1.5.1.</span> <span class="nav-text">activity_main.xml(顶部导航)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#activity-three-xml%EF%BC%88%E5%BA%95%E9%83%A8%E5%AF%BC%E8%88%AA%EF%BC%89"><span class="nav-number">1.5.2.</span> <span class="nav-text">activity_three.xml（底部导航）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MainActivity-java-1"><span class="nav-number">1.5.3.</span> <span class="nav-text">MainActivity.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%88%E6%9E%9C%E5%9B%BE-1"><span class="nav-number">1.5.4.</span> <span class="nav-text">效果图</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%B8%89"><span class="nav-number">2.</span> <span class="nav-text">实验三</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C3-1"><span class="nav-number">2.1.</span> <span class="nav-text">实验3.1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MainActivity-java-2"><span class="nav-number">2.1.1.</span> <span class="nav-text">MainActivity.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MainActivity2-java"><span class="nav-number">2.1.2.</span> <span class="nav-text">MainActivity2.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#activity-main-xml-3"><span class="nav-number">2.1.3.</span> <span class="nav-text">activity_main.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#activity-main2-xml"><span class="nav-number">2.1.4.</span> <span class="nav-text">activity_main2.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C%EF%BC%9A"><span class="nav-number">2.1.5.</span> <span class="nav-text">实验结果：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap-%E5%92%8CMap%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.6.</span> <span class="nav-text">HashMap 和Map区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList"><span class="nav-number">2.1.7.</span> <span class="nav-text">ArrayList</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C3-2"><span class="nav-number">2.2.</span> <span class="nav-text">实验3.2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MainActivity"><span class="nav-number">2.2.1.</span> <span class="nav-text">MainActivity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MyRecevier-java"><span class="nav-number">2.2.2.</span> <span class="nav-text">MyRecevier.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#activity-main-xml-4"><span class="nav-number">2.2.3.</span> <span class="nav-text">activity_main.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AndroidManifest-xml-%EF%BC%88%E5%9C%A8%E9%87%8C%E9%9D%A2%E6%B3%A8%E5%86%8C%E5%B9%BF%E6%92%AD%E5%92%8C%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%EF%BC%89"><span class="nav-number">2.2.4.</span> <span class="nav-text">AndroidManifest.xml （在里面注册广播和开机自启动）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">2.2.5.</span> <span class="nav-text">实验结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E5%B8%B8%E8%BF%90%E8%A1%8C"><span class="nav-number">2.2.5.1.</span> <span class="nav-text">正常运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E5%90%8E"><span class="nav-number">2.2.5.2.</span> <span class="nav-text">开机启动后</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%82%B9%E5%87%BB%E5%8F%91%E9%80%81%E5%B9%BF%E6%92%AD%E5%90%8E"><span class="nav-number">2.2.5.3.</span> <span class="nav-text">点击发送广播后</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E5%9B%9B"><span class="nav-number">3.</span> <span class="nav-text">实验四</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C4-1"><span class="nav-number">3.1.</span> <span class="nav-text">实验4.1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MainActivity-java-3"><span class="nav-number">3.1.1.</span> <span class="nav-text">MainActivity.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MyService-java"><span class="nav-number">3.1.2.</span> <span class="nav-text">MyService.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#antivity-main-xml"><span class="nav-number">3.1.3.</span> <span class="nav-text">antivity_main.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C%EF%BC%9A-1"><span class="nav-number">3.1.4.</span> <span class="nav-text">实验结果：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C4-2"><span class="nav-number">3.2.</span> <span class="nav-text">实验4.2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MainActivity-java-4"><span class="nav-number">3.2.1.</span> <span class="nav-text">MainActivity.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MyService-java-1"><span class="nav-number">3.2.2.</span> <span class="nav-text">MyService.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#contant-java"><span class="nav-number">3.2.3.</span> <span class="nav-text">contant.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#activity-main-xml-5"><span class="nav-number">3.2.4.</span> <span class="nav-text">activity_main.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%95%88%E6%9E%9C-2"><span class="nav-number">3.2.5.</span> <span class="nav-text">实验效果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%BA%94"><span class="nav-number">4.</span> <span class="nav-text">实验五</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C5-1"><span class="nav-number">4.1.</span> <span class="nav-text">实验5.1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MainActivity-java-5"><span class="nav-number">4.1.1.</span> <span class="nav-text">MainActivity.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Database-java"><span class="nav-number">4.1.2.</span> <span class="nav-text">Database.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#activity-main-xml-6"><span class="nav-number">4.1.3.</span> <span class="nav-text">activity_main.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strings-xml-1"><span class="nav-number">4.1.4.</span> <span class="nav-text">strings.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#edu-xml-%E5%9C%A8res%E4%B8%AD%E7%9A%84values%E4%B8%AD%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AAedu-xml%E6%96%87%E4%BB%B6"><span class="nav-number">4.1.5.</span> <span class="nav-text">edu.xml(在res中的values中新建一个edu.xml文件)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%95%88%E6%9E%9C-3"><span class="nav-number">4.1.6.</span> <span class="nav-text">实验效果</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="li kunsong"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">li kunsong</p>
+  <div class="site-description" itemprop="description">世事漫随流水，算来一梦浮生</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wuwei1636" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wuwei1636" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1537628435@qq.com" title="E-Mail → mailto:1537628435@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/streams_star?spm=1000.2115.3001.5343" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;streams_star?spm&#x3D;1000.2115.3001.5343" rel="noopener" target="_blank">CSDN</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">li kunsong</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+<script>
+!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+</script>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</html>
