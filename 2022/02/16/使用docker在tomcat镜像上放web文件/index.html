@@ -260,19 +260,25 @@
 
       
         <ul>
-<li><p>使用docker在dockerhub官网上拉取一个tomcat镜像<code>docker pull tomcat</code></p>
+<li>
+<p>使用docker在dockerhub官网上拉取一个tomcat镜像<code>docker pull tomcat</code></p>
 </li>
-<li><p>在本地新建一个文件夹，作为卷挂载的本地，给tomcat暴露一个钝口 </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker -d -p 8080:8080 --name firtomcat -v /home/likunsong/build/tomcat02/test:/usr/local/tomcat/webapps/test -v /home/likunsong/build/tomcat02/tomcatlogs:/usr/local/tomcat/webapps/tomcatlogs tomcat</span><br><span class="line"></span><br><span class="line">-d 在后台运行</span><br><span class="line">-p 8080:8080 外网的8080端口映射内网的8080端口</span><br><span class="line">--name 容器的名字</span><br><span class="line">-v 进行卷挂载 第一个是web的挂载，第二个是运行日志的挂载</span><br></pre></td></tr></table></figure></li>
-<li><p>修改tomcat文件位置（解决运行端口出现404的问题）</p>
+<li>
+<p>在本地新建一个文件夹，作为卷挂载的本地，给tomcat暴露一个钝口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker -d -p 8080:8080 --name firtomcat -v /home/likunsong/build/tomcat02/test:/usr/local/tomcat/webapps/test -v /home/likunsong/build/tomcat02/tomcatlogs:/usr/local/tomcat/webapps/tomcatlogs tomcat</span><br><span class="line"></span><br><span class="line">-d 在后台运行</span><br><span class="line">-p 8080:8080 外网的8080端口映射内网的8080端口</span><br><span class="line">--name 容器的名字</span><br><span class="line">-v 进行卷挂载 第一个是web的挂载，第二个是运行日志的挂载</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>修改tomcat文件位置（解决运行端口出现404的问题）</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">因为tomcat官方文件webapps没有东西，所以打开会报404的错误，所以需要修改。</span><br><span class="line"></span><br><span class="line">docker exec -it &lt;容器名或容器ID&gt;</span><br><span class="line"></span><br><span class="line">进入后，cp -r webapps.dist/* webapps,将外部的webapps文件复制到webapps里面</span><br><span class="line"></span><br><span class="line">然后再运行8080端口就不会报404的错误了</span><br></pre></td></tr></table></figure>
-
 <p><img src="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172326591.png" alt="image-20220413173215155"></p>
 </li>
-<li><p>设置web.xml文件，运行web程序</p>
+<li>
+<p>设置web.xml文件，运行web程序</p>
 <p>在test文件下建一个WEB-INF的文件夹，里面放web.xml。具体内容可以在网上自己找，下面是我的。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">version</span>=<span class="string">&quot;2.4&quot;</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns</span>=<span class="string">&quot;http://java.sun.com/xml/ns/j2ee&quot;</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://java.sun.com/xml/ns/j2ee </span></span></span><br><span class="line"><span class="string"><span class="tag">        http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>在test文件夹里面放html文件就可以运行了 ， 注**:首页的html文件命名一定是index.html，要不然会显示不出来**</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">version</span>=<span class="string">&quot;2.4&quot;</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns</span>=<span class="string">&quot;http://java.sun.com/xml/ns/j2ee&quot;</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://java.sun.com/xml/ns/j2ee </span></span></span><br><span class="line"><span class="string"><span class="tag">        http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>在test文件夹里面放html文件就可以运行了 ， 注**:首页的html文件命名一定是index.html，要不然会显示不出来**</p>
 </li>
 </ul>
 <p><img src="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202306172326238.png" alt="1"></p>

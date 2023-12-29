@@ -249,8 +249,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h3><hr>
-<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>dockerfile build run 手动操作单个容器</p>
+        <h3 id="Docker-Compose">Docker Compose</h3>
+<hr>
+<h4 id="简介">简介</h4>
+<p>dockerfile build run 手动操作单个容器</p>
 <p>Docker Compose 用来高效的管理容器。定义多个容器的运行</p>
 <blockquote>
 <p>官方文档</p>
@@ -264,16 +266,19 @@
 <p><strong>三个步骤</strong></p>
 <p>Using Compose is basically a three-step process:</p>
 <ol>
-<li>Define your app’s environment with a <code>Dockerfile</code> so it can be reproduced anywhere.<ul>
+<li>Define your app’s environment with a <code>Dockerfile</code> so it can be reproduced anywhere.
+<ul>
 <li>dockerfile 保证我们的项目可以在任何地方运行</li>
 </ul>
 </li>
-<li>Define the services that make up your app in <code>docker-compose.yml</code> so they can be run together in an isolated environment.<ul>
+<li>Define the services that make up your app in <code>docker-compose.yml</code> so they can be run together in an isolated environment.
+<ul>
 <li>service服务</li>
 <li>docker-compose.yml 文件怎么写</li>
 </ul>
 </li>
-<li>Run <code>docker compose up</code> and the <a target="_blank" rel="noopener" href="https://docs.docker.com/compose/cli-command/">Docker compose command</a> starts and runs your entire app. You can alternatively run <code>docker-compose up</code> using the docker-compose binary.<ul>
+<li>Run <code>docker compose up</code> and the <a target="_blank" rel="noopener" href="https://docs.docker.com/compose/cli-command/">Docker compose command</a> starts and runs your entire app. You can alternatively run <code>docker-compose up</code> using the docker-compose binary.
+<ul>
 <li>启动项目</li>
 </ul>
 </li>
@@ -284,74 +289,56 @@
 <p><code>dockerfile</code>可以让程序在任何地方运行。web服务，redis，mysql，nignx…多个容器</p>
 <p>Compose</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3.9&quot;</span>  <span class="comment"># optional since v1.27.0</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">web:</span></span><br><span class="line">    <span class="attr">build:</span> <span class="string">.</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;5000:5000&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">.:/code</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">logvolume01:/var/log</span></span><br><span class="line">    <span class="attr">links:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">redis</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis</span></span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line">  <span class="attr">logvolume01:</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
-
 <hr>
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>DockerCompose下载</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># </span><span class="language-bash">下载</span></span><br><span class="line">在GitHub上下载，下载速度比较慢</span><br><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/v1.29.2/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line"></span><br><span class="line">这个可能快一点</span><br><span class="line">curl -L https://get.daocloud.io/docker/compose/releases/download/1.29.2/docker-compose-`uname -s`-`uname -m`  &gt; /usr/local/bin/docker-compose</span><br><span class="line"><span class="meta"> </span></span><br><span class="line"><span class="meta"># </span><span class="language-bash">设置操作权限</span> </span><br><span class="line">chmod +x /usr/local/bin/docker-compose</span><br><span class="line"> </span><br><span class="line">docker-compose --help</span><br></pre></td></tr></table></figure>
-
-
+<h4 id="安装">安装</h4>
+<p>DockerCompose下载</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载</span></span><br><span class="line">在GitHub上下载，下载速度比较慢</span><br><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/v1.29.2/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line"></span><br><span class="line">这个可能快一点</span><br><span class="line">curl -L https://get.daocloud.io/docker/compose/releases/download/1.29.2/docker-compose-`uname -s`-`uname -m`  &gt; /usr/local/bin/docker-compose</span><br><span class="line"><span class="meta prompt_"> </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置操作权限</span> </span><br><span class="line">chmod +x /usr/local/bin/docker-compose</span><br><span class="line"> </span><br><span class="line">docker-compose --help</span><br></pre></td></tr></table></figure>
 
 <p>安装成功</p>
 <p><a target="_blank" rel="noopener" href="https://docs.docker.com/compose/install/">官方文档</a></p>
-<h4 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h4><hr>
+<h4 id="体验">体验</h4>
+<hr>
 <p>1.建立一个文件夹，并创建一个app文件</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir composetest</span><br><span class="line">cd composetest</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line"></span><br><span class="line">import redis</span><br><span class="line">from flask import Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line">cache = redis.Redis(host=&#x27;redis&#x27;, port=6379)</span><br><span class="line"></span><br><span class="line">def get_hit_count():</span><br><span class="line">    retries = 5</span><br><span class="line">    while True:</span><br><span class="line">        try:</span><br><span class="line">            return cache.incr(&#x27;hits&#x27;)</span><br><span class="line">        except redis.exceptions.ConnectionError as exc:</span><br><span class="line">            if retries == 0:</span><br><span class="line">                raise exc</span><br><span class="line">            retries -= 1</span><br><span class="line">            time.sleep(0.5)</span><br><span class="line"></span><br><span class="line">@app.route(&#x27;/&#x27;)</span><br><span class="line">def hello():</span><br><span class="line">    count = get_hit_count()</span><br><span class="line">    return &#x27;Hello World! I have been seen &#123;&#125; times.\n&#x27;.format(count)</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">flask</span><br><span class="line">redis</span><br></pre></td></tr></table></figure>
-
-
-
 <p>2.创建一个Dockerfile文件 应用打包为镜像</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># </span><span class="language-bash">syntax=docker/dockerfile:1</span></span><br><span class="line">FROM python:3.7-alpine</span><br><span class="line">WORKDIR /code</span><br><span class="line">ENV FLASK_APP=app.py</span><br><span class="line">ENV FLASK_RUN_HOST=0.0.0.0</span><br><span class="line">RUN apk add --no-cache gcc musl-dev linux-headers</span><br><span class="line">COPY requirements.txt requirements.txt</span><br><span class="line">RUN pip install -r requirements.txt</span><br><span class="line">EXPOSE 5000</span><br><span class="line">COPY . .</span><br><span class="line">CMD [&quot;flask&quot;, &quot;run&quot;]</span><br></pre></td></tr></table></figure>
-
-
-
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">syntax=docker/dockerfile:1</span></span><br><span class="line">FROM python:3.7-alpine</span><br><span class="line">WORKDIR /code</span><br><span class="line">ENV FLASK_APP=app.py</span><br><span class="line">ENV FLASK_RUN_HOST=0.0.0.0</span><br><span class="line">RUN apk add --no-cache gcc musl-dev linux-headers</span><br><span class="line">COPY requirements.txt requirements.txt</span><br><span class="line">RUN pip install -r requirements.txt</span><br><span class="line">EXPOSE 5000</span><br><span class="line">COPY . .</span><br><span class="line">CMD [&quot;flask&quot;, &quot;run&quot;]</span><br></pre></td></tr></table></figure>
 <p>3.写一个yml文件  定义整个服务需要的环境 web redis</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3.9&quot;</span><br><span class="line">services:</span><br><span class="line">  web:</span><br><span class="line">    build: .</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;5000:5000&quot;</span><br><span class="line">  redis:</span><br><span class="line">    image: &quot;redis:alpine&quot;</span><br></pre></td></tr></table></figure>
-
-
-
 <p>4.启动compose</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># </span><span class="language-bash">使用docker-compose up 的时候会出现一直卡在某一个下载进度上 目前没有很好的解决办法 只能慢慢等</span></span><br></pre></td></tr></table></figure>
-
-
-
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用docker-compose up 的时候会出现一直卡在某一个下载进度上 目前没有很好的解决办法 只能慢慢等</span></span><br></pre></td></tr></table></figure>
 <p>启动成功：</p>
-
-
-
-
 
 
 <p>停止dockercompose</p>
 <p>docker-compose down   或者 Ctrl + C</p>
-<p><strong>docker-compose</strong> </p>
+<p><strong>docker-compose</strong></p>
 <p>以前都是通过docker run 单个启动容器</p>
 <p>docker-compose 。 通过docker-compose 编写yml配置文件，可以通过compose一键启动所有服务，或者停止。</p>
-<h4 id="docker小结"><a href="#docker小结" class="headerlink" title="docker小结"></a>docker小结</h4><ol>
+<h4 id="docker小结">docker小结</h4>
+<ol>
 <li>Docker 镜像。 run == &gt; 容器</li>
 <li>Dockerfile 构建镜像（服务打包）</li>
 <li>docker-compose  启动项目（编排 ， 多个微服务/ 环境）</li>
 <li>docker网络</li>
 </ol>
-<h4 id="yaml规则"><a href="#yaml规则" class="headerlink" title="yaml规则"></a>yaml规则</h4><p>docker-compose 核心。</p>
+<h4 id="yaml规则">yaml规则</h4>
+<p>docker-compose 核心。</p>
 <p>services中的内容可以参考<a target="_blank" rel="noopener" href="https://docs.docker.com/compose/compose-file/compose-file-v3/">官方文档</a>，右侧可滑动的区域就是可以添加的services</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># </span><span class="language-bash">三层</span></span><br><span class="line"></span><br><span class="line">version:&#x27;&#x27;  # docker-compose 的版本</span><br><span class="line">services: # 服务</span><br><span class="line">	服务1: web</span><br><span class="line"><span class="meta">	# </span><span class="language-bash">容器配置</span></span><br><span class="line">    images</span><br><span class="line">    build</span><br><span class="line">    network</span><br><span class="line">	......	</span><br><span class="line">	服务2: redis</span><br><span class="line">	.....</span><br><span class="line">	服务3: </span><br><span class="line">	......</span><br><span class="line"><span class="meta"># </span><span class="language-bash">其他配置  网络/卷、全局规则</span></span><br><span class="line">volumes:</span><br><span class="line">networks:</span><br><span class="line">config:</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="开源项目"><a href="#开源项目" class="headerlink" title="开源项目"></a>开源项目</h4><hr>
-<h5 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h5><ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">三层</span></span><br><span class="line"></span><br><span class="line">version:&#x27;&#x27;  # docker-compose 的版本</span><br><span class="line">services: # 服务</span><br><span class="line">	服务1: web</span><br><span class="line"><span class="meta prompt_">	# </span><span class="language-bash">容器配置</span></span><br><span class="line">    images</span><br><span class="line">    build</span><br><span class="line">    network</span><br><span class="line">	......	</span><br><span class="line">	服务2: redis</span><br><span class="line">	.....</span><br><span class="line">	服务3: </span><br><span class="line">	......</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">其他配置  网络/卷、全局规则</span></span><br><span class="line">volumes:</span><br><span class="line">networks:</span><br><span class="line">config:</span><br></pre></td></tr></table></figure>
+<h4 id="开源项目">开源项目</h4>
+<hr>
+<h5 id="博客">博客</h5>
+<ol>
 <li>下载项目（docker-compose.yml）</li>
 <li>如果需要文件。Dockerfile</li>
 <li>文件准备齐全（直接一键启动）</li>
 </ol>
 <p>后台启动 <code>docker-compose up -d</code></p>
-<h4 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h4><hr>
+<h4 id="实战">实战</h4>
+<hr>
 <ol>
 <li>编写自己的springboot服务</li>
 <li>使用dockerfile 构建对象</li>
@@ -360,42 +347,22 @@
 </ol>
 <p>项目部署要重新部署打包</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up --build #重新构建</span><br></pre></td></tr></table></figure>
-
 <p>在xshell 上输入 <code>curl localhost:8080/hello</code>   即可测试访问，或者登录云服务器ip地址访问</p>
-
-
-
-
-
-
-
 
 <p><strong>遇到不会的命令就–help</strong></p>
 
-
-
-
-
-
-
-
-<h3 id="Swarm"><a href="#Swarm" class="headerlink" title="Swarm"></a>Swarm</h3><p>Docker Engine 1.12 introduces swarm mode that enables you to create a cluster of one or more Docker Engines called a swarm. A swarm consists of one or more nodes: physical or virtual machines running Docker Engine 1.12 or later in swarm mode.</p>
+<h3 id="Swarm">Swarm</h3>
+<p>Docker Engine 1.12 introduces swarm mode that enables you to create a cluster of one or more Docker Engines called a swarm. A swarm consists of one or more nodes: physical or virtual machines running Docker Engine 1.12 or later in swarm mode.</p>
 <p>There are two types of nodes: <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/swarm/how-swarm-mode-works/nodes/#manager-nodes"><strong>managers</strong></a> and <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/swarm/how-swarm-mode-works/nodes/#worker-nodes"><strong>workers</strong></a>.</p>
-
-
-
 
 <p>If you haven’t already, read through the <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/swarm/">swarm mode overview</a> and <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/swarm/key-concepts/">key concepts</a>.</p>
 <p>需要四个服务器，1主3从</p>
 
-
 <p>设置主机：<code>docker swarm init --advertise-addr  公网ip地址</code></p>
 <p><code>docker swarm join</code> 加入一个节点</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># </span><span class="language-bash">获取令牌(需要关闭主节点的防火墙 systemctl stop firewalld.service  关闭防火墙)</span> </span><br><span class="line">docker swarm join-token manager</span><br><span class="line">docker swarm join-taken worker</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Raft协议"><a href="#Raft协议" class="headerlink" title="Raft协议"></a>Raft协议</h4><p>双主双从：假设一个节点挂了，其他节点能否能用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取令牌(需要关闭主节点的防火墙 systemctl stop firewalld.service  关闭防火墙)</span> </span><br><span class="line">docker swarm join-token manager</span><br><span class="line">docker swarm join-taken worker</span><br></pre></td></tr></table></figure>
+<h4 id="Raft协议">Raft协议</h4>
+<p>双主双从：假设一个节点挂了，其他节点能否能用</p>
 <p>Raft协议：保证大多数节点可以用。只要&gt;1，集群数大于3台</p>
 <p>实验：</p>
 <ol>
@@ -406,18 +373,13 @@
 <p>Raft协议：保证大多数节点存活，才可以使用，高可用。</p>
 <p>体验：创建服务，动态扩展服务，动态更新服务</p>
 
-
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run 启动容器！ 不具有扩缩容功能</span><br><span class="line">docker service 启动服务！ 具有扩缩容功能</span><br></pre></td></tr></table></figure>
-
 <p>查看服务</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker service ps 服务名</span><br><span class="line">docker service ls</span><br></pre></td></tr></table></figure>
-
 <p>动态扩容</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker service update --replicas 10 已开启的服务名   # 开启10台服务</span><br><span class="line">docker service scale 已开启的服务名=10               #开启10台服务（一共10台，不是多开启10台）和update一样</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="概念总结"><a href="#概念总结" class="headerlink" title="概念总结"></a>概念总结</h4><hr>
+<h4 id="概念总结">概念总结</h4>
+<hr>
 <p><strong>swarm：</strong></p>
 <p>集群的管理和编号。docker可以初始化一个swarm集群，其他节点可以加入（工作者，管理者）</p>
 <p><strong>Node</strong></p>
@@ -427,10 +389,8 @@
 <p><strong>Task</strong></p>
 <p>容器内的命令，细节任务</p>
 
-
-
-
-<h3 id="Docker-Stack"><a href="#Docker-Stack" class="headerlink" title="Docker     Stack"></a>Docker     Stack</h3><p>docker-compose 单机部署</p>
+<h3 id="Docker-Stack">Docker     Stack</h3>
+<p>docker-compose 单机部署</p>
 <p>docker stac部署，集群部署</p>
 
     </div>
