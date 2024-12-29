@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Obisidian使用</title>
+      <link href="/2024/07/25/Obisidian%E4%BD%BF%E7%94%A8/"/>
+      <url>/2024/07/25/Obisidian%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Obsidian使用"><a href="#Obsidian使用" class="headerlink" title="Obsidian使用"></a>Obsidian使用</h1><h2 id="Obsidian的介绍"><a href="#Obsidian的介绍" class="headerlink" title="Obsidian的介绍"></a>Obsidian的介绍</h2><blockquote><p>Obsidian是一款强大的笔记应用程序，它主要设计用于创建和管理知识库。Obsidian支持使用Markdown语法来记录信息，并允许用户通过链接不同的笔记来构建一个复杂的知识图谱。</p></blockquote><p>安装地址：<a href="https://obsidian.md/">Obsidian</a> ， <a href="https://forum-zh.obsidian.md/">Obsidian中文论坛</a></p><p>Obsidian主要是能够双向链接，并存储自己对知识的总结笔记等，可以用于上传完博客，之后将内容放在Obsidian中，可以清楚的看到每个笔记的创作日期以及标注等等，有很多功能，目前我还没有时间去搞这个，先做一个文档，用于记录Obsidian的日常使用技巧以及快捷键。但是Obsidian需要手写markdown文件，我觉得可以和typora一起使用，这样方便一点。</p><ul><li><input disabled type="checkbox"> </li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Obsidian </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Obsidian </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Vue3_study</title>
       <link href="/2023/12/27/vue3-study/"/>
       <url>/2023/12/27/vue3-study/</url>
