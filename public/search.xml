@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>py学习中各种问题</title>
+      <link href="/2025/04/10/py%E5%AD%A6%E4%B9%A0%E4%B8%AD%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98/"/>
+      <url>/2025/04/10/py%E5%AD%A6%E4%B9%A0%E4%B8%AD%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h2 id="调试问题"><a href="#调试问题" class="headerlink" title="调试问题"></a>调试问题</h2><h3 id="vscode调试Python代码时解决输出端中文乱码问题"><a href="#vscode调试Python代码时解决输出端中文乱码问题" class="headerlink" title="vscode调试Python代码时解决输出端中文乱码问题"></a>vscode调试Python代码时解决输出端中文乱码问题</h3><p>解决办法：增加环境变量中系统变量</p><p>1.配置电脑的系统变量 </p><p> 2.新建系统变量，变量名为：PYTHONIOENCODING，值为：UTF8 </p><p> 3.重启vscode</p><p><img src="https://gihub.oss-cn-nanjing.aliyuncs.com/images/202504101257498.png" alt="image-20250410125724792"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> python </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>C++训练</title>
       <link href="/2025/02/26/C++%E7%BB%83%E4%B9%A0/"/>
       <url>/2025/02/26/C++%E7%BB%83%E4%B9%A0/</url>
