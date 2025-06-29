@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.nan-bluesky.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":false,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="人物按照A星路线移动的C++实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UEC++实现人物按照A星路线移动">
+<meta property="og:url" content="http://www.nan-bluesky.top/2025/06/26/UEC++%E5%AE%9E%E7%8E%B0%E4%BA%BA%E7%89%A9%E6%8C%89%E7%85%A7A%E6%98%9F%E8%B7%AF%E7%BA%BF%E7%A7%BB%E5%8A%A8/index.html">
+<meta property="og:site_name" content="南的个人博客">
+<meta property="og:description" content="人物按照A星路线移动的C++实现">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/45cc20eedf263cb9d4100dca430d8478.jpg">
+<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20250629142652730.png">
+<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20250629143948740.png">
+<meta property="article:published_time" content="2025-06-26T09:01:54.000Z">
+<meta property="article:modified_time" content="2025-06-29T07:47:40.010Z">
+<meta property="article:author" content="li kunsong">
+<meta property="article:tag" content="UE">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/45cc20eedf263cb9d4100dca430d8478.jpg">
+
+<link rel="canonical" href="http://www.nan-bluesky.top/2025/06/26/UEC++%E5%AE%9E%E7%8E%B0%E4%BA%BA%E7%89%A9%E6%8C%89%E7%85%A7A%E6%98%9F%E8%B7%AF%E7%BA%BF%E7%A7%BB%E5%8A%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>UEC++实现人物按照A星路线移动 | 南的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">
+    <a target="_blank" rel="noopener" href="https://github.com/wuwei1636" class="github-corner" aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+    </path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+    </path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+    </svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    </div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">南的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">遇事不决，但问春风</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.nan-bluesky.top/2025/06/26/UEC++%E5%AE%9E%E7%8E%B0%E4%BA%BA%E7%89%A9%E6%8C%89%E7%85%A7A%E6%98%9F%E8%B7%AF%E7%BA%BF%E7%A7%BB%E5%8A%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="li kunsong">
+      <meta itemprop="description" content="世事漫随流水，算来一梦浮生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UEC++实现人物按照A星路线移动
+        </h1>
+
+        <div class="post-meta">
+	
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-06-26 17:01:54" itemprop="dateCreated datePublished" datetime="2025-06-26T17:01:54+08:00">2025-06-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-06-29 15:47:40" itemprop="dateModified" datetime="2025-06-29T15:47:40+08:00">2025-06-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UE/" itemprop="url" rel="index"><span itemprop="name">UE</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">人物按照A星路线移动的C++实现</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>遇到的问题：</p>
+<ol>
+<li>如何使用UEC++实现UE蓝图中的方法 </li>
+<li>世界中存在一个不是自己放置的类</li>
+<li>在一个C++类中调用另一个C++类中的变量或者函数</li>
+<li>Get All Actors of Class的替代</li>
+<li>蓝图Actor的名字和在世界中获取到的Actor中的名字不相同</li>
+</ol>
+<p>详见博客置顶文章-<a target="_blank" rel="noopener" href="https://wuwei1636.github.io/2025/05/30/UE%E9%81%87%E5%88%B0%E7%9A%84%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98/">UE遇到的各种问题</a></p>
+</blockquote>
+<h1 id="实现A星算法规划路径"><a href="#实现A星算法规划路径" class="headerlink" title="实现A星算法规划路径"></a>实现A星算法规划路径</h1><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="AStar-test2Character-h"><a href="#AStar-test2Character-h" class="headerlink" title="AStar_test2Character.h"></a><code>AStar_test2Character.h</code></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义的变量</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 自定义定时器句柄</span></span><br><span class="line">	FTimerHandle TimerHandle;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">UFUNCTION</span>()</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">ShowWay</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 自定义函数 - 进入FuncAStarMoveCaculate</span></span><br><span class="line">	<span class="built_in">UFUNCTION</span>(BlueprintCallable)</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">AStarMoveCaculate</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// A星算法移动代价计算函数</span></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">FuncAStarMoveCaculate</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 曼哈顿距离计算函数</span></span><br><span class="line">	<span class="function">int32 <span class="title">DistanceToDistination</span><span class="params">(Aboard* board)</span></span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 用于存储样条点的坐标</span></span><br><span class="line">	TArray&lt;FVector&gt; AllPositions;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 开始移动的节点</span></span><br><span class="line">	Aboard* MoveStartBoard =  <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 终点的坐标</span></span><br><span class="line">	AMyDestination* Destination = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 存储已经扫描过的节点</span></span><br><span class="line">	TArray&lt;Aboard*&gt; BoardHasScanned;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 计算已经走过的步数</span></span><br><span class="line">	int32 moveStep = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 盒体检测参数</span></span><br><span class="line">	<span class="built_in">UPROPERTY</span>(EditAnywhere,Category=<span class="string">&quot;BoxTrace&quot;</span>)</span><br><span class="line">	FVector HalfSize = <span class="built_in">FVector</span>(<span class="number">50.0f</span>, <span class="number">50.0f</span>, <span class="number">10.0f</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 盒体检测参数</span></span><br><span class="line">	<span class="built_in">UPROPERTY</span>(EditAnywhere,Category=<span class="string">&quot;BoxTrace&quot;</span>)</span><br><span class="line">	FRotator Orientation = <span class="built_in">FRotator</span>(<span class="number">0.0f</span>, <span class="number">45.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 判断方向</span></span><br><span class="line">	int32 isChange = <span class="number">-1</span>;</span><br><span class="line">	<span class="comment">//上一个坐标</span></span><br><span class="line">	FVector LastPosition;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 加入指定位置的点于数组中</span></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">AddSpecialPositionToArray</span><span class="params">()</span></span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="AStar-test2Character-cpp"><a href="#AStar-test2Character-cpp" class="headerlink" title="AStar_test2Character.cpp"></a><code>AStar_test2Character.cpp</code></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AAStar_test2Character::SetupPlayerInputComponent</span><span class="params">(UInputComponent* PlayerInputComponent)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Super::<span class="built_in">SetupPlayerInputComponent</span>(PlayerInputComponent);</span><br><span class="line">	<span class="comment">// 绑定输入：键盘1 形成A星算法路径;键盘2 根据A星算法路径形成样条点;键盘3 AI开始按照A星算法规划路径移动（实际上是按照样条点移动）</span></span><br><span class="line">	PlayerInputComponent-&gt;<span class="built_in">BindAction</span>(<span class="built_in">TEXT</span>(<span class="string">&quot;showWay&quot;</span>), IE_Pressed, <span class="keyword">this</span>, &amp;AAStar_test2Character::ShowWay);</span><br><span class="line">	PlayerInputComponent-&gt;<span class="built_in">BindAction</span>(<span class="built_in">TEXT</span>(<span class="string">&quot;createSpine&quot;</span>), IE_Pressed, <span class="keyword">this</span>, &amp;AAStar_test2Character::SpineSet);</span><br><span class="line">	PlayerInputComponent-&gt;<span class="built_in">BindAction</span>(<span class="built_in">TEXT</span>(<span class="string">&quot;AiMove&quot;</span>), IE_Pressed, <span class="keyword">this</span>, &amp;AAStar_test2Character::AIMove);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AAStar_test2Character::ShowWay</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 获取World</span></span><br><span class="line">	UWorld* World = <span class="built_in">GetWorld</span>();</span><br><span class="line">	<span class="keyword">if</span> (!World) <span class="keyword">return</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// Step 1: 获取指定类的所有实例</span></span><br><span class="line">	TArray&lt;AActor*&gt; FoundActors;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 获取StartActor 起始点 获取DestinationActor 终点</span></span><br><span class="line">	UGameplayStatics::<span class="built_in">GetAllActorsOfClass</span>(World, AMyStart::<span class="built_in">StaticClass</span>(), FoundActors);</span><br><span class="line">	AActor* StartActor = FoundActors.<span class="built_in">Num</span>() &gt; <span class="number">0</span> ? FoundActors[<span class="number">0</span>] : <span class="literal">nullptr</span>;</span><br><span class="line">	UGameplayStatics::<span class="built_in">GetAllActorsOfClass</span>(World, AMyDestination::<span class="built_in">StaticClass</span>(), FoundActors);</span><br><span class="line">	AActor* DestinationActor = FoundActors.<span class="built_in">Num</span>() &gt; <span class="number">0</span> ? FoundActors[<span class="number">0</span>] : <span class="literal">nullptr</span>;</span><br><span class="line">	<span class="keyword">if</span> (!StartActor || !DestinationActor) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 将终点的坐标放入变量 Destination</span></span><br><span class="line">	Destination = <span class="built_in">Cast</span>&lt;AMyDestination&gt;(DestinationActor);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 获取起始点的坐标位置 并添加到AllPositions（样条点数组）中</span></span><br><span class="line">	FVector StartActorLocation = StartActor-&gt;<span class="built_in">GetActorLocation</span>();</span><br><span class="line">	AllPositions.<span class="built_in">Add</span>(StartActorLocation);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 初始化LastPosition，用于之后判断是否需要添加新的样条点</span></span><br><span class="line">	LastPosition = StartActorLocation;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 自定义线条追踪穿过的Z轴</span></span><br><span class="line">	<span class="type">float</span> StartZ = <span class="number">100.0f</span>;</span><br><span class="line">	<span class="type">float</span> EndZ = <span class="number">-100.0f</span>;</span><br><span class="line">	FVector StartTraceLocation = <span class="built_in">FVector</span>(StartActorLocation.X, StartActorLocation.Y, StartZ);</span><br><span class="line">	FVector EndTraceLocation = <span class="built_in">FVector</span>(StartActorLocation.X, StartActorLocation.Y, EndZ);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// Step 2: 进行射线追踪</span></span><br><span class="line">	FHitResult HitResult;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 定义 trace 的行为参数</span></span><br><span class="line">	<span class="function">FCollisionQueryParams <span class="title">TraceParams</span><span class="params">(FName(TEXT(<span class="string">&quot;&quot;</span>)), <span class="literal">false</span>, <span class="keyword">this</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 定义 trace 的对象参数，即需要检测的对象类型</span></span><br><span class="line">	FCollisionObjectQueryParams ObjectQueryParams;</span><br><span class="line">	<span class="comment">// 设置查询世界中动态的物体</span></span><br><span class="line">	ObjectQueryParams.<span class="built_in">AddObjectTypesToQuery</span>(ECC_WorldDynamic);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 进行 trace 射线检测</span></span><br><span class="line">	<span class="type">bool</span> bHit = <span class="built_in">GetWorld</span>()-&gt;<span class="built_in">LineTraceSingleByObjectType</span>(</span><br><span class="line">		HitResult,</span><br><span class="line">		StartTraceLocation,</span><br><span class="line">		EndTraceLocation,</span><br><span class="line">		ObjectQueryParams,</span><br><span class="line">		TraceParams		</span><br><span class="line">	);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Step 3: 处理命中结果</span></span><br><span class="line">	<span class="keyword">if</span> (!bHit)	<span class="built_in">UE_LOG</span>(LogTemp, Error, <span class="built_in">TEXT</span>(<span class="string">&quot;射线没有命中！&quot;</span>));</span><br><span class="line">	AActor* HitActor = HitResult.<span class="built_in">GetActor</span>();</span><br><span class="line">	<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;命中的Actor是: %s&quot;</span>), *HitActor-&gt;<span class="built_in">GetClass</span>()-&gt;<span class="built_in">GetName</span>());</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// Step 4: 类型转换为 BP_Board</span></span><br><span class="line">	Aboard* Board = <span class="built_in">Cast</span>&lt;Aboard&gt;(HitActor);</span><br><span class="line">	<span class="keyword">if</span> (!Board) <span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;命中了Actor，但不是BP_Board!&quot;</span>));</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 更新 MoveStartBoard 添加到 BoardHasScanned 中</span></span><br><span class="line">	MoveStartBoard = Board;</span><br><span class="line">	BoardHasScanned.<span class="built_in">Add</span>(MoveStartBoard);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 计算移动代价</span></span><br><span class="line">	<span class="built_in">AStarMoveCaculate</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AAStar_test2Character::AStarMoveCaculate</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">GetWorld</span>()-&gt;<span class="built_in">GetTimerManager</span>().<span class="built_in">SetTimer</span>(TimerHandle,<span class="keyword">this</span>,&amp;AAStar_test2Character::FuncAStarMoveCaculate,<span class="number">0.01f</span>,<span class="literal">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AAStar_test2Character::FuncAStarMoveCaculate</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 初始化 当前位置至终点 的最小移动代价</span></span><br><span class="line">	int32 minMoveCost = <span class="number">9999</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// Step 1: 初始化盒体追踪检测参数，获取前后左右四个方向的位置进行判断</span></span><br><span class="line">	TArray&lt;FHitResult&gt; OutHits;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 设置追踪中心 的起点和终点的Z值</span></span><br><span class="line">	<span class="type">float</span> StartZ = <span class="number">100.0f</span>;</span><br><span class="line">	<span class="type">float</span> EndZ = <span class="number">-100.0f</span>;</span><br><span class="line">	FVector Location = MoveStartBoard-&gt;<span class="built_in">GetActorLocation</span>();</span><br><span class="line">	FVector StartTraceLocation = <span class="built_in">FVector</span>(Location.X, Location.Y, StartZ);</span><br><span class="line">	FVector EndTraceLocation = <span class="built_in">FVector</span>(Location.X, Location.Y, EndZ);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 忽略的 Actor 数组和对象类型</span></span><br><span class="line">	TArray&lt;AActor*&gt; ActorsToIgnore;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 指定要检测的对象类型数组</span></span><br><span class="line">	TArray&lt;TEnumAsByte&lt;EObjectTypeQuery&gt;&gt; ObjectTypes;</span><br><span class="line">	ObjectTypes.<span class="built_in">Add</span>(UEngineTypes::<span class="built_in">ConvertToObjectType</span>(ECC_WorldDynamic));</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Step 2: 执行盒体追踪</span></span><br><span class="line">	<span class="type">bool</span> bHit = UKismetSystemLibrary::<span class="built_in">BoxTraceMultiForObjects</span>(</span><br><span class="line">		<span class="keyword">this</span>,  <span class="comment">//当前对象作为追踪发起者</span></span><br><span class="line">	    StartTraceLocation,</span><br><span class="line">	    EndTraceLocation,</span><br><span class="line">	    HalfSize,</span><br><span class="line">	    Orientation,</span><br><span class="line">	    ObjectTypes,</span><br><span class="line">	    <span class="literal">false</span>, <span class="comment">// 是否检测复杂碰撞  false表示简单碰撞</span></span><br><span class="line">	    ActorsToIgnore,</span><br><span class="line">	    EDrawDebugTrace::None, <span class="comment">// 是否绘制调试信息</span></span><br><span class="line">	    OutHits,</span><br><span class="line">	    <span class="literal">true</span>  <span class="comment">// 是否返回命中结果</span></span><br><span class="line">	);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// Step 3: 循环遍历检测结果，得到下一个前进的点</span></span><br><span class="line">	<span class="keyword">if</span>(OutHits.<span class="built_in">Num</span>() &gt; <span class="number">0</span>)&#123;</span><br><span class="line">		<span class="comment">// Step 3.1: 计算得到检测结果中距离最近的点</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">const</span> FHitResult&amp; HitResult : OutHits)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// 获取该方向的命中结果</span></span><br><span class="line">			AActor* HitActor = HitResult.<span class="built_in">GetActor</span>();</span><br><span class="line">			<span class="keyword">if</span> (!HitActor) <span class="keyword">continue</span>;</span><br><span class="line">			</span><br><span class="line">			<span class="comment">// 类型转换为 BP_Board</span></span><br><span class="line">			Aboard* Board = <span class="built_in">Cast</span>&lt;Aboard&gt;(HitActor);</span><br><span class="line">			<span class="keyword">if</span> (!Board || BoardHasScanned.<span class="built_in">Contains</span>(Board)) <span class="keyword">continue</span>;</span><br><span class="line">			</span><br><span class="line">			<span class="comment">// 若为BP_Board且不包含在 BoardHasScanned 中，计算移动代价 和最小的移动方向进行比较</span></span><br><span class="line">			BoardHasScanned.<span class="built_in">Add</span>(Board);</span><br><span class="line">			int32 moveCost = <span class="built_in">DistanceToDistination</span>(Board) + moveStep;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">if</span> (minMoveCost &gt; moveCost)</span><br><span class="line">			&#123;</span><br><span class="line">				MoveStartBoard = Board;</span><br><span class="line">				minMoveCost = moveCost;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// Step 3.2: 判断检测结果中距离最近的点 是否在可以移动的范围内</span></span><br><span class="line">		<span class="keyword">if</span>(MoveStartBoard != <span class="literal">nullptr</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// 判断该位置是否可以加入样条点数组中，函数在下一个专题代码中展示</span></span><br><span class="line">			<span class="built_in">AddSpecialPositionToArray</span>();</span><br><span class="line">			</span><br><span class="line">			<span class="comment">// 修改moveStartBoard的颜色，来示该位置已经在A星算法规划的路线中</span></span><br><span class="line">			MoveStartBoard-&gt;<span class="built_in">SetColor</span>(MoveStartBoard);</span><br><span class="line">			</span><br><span class="line">			<span class="comment">// 更新移动步数</span></span><br><span class="line">			moveStep++;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 判断是否到达终点</span></span><br><span class="line">			<span class="keyword">if</span> (!(<span class="built_in">DistanceToDistination</span>(MoveStartBoard) &lt; <span class="number">2</span>))</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">AStarMoveCaculate</span>();</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">// 将终点加入AllPositions</span></span><br><span class="line">				AllPositions.<span class="built_in">Add</span>(Destination-&gt;<span class="built_in">GetActorLocation</span>());</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取 目标点距离终点的 曼哈顿距离</span></span><br><span class="line"><span class="function">int32 <span class="title">AAStar_test2Character::DistanceToDistination</span><span class="params">(Aboard* board)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	FVector BoardLocation = board-&gt;<span class="built_in">GetActorLocation</span>();</span><br><span class="line">	FVector DistinationLocation = Destination-&gt;<span class="built_in">GetActorLocation</span>();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 表示每个网格单元的大小，用于将实际距离转换为 格子 数量</span></span><br><span class="line">	<span class="type">float</span> GridSize = <span class="number">100.0f</span>;</span><br><span class="line">	<span class="type">float</span> Dt = FMath::<span class="built_in">Abs</span>(BoardLocation.X - DistinationLocation.X) + FMath::<span class="built_in">Abs</span>(BoardLocation.Y - DistinationLocation.Y);</span><br><span class="line">	Dt = FMath::<span class="built_in">GridSnap</span>(Dt,GridSize);</span><br><span class="line">	Dt /= GridSize;</span><br><span class="line"></span><br><span class="line">	int32 Distance = FMath::<span class="built_in">CeilToInt</span>(Dt);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> Distance;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="A星算法路径存入样条点数组中"><a href="#A星算法路径存入样条点数组中" class="headerlink" title="A星算法路径存入样条点数组中"></a>A星算法路径存入样条点数组中</h1><h2 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h2><h3 id="如何获取样条线组件"><a href="#如何获取样条线组件" class="headerlink" title="如何获取样条线组件"></a>如何获取样条线组件</h3><blockquote>
+<p>优化前：在<code>AStar_test2Character.h</code>创建一个<code>ASpine</code>类的变量<code>SpineRef</code>，然后在<code>AStar_test2Character.cpp</code>中创建了一个<code>ASpine</code>类的对象，对该对象执行函数操作；此时<code>Spine.cpp</code>类中的<code>this</code>指的是系统创建的对象。</p>
+<p>优化后：直接在<code>AStar_test2Character.cpp</code>中使用<code>GetAllActorsOfClass</code>方法获取到真正的<code>ASpine</code>的引用，然后直接对<code>ASpine</code>本体执行函数操作；此时<code>Spine.cpp</code>类中的<code>this</code>指的是<code>Spine.cpp</code>本身。</p>
+</blockquote>
+<h4 id="优化前"><a href="#优化前" class="headerlink" title="优化前"></a>优化前</h4><p><code>AStar_test2Character</code>类和<code>Spine</code>类</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// AStar_test2Character.h</span></span><br><span class="line">ASpine* SpineRef;</span><br><span class="line"></span><br><span class="line"><span class="comment">// AStar_test2Character.cpp</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!SpineRef)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 创建了一个Spine的动态对象，此步以后，由 GetAllActorsOfClass 找到的ASpine会有两个，一个是系统创建的，一个是自己创建的</span></span><br><span class="line">    SpineRef = <span class="built_in">GetWorld</span>()-&gt;<span class="built_in">SpawnActor</span>&lt;ASpine&gt;();</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (SpineRef)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;进入执行SpineSet222&quot;</span>));</span><br><span class="line">    <span class="comment">// 得到的结果是Spine0，即系统创建的ASpine类的动态对象</span></span><br><span class="line">    <span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;SpineRef是 %s&quot;</span>), *SpineRef-&gt;<span class="built_in">GetName</span>());</span><br><span class="line">    SpineRef-&gt;<span class="built_in">setSpine</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">===================================================</span><br><span class="line"><span class="comment">// Spine.cpp  </span></span><br><span class="line">    </span><br><span class="line"><span class="comment">// 查找名为 &quot;BP_Spine&quot; 的 Actor</span></span><br><span class="line">ASpine* SpineActor = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="keyword">for</span> (TActorIterator&lt;ASpine&gt; <span class="built_in">It</span>(<span class="built_in">GetWorld</span>()); It; ++It)</span><br><span class="line">&#123;</span><br><span class="line">    SpineActor = *It;</span><br><span class="line">    <span class="keyword">if</span> (SpineActor &amp;&amp; SpineActor-&gt;<span class="built_in">GetName</span>().<span class="built_in">Contains</span>(<span class="string">&quot;BP_Spine&quot;</span>))</span><br><span class="line">    &#123;</span><br><span class="line">          <span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;Found BP_Spine: %s&quot;</span>), *SpineActor-&gt;<span class="built_in">GetName</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (!SpineActor)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;未找到名为 BP_Spine 的 Actor&quot;</span>));</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取样条组件</span></span><br><span class="line">USplineComponent* SplineComp = SpineActor -&gt; <span class="built_in">FindComponentByClass</span>&lt;USplineComponent&gt;();</span><br><span class="line"><span class="keyword">if</span> (!SplineComp) <span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="优化后-减少了很多不必要的代码"><a href="#优化后-减少了很多不必要的代码" class="headerlink" title="优化后(减少了很多不必要的代码)"></a>优化后(减少了很多不必要的代码)</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// AStar_test2Character.cpp</span></span><br><span class="line"></span><br><span class="line">UWorld* World = <span class="built_in">GetWorld</span>();</span><br><span class="line">TArray&lt;AActor*&gt; FoundActors;</span><br><span class="line">UGameplayStatics::<span class="built_in">GetAllActorsOfClass</span>(World, ASpine::<span class="built_in">StaticClass</span>(), FoundActors);</span><br><span class="line">ASpine* SpineRefT = <span class="built_in">Cast</span>&lt;ASpine&gt;(FoundActors[<span class="number">0</span>]);</span><br><span class="line">SpineRefT-&gt;<span class="built_in">setSpine</span>();</span><br><span class="line"></span><br><span class="line">===================================================</span><br><span class="line"><span class="comment">// Spine.cpp</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">// 获取样条组件</span></span><br><span class="line">USplineComponent* SplineComp = <span class="keyword">this</span> -&gt; <span class="built_in">FindComponentByClass</span>&lt;USplineComponent&gt;();</span><br><span class="line"><span class="keyword">if</span> (!SplineComp) <span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// AStar_test2Character.cpp</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断是否可以加入样条点数组中，方向改变才加入</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AAStar_test2Character::AddSpecialPositionToArray</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 判断当前点相对于上一个点要走的方向  只有横竖两个方向，故只判断X轴是否相等</span></span><br><span class="line">	FVector moveStartLocation = MoveStartBoard-&gt;<span class="built_in">GetActorLocation</span>();</span><br><span class="line">	<span class="type">bool</span> isXSame = moveStartLocation.X - LastPosition.X == <span class="number">0.0f</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// isChange: -1 表示是加入的第一个点；0 表示上一个点的方向是Y轴的；1 表示上一个点的方向是X轴</span></span><br><span class="line">	<span class="keyword">if</span> (isChange == <span class="number">-1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (isXSame)</span><br><span class="line">		&#123;</span><br><span class="line">			isChange = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			isChange = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		LastPosition = moveStartLocation;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="comment">// 不是第一个加入的点，判断方向有没有变化</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (isXSame)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (isChange == <span class="number">0</span>) <span class="comment">// 方向没有改变</span></span><br><span class="line">			&#123;</span><br><span class="line">				LastPosition = moveStartLocation;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				AllPositions.<span class="built_in">Add</span>(LastPosition);</span><br><span class="line">				LastPosition = moveStartLocation;</span><br><span class="line">				isChange = <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (isChange == <span class="number">1</span>) <span class="comment">// 方向没有改变</span></span><br><span class="line">			&#123;</span><br><span class="line">				LastPosition = moveStartLocation;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				AllPositions.<span class="built_in">Add</span>(LastPosition);</span><br><span class="line">				LastPosition = moveStartLocation;</span><br><span class="line">				isChange = <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="人物实现AI行为树——按照样条线行走"><a href="#人物实现AI行为树——按照样条线行走" class="headerlink" title="人物实现AI行为树——按照样条线行走"></a>人物实现AI行为树——按照样条线行走</h1><h2 id="难点-1"><a href="#难点-1" class="headerlink" title="难点"></a>难点</h2><h3 id="自定义实现AI行为树中的Decorator和Task节点"><a href="#自定义实现AI行为树中的Decorator和Task节点" class="headerlink" title="自定义实现AI行为树中的Decorator和Task节点"></a>自定义实现AI行为树中的Decorator和Task节点</h3><h4 id="1-创建C-类"><a href="#1-创建C-类" class="headerlink" title="1. 创建C++类"></a>1. 创建C++类</h4><p>Decorator应继承<code>BTDecorator</code>，Task应继承<code>BTTaskNode</code>；如果希望使用黑板键，可以继承自相应的有<code>_BlackboardBase</code>后缀的类，这个类会提供一个黑板键成员变量，当然也可以不继承这个<code>_BlackboardBase</code>，自己写</p>
+<p><img src="/D:/env\typora\localImg\45cc20eedf263cb9d4100dca430d8478.jpg" alt="45cc20eedf263cb9d4100dca430d8478"></p>
+<h4 id="2-关键函数"><a href="#2-关键函数" class="headerlink" title="2. 关键函数"></a>2. 关键函数</h4><blockquote>
+<p>只举例了代码中用到的部分函数，其他函数请自己参考<code>BTDecorator.h</code>和<code>BTTaskNode.h</code>中的函数以及注释</p>
+</blockquote>
+<h5 id="Decorator的判断函数为"><a href="#Decorator的判断函数为" class="headerlink" title="Decorator的判断函数为"></a>Decorator的判断函数为</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="type">bool</span> <span class="title">CalculateRawConditionValue</span><span class="params">(UBehaviorTreeComponent&amp; OwnerComp, uint8* NodeMemory)</span> <span class="type">const</span> <span class="keyword">override</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>重写这个函数，返回值是能否执行子节点</p>
+<h5 id="Task的开始执行函数"><a href="#Task的开始执行函数" class="headerlink" title="Task的开始执行函数"></a>Task的开始执行函数</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** starts this task, should return Succeeded, Failed or InProgress</span></span><br><span class="line"><span class="comment">*  (use FinishLatentTask() when returning InProgress)</span></span><br><span class="line"><span class="comment">* this function should be considered as const (don&#x27;t modify state of object) if node is not instanced! */</span></span><br><span class="line"></span><br><span class="line"><span class="function">AIMODULE_API <span class="keyword">virtual</span> EBTNodeResult::Type <span class="title">ExecuteTask</span><span class="params">(UBehaviorTreeComponent&amp; OwnerComp, uint8* NodeMemory)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>可用的返回值由三种</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">EBTNodeResult::Failed</span><br><span class="line">EBTNodeResult::Succeeded</span><br><span class="line">EBTNodeResult::InProgress</span><br></pre></td></tr></table></figure>
+
+<p>前两种自然就是立刻返回当前节点执行成功与否，最后一种是表示节点虽然已经开始执行，但暂时还没执行结束，当希望结束执行InProgress的节点（以成功执行举例），就需要调用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">FinishLatentTask</span>(OwnerComp, EBTNodeResult::Succeeded);</span><br></pre></td></tr></table></figure>
+
+<p>该函数一般在<code>TickTask</code>中调用，也就是每个Tick都去检查是否执行完成。</p>
+<h5 id="TickTask函数原型"><a href="#TickTask函数原型" class="headerlink" title="TickTask函数原型"></a>TickTask函数原型</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** ticks this task </span></span><br><span class="line"><span class="comment"> * this function should be considered as const (don&#x27;t modify state of object) if node is not instanced! </span></span><br><span class="line"><span class="comment"> * bNotifyTick must be set to true for this function to be called</span></span><br><span class="line"><span class="comment"> * Calling INIT_TASK_NODE_NOTIFY_FLAGS in the constructor of the task will set this flag automatically */</span></span><br><span class="line"><span class="function">AIMODULE_API <span class="keyword">virtual</span> <span class="type">void</span> <span class="title">TickTask</span><span class="params">(UBehaviorTreeComponent&amp; OwnerComp, uint8* NodeMemory, <span class="type">float</span> DeltaSeconds)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>根据上面的注释，我们可以知道，只有当设置<code>bNotifyTick</code> &#x3D; true时<code>TickTask</code>才会执行；同理还有<code>bNotifyActivation </code>于<code>OnNodeActivation</code>、<code>bNotifyDeactivation</code> 于<code>OnNodeDeactivation</code></p>
+<h3 id="如何在AIController中获取黑板，并修改其中的变量值"><a href="#如何在AIController中获取黑板，并修改其中的变量值" class="headerlink" title="如何在AIController中获取黑板，并修改其中的变量值"></a>如何在<code>AIController</code>中获取黑板，并修改其中的变量值</h3><h4 id="1-定义变量"><a href="#1-定义变量" class="headerlink" title="1. 定义变量"></a>1. 定义变量</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取控制角色，初始化AI逻辑和状态</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">OnPossess</span><span class="params">(APawn* possesPawn)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// AI移动的函数</span></span><br><span class="line"><span class="built_in">UFUNCTION</span>(BlueprintCallable, Category = <span class="string">&quot;AI&quot;</span>)</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">goAIMove</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 行为树</span></span><br><span class="line"><span class="built_in">UPROPERTY</span>(EditAnywhere, Category = <span class="string">&quot;AI&quot;</span>)</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UBehaviorTree</span>* BehaviorTree;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 黑板组件</span></span><br><span class="line"><span class="built_in">UPROPERTY</span>()</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UBlackboardComponent</span>* BlackboardComp;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 存储黑板资产的引用</span></span><br><span class="line"><span class="built_in">UPROPERTY</span>(EditDefaultsOnly, Category = <span class="string">&quot;AI&quot;</span>)</span><br><span class="line">UBlackboardData* BlackboardAsset;</span><br></pre></td></tr></table></figure>
+
+<p><code>UBlackboardComponent* BlackboardComp</code>和<code>UBlackboardData* BlackboardAsset</code>的区别</p>
+<ul>
+<li>**<code>UBlackboardComponent</code>**：这是一个实际的游戏性组件（Actor Component），你可以将其添加到你的AI控制器或者需要访问黑板数据的角色上。它负责运行时存储所有黑板键值对（Key-Value Pairs），这些键值对代表了影响AI决策的数据点。例如，目标位置、最近看到的敌人等。简单来说，<code>UBlackboardComponent</code> 就是AI用来在游戏过程中实时记录和查询各种状态的地方。</li>
+<li>**<code>UBlackboardData</code>**：这是一个资产（Asset），定义了黑板的结构或模式。它描述了可以在<code>UBlackboardComponent</code>中使用的不同键（Keys）以及每个键的类型（比如Object, Vector, Bool等）。这个资产主要用于设计阶段，在编辑器中设置，决定了哪些键可用及其默认值。因此，<code>UBlackboardData</code>更像是一个模板或蓝图，指定了你希望在黑板上跟踪的所有信息的种类。</li>
+</ul>
+<p><img src="/D:/env\typora\localImg\image-20250629142652730.png" alt="image-20250629142652730"></p>
+<h4 id="2-在OnPossess函数中初始化行为树、黑板组件"><a href="#2-在OnPossess函数中初始化行为树、黑板组件" class="headerlink" title="2. 在OnPossess函数中初始化行为树、黑板组件"></a>2. 在<code>OnPossess</code>函数中初始化行为树、黑板组件</h4><p>当一个 <code>AIController</code> 开始控制一个新的 <code>Pawn</code>（通常是NPC或玩家角色的基类）时，就会调用 <code>OnPossess</code> 函数。这个函数的主要作用是初始化与新控制的角色相关的任何AI逻辑或状态。具体来说，它允许AI控制器执行一些设置操作，比如为该角色创建行为树、设置黑板数据、初始化感知系统等。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AMyAIController::OnPossess</span><span class="params">(APawn* possesPawn)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Super::<span class="built_in">OnPossess</span>(possesPawn);</span><br><span class="line">	<span class="comment">// 检查黑板资产是否已设置</span></span><br><span class="line">	<span class="keyword">if</span> (BlackboardAsset)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 初始化 UBlackboardComponent 使用指定的 UBlackboardData 资产</span></span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">UseBlackboard</span>(BlackboardAsset, BlackboardComp))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;黑板初始化成功&quot;</span>));</span><br><span class="line">            </span><br><span class="line">			<span class="comment">// 启动行为树（如果有）</span></span><br><span class="line">			<span class="keyword">if</span> (BehaviorTree)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">RunBehaviorTree</span>(BehaviorTree);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">UE_LOG</span>(LogTemp, Error, <span class="built_in">TEXT</span>(<span class="string">&quot;黑板初始化失败！请检查BlackboardAsset是否正确设置&quot;</span>));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">UE_LOG</span>(LogTemp, Error, <span class="built_in">TEXT</span>(<span class="string">&quot;请设置BlackboardAsset！&quot;</span>));</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>UseBlackboard(BlackboardAsset, BlackboardComp)</code>函数调用的作用</p>
+<p>具体来说，该函数的作用如下：</p>
+<ul>
+<li><strong>参数1 (<code>BlackboardAsset</code>)</strong>: 这是一个指向 <code>UBlackboardData</code> 类型对象的指针，定义了黑板中可用键（Keys）的结构和类型。它描述了哪些信息将被存储在黑板上，例如目标位置、最近发现的敌人等。</li>
+<li><strong>参数2 (<code>BlackboardComp</code>)</strong>: 这是一个指向 <code>UBlackboardComponent</code> 类型对象的引用，表示实际运行时用来存储和访问黑板数据的组件。通过这个组件，AI 系统可以在运行时读取和写入黑板上的数据。</li>
+</ul>
+<p>当调用 <code>UseBlackboard()</code> 函数时，它会执行以下操作：</p>
+<ol>
+<li><strong>初始化黑板组件</strong>：基于提供的 <code>BlackboardAsset</code>，初始化关联的 <code>BlackboardComp</code>，使其准备好根据定义的模式存储和管理数据。</li>
+<li><strong>配置黑板键</strong>：根据 <code>BlackboardAsset</code> 中定义的键值对，配置 <code>BlackboardComp</code> 以确保所有必要的键都已准备就绪，并可以被行为树中的任务和服务所使用。</li>
+<li><strong>返回值</strong>：如果初始化成功，则返回 <code>true</code>，否则返回 <code>false</code>。这允许你在初始化失败的情况下进行错误处理或日志记录。</li>
+</ol>
+<h4 id="3-在AIController类的函数中修改黑板中的变量值"><a href="#3-在AIController类的函数中修改黑板中的变量值" class="headerlink" title="3. 在AIController类的函数中修改黑板中的变量值"></a>3. 在<code>AIController</code>类的函数中修改黑板中的变量值</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置黑板中的值</span></span><br><span class="line"><span class="keyword">if</span> (BlackboardComp)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;获取到黑板中的值&quot;</span>));</span><br><span class="line">    <span class="comment">// 修改黑板中的值，修改后，触发装饰器Decorator判断函数，执行Task中的执行函数</span></span><br><span class="line">    BlackboardComp-&gt;<span class="built_in">SetValueAsBool</span>(<span class="built_in">FName</span>(<span class="string">&quot;AI_Move&quot;</span>), <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;无法获取黑板组件&quot;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改黑板中的变量值后，会触发Decorator中的判断函数<code>CalculateRawConditionValue</code>，若返回True，则执行Task中的<code>ExecuteTask</code>函数，实现AI行为树的全部过程。</p>
+<p>蓝图中AI行为树的配置如下</p>
+<p><img src="/D:/env\typora\localImg\image-20250629143948740.png" alt="image-20250629143948740"></p>
+<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><h3 id="继承BTDecorator的UBTD-Judge类"><a href="#继承BTDecorator的UBTD-Judge类" class="headerlink" title="继承BTDecorator的UBTD_Judge类"></a>继承<code>BTDecorator</code>的<code>UBTD_Judge</code>类</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">UBTD_Judge::<span class="built_in">UBTD_Judge</span>(FObjectInitializer <span class="type">const</span>&amp; ObjectInitializer)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 设置此装饰器在每次 tick 时检查条件</span></span><br><span class="line">	<span class="keyword">this</span>-&gt;bNotifyBecomeRelevant = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">UBTD_Judge::CalculateRawConditionValue</span><span class="params">(UBehaviorTreeComponent&amp; OwnerComp, uint8* NodeMemory)</span> <span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 获取与行为树组件关联的黑板组件</span></span><br><span class="line">	UBlackboardComponent* BlackboardComp = OwnerComp.<span class="built_in">GetBlackboardComponent</span>();</span><br><span class="line">	<span class="keyword">if</span> (BlackboardComp == <span class="literal">nullptr</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;no BlackboardComp&quot;</span>));</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// UE_LOG(LogTemp, Warning, TEXT(&quot;进入筛选器&quot;));</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 假设我们要检查名为 &quot;AI_Move&quot; 的布尔键</span></span><br><span class="line">	<span class="type">bool</span> bAI_Move = BlackboardComp-&gt;<span class="built_in">GetValueAsBool</span>(<span class="string">&quot;AI_Move&quot;</span>);</span><br><span class="line">	<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;筛选器获得的AI_Move的值：%s&quot;</span>), bAI_Move ? <span class="built_in">TEXT</span>(<span class="string">&quot;true&quot;</span>) : <span class="built_in">TEXT</span>(<span class="string">&quot;false&quot;</span>));</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 根据黑板中的值返回条件结果</span></span><br><span class="line">	<span class="keyword">return</span> bAI_Move;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="继承BTTaskNode的UUBTT-MoveBySpine"><a href="#继承BTTaskNode的UUBTT-MoveBySpine" class="headerlink" title="继承BTTaskNode的UUBTT_MoveBySpine"></a>继承<code>BTTaskNode</code>的<code>UUBTT_MoveBySpine</code></h3><blockquote>
+<p>Task的代码有问题，以后有时间会修改</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">UUBTT_MoveBySpine::<span class="built_in">UUBTT_MoveBySpine</span>()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">UE_LOG</span>(LogTemp,Warning,<span class="built_in">TEXT</span>(<span class="string">&quot;进入AI行为树中的Task&quot;</span>))</span><br><span class="line">	MoveKeySelector.<span class="built_in">AddBoolFilter</span>(<span class="keyword">this</span>,<span class="built_in">TEXT</span>(<span class="string">&quot;AI_Move&quot;</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">UUBTT_MoveBySpine::InitializeFromAsset</span><span class="params">(UBehaviorTree&amp; Asset)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Super::<span class="built_in">InitializeFromAsset</span>(Asset);</span><br><span class="line">	<span class="built_in">UE_LOG</span>(LogTemp,Warning,<span class="built_in">TEXT</span>(<span class="string">&quot;进入AI行为树中的Task的InitializeFromAsset&quot;</span>))</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 获取行为树使用的黑板</span></span><br><span class="line">	UBlackboardData* BBAsset = <span class="built_in">GetBlackboardAsset</span>();</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">ensure</span>(BBAsset))</span><br><span class="line">	&#123;</span><br><span class="line">        <span class="comment">// 根据黑板中的条目做初始化</span></span><br><span class="line">		MoveKeySelector.<span class="built_in">ResolveSelectedKey</span>(*BBAsset);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function">EBTNodeResult::Type <span class="title">UUBTT_MoveBySpine::ExecuteTask</span><span class="params">(UBehaviorTreeComponent&amp; OwnerComp, uint8* NodeMemory)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;进入AI行为树的方法执行中&quot;</span>));</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	UWorld* World = <span class="built_in">GetWorld</span>();</span><br><span class="line">	<span class="keyword">if</span> (!World) <span class="keyword">return</span> EBTNodeResult::Failed;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 查找名为 &quot;BP_Spine&quot; 的 Actor</span></span><br><span class="line">	ASpine* SpineActor = <span class="literal">nullptr</span>;</span><br><span class="line">	<span class="keyword">for</span> (TActorIterator&lt;ASpine&gt; <span class="built_in">It</span>(<span class="built_in">GetWorld</span>()); It; ++It)</span><br><span class="line">	&#123;</span><br><span class="line">		SpineActor = *It;</span><br><span class="line">		<span class="keyword">if</span> (SpineActor &amp;&amp; SpineActor-&gt;<span class="built_in">GetName</span>().<span class="built_in">Contains</span>(<span class="string">&quot;BP_Spine&quot;</span>))</span><br><span class="line">		&#123;</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;Found BP_Spine: %s&quot;</span>), *SpineActor-&gt;<span class="built_in">GetName</span>());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (!SpineActor)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;未找到名为 BP_Spine 的 Actor&quot;</span>));</span><br><span class="line">		<span class="keyword">return</span> EBTNodeResult::Failed;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 获取样条组件</span></span><br><span class="line">	USplineComponent* SplineComp = SpineActor -&gt; <span class="built_in">FindComponentByClass</span>&lt;USplineComponent&gt;();</span><br><span class="line">	<span class="keyword">if</span> (!SplineComp) <span class="keyword">return</span> EBTNodeResult::Failed;</span><br><span class="line"></span><br><span class="line">	int32 NumberOfSplinePoints = SplineComp-&gt;<span class="built_in">GetNumberOfSplinePoints</span>();</span><br><span class="line">	<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;NumberOfSplinePoints的值为：%d&quot;</span>),NumberOfSplinePoints);</span><br><span class="line">	<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;index值为：%d&quot;</span>),index);</span><br><span class="line">		</span><br><span class="line">	<span class="comment">// 获取 AI 控制器</span></span><br><span class="line">	AMyAIController* myAIController = <span class="built_in">Cast</span>&lt;AMyAIController&gt;(OwnerComp.<span class="built_in">GetAIOwner</span>());</span><br><span class="line">	<span class="keyword">if</span> (!myAIController) <span class="keyword">return</span> EBTNodeResult::Failed;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 获取控制的角色</span></span><br><span class="line">	APawn* ControlledPawn = myAIController-&gt;<span class="built_in">GetPawn</span>();</span><br><span class="line">	<span class="keyword">if</span> (!ControlledPawn) <span class="keyword">return</span> EBTNodeResult::Failed;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (index &gt;= NumberOfSplinePoints)</span><br><span class="line">	&#123;</span><br><span class="line">		index = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	FVector Point = SplineComp-&gt;<span class="built_in">GetLocationAtSplinePoint</span>(index, ESplineCoordinateSpace::World);</span><br><span class="line">	<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;Points的值为：%s&quot;</span>),*Point.<span class="built_in">ToString</span>());</span><br><span class="line">	UGameplayStatics::<span class="built_in">GetPlayerController</span>(myAIController-&gt;<span class="built_in">GetWorld</span>(), <span class="number">0</span>); <span class="comment">// 确保世界上下文正确</span></span><br><span class="line">	UAIBlueprintHelperLibrary::<span class="built_in">SimpleMoveToLocation</span>(myAIController, Point);</span><br><span class="line">	</span><br><span class="line">	index ++;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;&quot;</span>));</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> EBTNodeResult::Succeeded;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="继承AIController的AMyAIController"><a href="#继承AIController的AMyAIController" class="headerlink" title="继承AIController的AMyAIController"></a>继承<code>AIController</code>的<code>AMyAIController</code></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .h</span></span><br><span class="line"><span class="comment">// 获取控制角色，初始化AI逻辑和状态</span></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">OnPossess</span><span class="params">(APawn* possesPawn)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// AI移动的函数</span></span><br><span class="line">	<span class="built_in">UFUNCTION</span>(BlueprintCallable, Category = <span class="string">&quot;AI&quot;</span>)</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">goAIMove</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 行为树</span></span><br><span class="line">	<span class="built_in">UPROPERTY</span>(EditAnywhere, Category = <span class="string">&quot;AI&quot;</span>)</span><br><span class="line">	<span class="keyword">class</span> <span class="title class_">UBehaviorTree</span>* BehaviorTree;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 黑板组件</span></span><br><span class="line">	<span class="built_in">UPROPERTY</span>()</span><br><span class="line">	<span class="keyword">class</span> <span class="title class_">UBlackboardComponent</span>* BlackboardComp;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 存储黑板资产的引用</span></span><br><span class="line">	<span class="built_in">UPROPERTY</span>(EditDefaultsOnly, Category = <span class="string">&quot;AI&quot;</span>)</span><br><span class="line">	UBlackboardData* BlackboardAsset;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">.<span class="function">cpp</span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function"><span class="title">AMyAIController::AMyAIController</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	BehaviorTree = <span class="literal">nullptr</span>;</span><br><span class="line">	BlackboardComp = <span class="literal">nullptr</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AMyAIController::BeginPlay</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Super::<span class="built_in">BeginPlay</span>();</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AMyAIController::OnPossess</span><span class="params">(APawn* possesPawn)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Super::<span class="built_in">OnPossess</span>(possesPawn);</span><br><span class="line">	<span class="comment">// 检查黑板资产是否已设置</span></span><br><span class="line">	<span class="keyword">if</span> (BlackboardAsset)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 初始化黑板  初始化 UBlackboardComponent 使用指定的 UBlackboardData 资产</span></span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">UseBlackboard</span>(BlackboardAsset, BlackboardComp))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;黑板初始化成功&quot;</span>));</span><br><span class="line">            </span><br><span class="line">			<span class="comment">// 启动行为树（如果有）</span></span><br><span class="line">			<span class="keyword">if</span> (BehaviorTree)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">RunBehaviorTree</span>(BehaviorTree);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">UE_LOG</span>(LogTemp, Error, <span class="built_in">TEXT</span>(<span class="string">&quot;黑板初始化失败！请检查BlackboardAsset是否正确设置&quot;</span>));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">UE_LOG</span>(LogTemp, Error, <span class="built_in">TEXT</span>(<span class="string">&quot;请设置BlackboardAsset！&quot;</span>));</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AMyAIController::goAIMove</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;AI开始移动&quot;</span>));</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 确保OnPossess已被调用</span></span><br><span class="line">	<span class="keyword">if</span> (!BlackboardComp &amp;&amp; !BlackboardAsset)</span><br><span class="line">		<span class="built_in">UE_LOG</span>(LogTemp, Error, <span class="built_in">TEXT</span>(<span class="string">&quot;BlackboardComp和BlackboardAsset均无法获取！&quot;</span>));</span><br><span class="line">	<span class="keyword">if</span> (!BlackboardComp &amp;&amp; BlackboardAsset)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;黑板组件为空，尝试重新初始化&quot;</span>));</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">UseBlackboard</span>(BlackboardAsset, BlackboardComp))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;黑板重新初始化成功&quot;</span>));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">UE_LOG</span>(LogTemp, Error, <span class="built_in">TEXT</span>(<span class="string">&quot;黑板重新初始化失败！&quot;</span>));</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;尝试修改黑板值&quot;</span>));</span><br><span class="line">	<span class="comment">// 设置黑板中的值</span></span><br><span class="line">	<span class="keyword">if</span> (BlackboardComp)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;获取到黑板中的值&quot;</span>));</span><br><span class="line">		<span class="comment">// 修改黑板中的值，修改后，触发装饰器Decorator判断函数，执行Task函数</span></span><br><span class="line">		BlackboardComp-&gt;<span class="built_in">SetValueAsBool</span>(<span class="built_in">FName</span>(<span class="string">&quot;AI_Move&quot;</span>), <span class="literal">true</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;无法获取黑板组件&quot;</span>));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/174722853">UE4 C++自定义AI行为树的Decorator和Task节点</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_63556231/article/details/146141455">【UEC++】AI行为树及其相关蓝图部分在C++中的实现</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_58814201/article/details/135949959">UEC++学习（十一）AI行为树</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27438091/article/details/146437480">UE5&amp;C++ 在 AIController中绑定行为树，和黑板初始化</a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>li kunsong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.nan-bluesky.top/2025/06/26/UEC++%E5%AE%9E%E7%8E%B0%E4%BA%BA%E7%89%A9%E6%8C%89%E7%85%A7A%E6%98%9F%E8%B7%AF%E7%BA%BF%E7%A7%BB%E5%8A%A8/" title="UEC++实现人物按照A星路线移动">http://www.nan-bluesky.top/2025/06/26/UEC++实现人物按照A星路线移动/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/UE/" rel="tag"># UE</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/06/03/UE/" rel="prev" title="UE">
+      <i class="fa fa-chevron-left"></i> UE
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0A%E6%98%9F%E7%AE%97%E6%B3%95%E8%A7%84%E5%88%92%E8%B7%AF%E5%BE%84"><span class="nav-number">1.</span> <span class="nav-text">实现A星算法规划路径</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.1.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AStar-test2Character-h"><span class="nav-number">1.1.1.</span> <span class="nav-text">AStar_test2Character.h</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AStar-test2Character-cpp"><span class="nav-number">1.1.2.</span> <span class="nav-text">AStar_test2Character.cpp</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#A%E6%98%9F%E7%AE%97%E6%B3%95%E8%B7%AF%E5%BE%84%E5%AD%98%E5%85%A5%E6%A0%B7%E6%9D%A1%E7%82%B9%E6%95%B0%E7%BB%84%E4%B8%AD"><span class="nav-number">2.</span> <span class="nav-text">A星算法路径存入样条点数组中</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%BE%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">难点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%A0%B7%E6%9D%A1%E7%BA%BF%E7%BB%84%E4%BB%B6"><span class="nav-number">2.1.1.</span> <span class="nav-text">如何获取样条线组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%89%8D"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">优化前</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%90%8E-%E5%87%8F%E5%B0%91%E4%BA%86%E5%BE%88%E5%A4%9A%E4%B8%8D%E5%BF%85%E8%A6%81%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">优化后(减少了很多不必要的代码)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="nav-number">2.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%BA%E7%89%A9%E5%AE%9E%E7%8E%B0AI%E8%A1%8C%E4%B8%BA%E6%A0%91%E2%80%94%E2%80%94%E6%8C%89%E7%85%A7%E6%A0%B7%E6%9D%A1%E7%BA%BF%E8%A1%8C%E8%B5%B0"><span class="nav-number">3.</span> <span class="nav-text">人物实现AI行为树——按照样条线行走</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%BE%E7%82%B9-1"><span class="nav-number">3.1.</span> <span class="nav-text">难点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E7%8E%B0AI%E8%A1%8C%E4%B8%BA%E6%A0%91%E4%B8%AD%E7%9A%84Decorator%E5%92%8CTask%E8%8A%82%E7%82%B9"><span class="nav-number">3.1.1.</span> <span class="nav-text">自定义实现AI行为树中的Decorator和Task节点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BAC-%E7%B1%BB"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">1. 创建C++类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%85%B3%E9%94%AE%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">2. 关键函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Decorator%E7%9A%84%E5%88%A4%E6%96%AD%E5%87%BD%E6%95%B0%E4%B8%BA"><span class="nav-number">3.1.1.2.1.</span> <span class="nav-text">Decorator的判断函数为</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Task%E7%9A%84%E5%BC%80%E5%A7%8B%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.1.2.2.</span> <span class="nav-text">Task的开始执行函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#TickTask%E5%87%BD%E6%95%B0%E5%8E%9F%E5%9E%8B"><span class="nav-number">3.1.1.2.3.</span> <span class="nav-text">TickTask函数原型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8AIController%E4%B8%AD%E8%8E%B7%E5%8F%96%E9%BB%91%E6%9D%BF%EF%BC%8C%E5%B9%B6%E4%BF%AE%E6%94%B9%E5%85%B6%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F%E5%80%BC"><span class="nav-number">3.1.2.</span> <span class="nav-text">如何在AIController中获取黑板，并修改其中的变量值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">1. 定义变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%9C%A8OnPossess%E5%87%BD%E6%95%B0%E4%B8%AD%E5%88%9D%E5%A7%8B%E5%8C%96%E8%A1%8C%E4%B8%BA%E6%A0%91%E3%80%81%E9%BB%91%E6%9D%BF%E7%BB%84%E4%BB%B6"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">2. 在OnPossess函数中初始化行为树、黑板组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%9C%A8AIController%E7%B1%BB%E7%9A%84%E5%87%BD%E6%95%B0%E4%B8%AD%E4%BF%AE%E6%94%B9%E9%BB%91%E6%9D%BF%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F%E5%80%BC"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">3. 在AIController类的函数中修改黑板中的变量值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="nav-number">3.2.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E6%89%BFBTDecorator%E7%9A%84UBTD-Judge%E7%B1%BB"><span class="nav-number">3.2.1.</span> <span class="nav-text">继承BTDecorator的UBTD_Judge类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E6%89%BFBTTaskNode%E7%9A%84UUBTT-MoveBySpine"><span class="nav-number">3.2.2.</span> <span class="nav-text">继承BTTaskNode的UUBTT_MoveBySpine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E6%89%BFAIController%E7%9A%84AMyAIController"><span class="nav-number">3.2.3.</span> <span class="nav-text">继承AIController的AMyAIController</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">参考文章：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="li kunsong"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">li kunsong</p>
+  <div class="site-description" itemprop="description">世事漫随流水，算来一梦浮生</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wuwei1636" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wuwei1636" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1537628435@qq.com" title="E-Mail → mailto:1537628435@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">li kunsong</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+<script>
+!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+</script>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</html>
