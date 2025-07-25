@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.nan-bluesky.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":false,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="UE控制物体移动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UE控制物体移动">
+<meta property="og:url" content="http://www.nan-bluesky.top/2025/07/20/UE%E6%8E%A7%E5%88%B6%E7%89%A9%E4%BD%93%E7%A7%BB%E5%8A%A8/index.html">
+<meta property="og:site_name" content="南的个人博客">
+<meta property="og:description" content="UE控制物体移动">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507251201795.png">
+<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507251201797.png">
+<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507251201798.png">
+<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507251201799.png">
+<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507251201800.png">
+<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507251201801.png">
+<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507251201802.png">
+<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507251201803.png">
+<meta property="article:published_time" content="2025-07-20T03:21:35.000Z">
+<meta property="article:modified_time" content="2025-07-25T04:01:05.847Z">
+<meta property="article:author" content="li kunsong">
+<meta property="article:tag" content="UE">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507251201795.png">
+
+<link rel="canonical" href="http://www.nan-bluesky.top/2025/07/20/UE%E6%8E%A7%E5%88%B6%E7%89%A9%E4%BD%93%E7%A7%BB%E5%8A%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>UE控制物体移动 | 南的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">
+    <a target="_blank" rel="noopener" href="https://github.com/wuwei1636" class="github-corner" aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+    </path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+    </path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+    </svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    </div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">南的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">遇事不决，但问春风</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.nan-bluesky.top/2025/07/20/UE%E6%8E%A7%E5%88%B6%E7%89%A9%E4%BD%93%E7%A7%BB%E5%8A%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="li kunsong">
+      <meta itemprop="description" content="世事漫随流水，算来一梦浮生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UE控制物体移动
+        </h1>
+
+        <div class="post-meta">
+	
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-07-20 11:21:35" itemprop="dateCreated datePublished" datetime="2025-07-20T11:21:35+08:00">2025-07-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-07-25 12:01:05" itemprop="dateModified" datetime="2025-07-25T12:01:05+08:00">2025-07-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UE/" itemprop="url" rel="index"><span itemprop="name">UE</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">UE控制物体移动</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="方法1：使用-Lerp-线性插值-Timeline-时间轴"><a href="#方法1：使用-Lerp-线性插值-Timeline-时间轴" class="headerlink" title="方法1：使用 Lerp(线性插值) + Timeline(时间轴)"></a>方法1：使用 <code>Lerp</code>(线性插值) + <code>Timeline</code>(时间轴)</h1><blockquote>
+<p>适合控制移动时长和曲线效果</p>
+</blockquote>
+<p>该方法需要三个变量：</p>
+<ul>
+<li><code>StartLocation</code>（Vector）：起始位置</li>
+<li><code>TargetLocation</code>（Vector）：目标位置</li>
+<li><code>MoveDuration</code>（Float）：移动时长（秒）</li>
+</ul>
+<p>设置时间轴：</p>
+<ul>
+<li>添加 <code>Timeline</code> 组件，命名为 <code>MoveTimeline</code>。</li>
+<li>在时间轴中添加 <strong>浮点轨道（Float Track）</strong>，命名为 <code>Alpha</code>。</li>
+<li>编辑曲线：<code>0.0</code> 秒时值为 <code>0.0</code>，<code>MoveDuration</code> 秒时值为 <code>1.0</code>（可调整曲线形状控制缓动效果）。</li>
+</ul>
+<p>蓝图逻辑：我这里为了测试方便，直接设置了三个变量的值</p>
+<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507251201795.png" alt="image-20250720113010057"></p>
+<h1 id="方法2：使用-VInterp-To-向量插值"><a href="#方法2：使用-VInterp-To-向量插值" class="headerlink" title="方法2：使用 VInterp To(向量插值)"></a>方法2：使用 <code>VInterp To</code>(向量插值)</h1><blockquote>
+<p>适合每一帧平滑移动，无需设置时间轴，需要配合Event Tick 一起使用</p>
+</blockquote>
+<p>需要两个变量：</p>
+<ul>
+<li><code>TargetLocation</code>（Vector）：目标位置</li>
+<li><code>InterpSpeed</code>（Float）：插值速度（推荐 5-10）</li>
+</ul>
+<p>蓝图逻辑：</p>
+<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507251201797.png" alt="image-20250720113301938"></p>
+<h1 id="方法3：使用-MoveComponentTo-组件平滑移动"><a href="#方法3：使用-MoveComponentTo-组件平滑移动" class="headerlink" title="方法3：使用 MoveComponentTo(组件平滑移动)"></a>方法3：使用 <code>MoveComponentTo</code>(组件平滑移动)</h1><blockquote>
+<p>注意使用此方法移动的是相对位置</p>
+</blockquote>
+<p>蓝图逻辑：</p>
+<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507251201798.png" alt="image-20250720113617663"></p>
+<h1 id="实现物体匀速到达不同长度的目的地"><a href="#实现物体匀速到达不同长度的目的地" class="headerlink" title="实现物体匀速到达不同长度的目的地"></a>实现物体匀速到达不同长度的目的地</h1><blockquote>
+<p>实际上本例子是物体按照样条线上的样条点进行移动</p>
+</blockquote>
+<p>设置的变量：</p>
+<ul>
+<li><code>MoveSpeed</code>：移动速度</li>
+<li><code>StopThreshold</code>：距离目的地多远可以停止</li>
+<li><code>TargetLocation</code>：目的地</li>
+<li><code>CurrentLocation</code>：当前位置</li>
+<li><code>isMoving</code>：是否正在移动</li>
+<li><code>ToTarget</code>：剩余方向向量 （<code>TargetLocation - CurrentLocation</code>）</li>
+<li><code>VTarget</code>：单位方向向量（<code>Normalize(ToTarget)</code>）</li>
+<li><code>Distance</code>：距离目的地的距离（<code>VSize(ToTarget)</code>）</li>
+</ul>
+<p>实现步骤：</p>
+<ol>
+<li><p>开始移动时，判断是否已经在目的地：若否，执行下面步骤；若是，不执行</p>
+</li>
+<li><p>根据当前位置和目的地位置，得到单位方向向量<code>VTarget</code></p>
+</li>
+<li><p>计算当前帧需要移动的距离 <code>MoveEachDeltaSeconds</code>：<code>MoveSpeed * DeltaSeconds</code></p>
+<ol>
+<li>如果当前位置和目标位置小于最小步长，则直接移动到目标位置</li>
+<li>否则向目标前进一步<code>CurrentLocation = CurrentLocation + VTarget * MoveEachDeltaSeconds</code></li>
+</ol>
+</li>
+<li><p>回到步骤一</p>
+</li>
+</ol>
+<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507251201799.png" alt="image-20250720190527911"></p>
+<p>BoxMove函数</p>
+<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507251201800.png" alt="image-20250720190618495"></p>
+<h1 id="附加：实现物体按照样条线（非样条点）进行移动"><a href="#附加：实现物体按照样条线（非样条点）进行移动" class="headerlink" title="附加：实现物体按照样条线（非样条点）进行移动"></a>附加：实现物体按照样条线（非样条点）进行移动</h1><h2 id="蓝图逻辑："><a href="#蓝图逻辑：" class="headerlink" title="蓝图逻辑："></a>蓝图逻辑：</h2><p>时间轴参照上述方法1设置</p>
+<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507251201801.png" alt="image-20250720190832764"></p>
+<p>触发函数</p>
+<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507251201802.png" alt="image-20250720190954965"></p>
+<h2 id="使用UEC-实现"><a href="#使用UEC-实现" class="headerlink" title="使用UEC++实现"></a>使用UEC++实现</h2><p>UEC++实现时间轴</p>
+<ol>
+<li>创建一个时间轴组件</li>
+<li>绑定一个浮点曲线（如果需要的话），用于控制时间轴的变化</li>
+<li>绑定时间轴更新和结束的委托</li>
+<li>实现各个函数内的不同需求</li>
+</ol>
+<p>创建一个浮点曲线，内部设置同蓝图创建时间轴的浮点曲线设置</p>
+<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507251201803.png" alt="image-20250721151819659"></p>
+<p><code>MyTimeLine.h</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Fill out your copyright notice in the Description page of Project Settings.</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;CoreMinimal.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Components/TimelineComponent.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;GameFramework/Actor.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;MyTimeLine.generated.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam</span>(FOnTimelineUpdateDelegate, <span class="type">float</span>, Alpha);</span><br><span class="line"><span class="built_in">UCLASS</span>()</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ASTAR_TEST2_API</span> AMyTimeLine : <span class="keyword">public</span> AActor</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">GENERATED_BODY</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">// Sets default values for this actor&#x27;s properties</span></span><br><span class="line">	<span class="built_in">AMyTimeLine</span>();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Called every frame</span></span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Tick</span><span class="params">(<span class="type">float</span> DeltaTime)</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 时间轴组件</span></span><br><span class="line">	<span class="built_in">UPROPERTY</span>(VisibleAnywhere,BlueprintReadWrite, Category = <span class="string">&quot;Timeline&quot;</span>)</span><br><span class="line">	UTimelineComponent* MyTimeline;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 浮点曲线（用于驱动数值变化）</span></span><br><span class="line">	<span class="built_in">UPROPERTY</span>(BlueprintReadWrite,EditAnywhere, Category = <span class="string">&quot;Timeline&quot;</span>)</span><br><span class="line">	UCurveFloat* FloatCurve;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 时间轴更新事件</span></span><br><span class="line">	<span class="built_in">UPROPERTY</span>(BlueprintAssignable, Category = <span class="string">&quot;Timeline&quot;</span>)</span><br><span class="line">	FOnTimelineUpdateDelegate FOnTimelineUpdate;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 时间轴更新回调</span></span><br><span class="line">	<span class="built_in">UFUNCTION</span>()</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">OnTimelineUpdate</span><span class="params">(<span class="type">float</span> Value)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 时间轴完成回调</span></span><br><span class="line">	<span class="built_in">UFUNCTION</span>()</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">OnTimelineFinished</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 事件轨道回调</span></span><br><span class="line">	<span class="built_in">UFUNCTION</span>()</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">OnTimelineEvent</span><span class="params">()</span></span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 设置播放速率</span></span><br><span class="line">	<span class="built_in">UFUNCTION</span>(BlueprintCallable, Category = <span class="string">&quot;Timeline&quot;</span>)</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">SetPlayRate</span><span class="params">(<span class="type">float</span> NewRate)</span></span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 控制函数</span></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">PlayTimeline</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">	<span class="comment">// Called when the game starts or when spawned</span></span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">BeginPlay</span><span class="params">()</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 委托绑定</span></span><br><span class="line">	FOnTimelineFloat UpdateFunction;</span><br><span class="line">	FOnTimelineEvent FinishedFunction;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>MyTimeLine.cpp</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Fill out your copyright notice in the Description page of Project Settings.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;MyTimeLine.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Sets default values</span></span><br><span class="line">AMyTimeLine::<span class="built_in">AMyTimeLine</span>()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don&#x27;t need it.</span></span><br><span class="line">	PrimaryActorTick.bCanEverTick = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 创建时间轴组件</span></span><br><span class="line">	MyTimeline = <span class="built_in">CreateDefaultSubobject</span>&lt;UTimelineComponent&gt;(<span class="built_in">TEXT</span>(<span class="string">&quot;MyTimelineComponent&quot;</span>));</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 初始化委托</span></span><br><span class="line">	UpdateFunction.<span class="built_in">BindUFunction</span>(<span class="keyword">this</span>, <span class="built_in">FName</span>(<span class="string">&quot;OnTimelineUpdate&quot;</span>));</span><br><span class="line">	FinishedFunction.<span class="built_in">BindUFunction</span>(<span class="keyword">this</span>, <span class="built_in">FName</span>(<span class="string">&quot;OnTimelineFinished&quot;</span>));</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 重点，要在此处绑定curve</span></span><br><span class="line">	<span class="function"><span class="type">static</span> ConstructorHelpers::FObjectFinder&lt;UCurveFloat&gt; <span class="title">CurveAsset</span><span class="params">(TEXT(<span class="string">&quot;CurveFloat&#x27;/Game/BP/TimeLineCurve.TimeLineCurve&#x27;&quot;</span>))</span></span>;</span><br><span class="line">	<span class="keyword">if</span> (CurveAsset.<span class="built_in">Succeeded</span>()) FloatCurve = CurveAsset.Object;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Called when the game starts or when spawned</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AMyTimeLine::BeginPlay</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Super::<span class="built_in">BeginPlay</span>();</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 绑定时间轴曲线</span></span><br><span class="line">	<span class="keyword">if</span> (FloatCurve) &#123;</span><br><span class="line">		MyTimeline-&gt;<span class="built_in">AddInterpFloat</span>(FloatCurve, UpdateFunction);</span><br><span class="line">		<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;FloatCurve，存在&quot;</span>));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 绑定完成事件</span></span><br><span class="line">	MyTimeline-&gt;<span class="built_in">SetTimelineFinishedFunc</span>(FinishedFunction);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Called every frame</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AMyTimeLine::Tick</span><span class="params">(<span class="type">float</span> DeltaTime)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Super::<span class="built_in">Tick</span>(DeltaTime);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 驱动时间轴更新,OnTimelineUpdate得到执行</span></span><br><span class="line">	<span class="keyword">if</span> (MyTimeline-&gt;<span class="built_in">IsPlaying</span>()) &#123;</span><br><span class="line">		MyTimeline-&gt;<span class="built_in">TickComponent</span>(DeltaTime, LEVELTICK_TimeOnly, <span class="literal">nullptr</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AMyTimeLine::OnTimelineUpdate</span><span class="params">(<span class="type">float</span> Value)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 在此处实现基于曲线值的逻辑</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过委托，来实现每次更新时，执行逻辑</span></span><br><span class="line">	FOnTimelineUpdate.<span class="built_in">Broadcast</span>(Value);</span><br><span class="line">	<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;Timeline Value: %f&quot;</span>), Value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AMyTimeLine::OnTimelineFinished</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;Timeline Finished!&quot;</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AMyTimeLine::OnTimelineEvent</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;Timeline Event Triggered!&quot;</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AMyTimeLine::SetPlayRate</span><span class="params">(<span class="type">float</span> NewRate)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (MyTimeline)</span><br><span class="line">	&#123;</span><br><span class="line">		MyTimeline-&gt;<span class="built_in">SetPlayRate</span>(NewRate);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AMyTimeLine::PlayTimeline</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (MyTimeline) MyTimeline-&gt;<span class="built_in">Play</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>剩余部分实现：</p>
+<p><code>BoxMove.h</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ASpine</span>;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">USplineComponent</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">UCLASS</span>()</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ASTAR_TEST2_API</span> ABoxMove : <span class="keyword">public</span> AActor</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">GENERATED_BODY</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">// Sets default values for this actor&#x27;s properties</span></span><br><span class="line">	<span class="built_in">ABoxMove</span>();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Called every frame</span></span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Tick</span><span class="params">(<span class="type">float</span> DeltaTime)</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">UFUNCTION</span>()</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">MoveBySpline</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">UFUNCTION</span>()</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">HandleTimelineUpdate</span><span class="params">(<span class="type">float</span> Alpha)</span></span>;</span><br><span class="line"></span><br><span class="line">	AMyTimeLine* TimelineActor;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">	<span class="comment">// Called when the game starts or when spawned</span></span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">BeginPlay</span><span class="params">()</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	USplineComponent* SplineComp ;</span><br><span class="line"></span><br><span class="line">	ASpine* SpineRef = <span class="literal">nullptr</span> ;</span><br><span class="line">	</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>BoxMove.cpp</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Sets default values</span></span><br><span class="line">ABoxMove::<span class="built_in">ABoxMove</span>()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don&#x27;t need it.</span></span><br><span class="line">	PrimaryActorTick.bCanEverTick = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Called when the game starts or when spawned</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ABoxMove::BeginPlay</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Super::<span class="built_in">BeginPlay</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Called every frame</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ABoxMove::Tick</span><span class="params">(<span class="type">float</span> DeltaTime)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Super::<span class="built_in">Tick</span>(DeltaTime);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ABoxMove::MoveBySpline</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 获取时间轴Actor引用</span></span><br><span class="line">	TimelineActor = <span class="built_in">GetWorld</span>()-&gt;<span class="built_in">SpawnActor</span>&lt;AMyTimeLine&gt;();</span><br><span class="line">	<span class="keyword">if</span> (!TimelineActor) <span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;TimelineActor不存在&quot;</span>));</span><br><span class="line">	<span class="keyword">if</span> (TimelineActor)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 绑定委托</span></span><br><span class="line">		TimelineActor -&gt;FOnTimelineUpdate.<span class="built_in">AddDynamic</span>(<span class="keyword">this</span>, &amp;ABoxMove::HandleTimelineUpdate);</span><br><span class="line">		<span class="comment">// 设置播放速度</span></span><br><span class="line">		TimelineActor-&gt;<span class="built_in">SetPlayRate</span>(<span class="number">0.2f</span>);</span><br><span class="line">		<span class="comment">// 播放时间轴</span></span><br><span class="line">		TimelineActor-&gt;<span class="built_in">PlayTimeline</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (TActorIterator&lt;ASpine&gt; <span class="built_in">It</span>(<span class="built_in">GetWorld</span>()); It; ++It)</span><br><span class="line">	&#123;</span><br><span class="line">		SpineRef = *It;</span><br><span class="line">	&#125;</span><br><span class="line">	SplineComp = SpineRef -&gt; <span class="built_in">FindComponentByClass</span>&lt;USplineComponent&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ABoxMove::HandleTimelineUpdate</span><span class="params">(<span class="type">float</span> Alpha)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">float</span> SplineLength = SplineComp-&gt;<span class="built_in">GetSplineLength</span>();</span><br><span class="line">	<span class="type">double</span> Lerp = UKismetMathLibrary::<span class="built_in">Lerp</span>(<span class="number">0.0f</span>, SplineLength, Alpha);</span><br><span class="line">	FVector LocationAtDistanceAlongSpline = SplineComp -&gt; <span class="built_in">GetLocationAtDistanceAlongSpline</span>(Lerp, ESplineCoordinateSpace::World);</span><br><span class="line">	LocationAtDistanceAlongSpline += <span class="built_in">FVector</span>(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">25.0f</span>);</span><br><span class="line">	<span class="built_in">SetActorLocation</span>(LocationAtDistanceAlongSpline);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>li kunsong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.nan-bluesky.top/2025/07/20/UE%E6%8E%A7%E5%88%B6%E7%89%A9%E4%BD%93%E7%A7%BB%E5%8A%A8/" title="UE控制物体移动">http://www.nan-bluesky.top/2025/07/20/UE控制物体移动/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/UE/" rel="tag"># UE</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/07/19/UE%E5%A7%94%E6%89%98%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="prev" title="UE委托的使用">
+      <i class="fa fa-chevron-left"></i> UE委托的使用
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%B3%951%EF%BC%9A%E4%BD%BF%E7%94%A8-Lerp-%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BC-Timeline-%E6%97%B6%E9%97%B4%E8%BD%B4"><span class="nav-number">1.</span> <span class="nav-text">方法1：使用 Lerp(线性插值) + Timeline(时间轴)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%B3%952%EF%BC%9A%E4%BD%BF%E7%94%A8-VInterp-To-%E5%90%91%E9%87%8F%E6%8F%92%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">方法2：使用 VInterp To(向量插值)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%B3%953%EF%BC%9A%E4%BD%BF%E7%94%A8-MoveComponentTo-%E7%BB%84%E4%BB%B6%E5%B9%B3%E6%BB%91%E7%A7%BB%E5%8A%A8"><span class="nav-number">3.</span> <span class="nav-text">方法3：使用 MoveComponentTo(组件平滑移动)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%89%A9%E4%BD%93%E5%8C%80%E9%80%9F%E5%88%B0%E8%BE%BE%E4%B8%8D%E5%90%8C%E9%95%BF%E5%BA%A6%E7%9A%84%E7%9B%AE%E7%9A%84%E5%9C%B0"><span class="nav-number">4.</span> <span class="nav-text">实现物体匀速到达不同长度的目的地</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84%E5%8A%A0%EF%BC%9A%E5%AE%9E%E7%8E%B0%E7%89%A9%E4%BD%93%E6%8C%89%E7%85%A7%E6%A0%B7%E6%9D%A1%E7%BA%BF%EF%BC%88%E9%9D%9E%E6%A0%B7%E6%9D%A1%E7%82%B9%EF%BC%89%E8%BF%9B%E8%A1%8C%E7%A7%BB%E5%8A%A8"><span class="nav-number">5.</span> <span class="nav-text">附加：实现物体按照样条线（非样条点）进行移动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%93%9D%E5%9B%BE%E9%80%BB%E8%BE%91%EF%BC%9A"><span class="nav-number">5.1.</span> <span class="nav-text">蓝图逻辑：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8UEC-%E5%AE%9E%E7%8E%B0"><span class="nav-number">5.2.</span> <span class="nav-text">使用UEC++实现</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="li kunsong"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">li kunsong</p>
+  <div class="site-description" itemprop="description">世事漫随流水，算来一梦浮生</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wuwei1636" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wuwei1636" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1537628435@qq.com" title="E-Mail → mailto:1537628435@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">li kunsong</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+<script>
+!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+</script>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</html>
