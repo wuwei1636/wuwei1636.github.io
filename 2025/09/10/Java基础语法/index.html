@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.nan-bluesky.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":false,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="记录Java的部分初始语法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础语法">
+<meta property="og:url" content="http://www.nan-bluesky.top/2025/09/10/Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/index.html">
+<meta property="og:site_name" content="南的个人博客">
+<meta property="og:description" content="记录Java的部分初始语法">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-10T02:02:49.000Z">
+<meta property="article:modified_time" content="2025-09-10T06:16:13.314Z">
+<meta property="article:author" content="li kunsong">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.nan-bluesky.top/2025/09/10/Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Java基础语法 | 南的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">
+    <a target="_blank" rel="noopener" href="https://github.com/wuwei1636" class="github-corner" aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+    </path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+    </path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+    </svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    </div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">南的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">遇事不决，但问春风</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.nan-bluesky.top/2025/09/10/Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="li kunsong">
+      <meta itemprop="description" content="世事漫随流水，算来一梦浮生">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java基础语法
+        </h1>
+
+        <div class="post-meta">
+	
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-09-10 10:02:49 / 修改时间：14:16:13" itemprop="dateCreated datePublished" datetime="2025-09-10T10:02:49+08:00">2025-09-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">记录Java的部分初始语法</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>笔者之前学习过Spring系列的使用，但是对Java的初始语法一直不太明白。在leetcode刷题过程，发现很多Java基础的方法都不会，因此通过写这个文档来进行初始语法的学习</p>
+</blockquote>
+<h1 id="Java中语法的问题"><a href="#Java中语法的问题" class="headerlink" title="Java中语法的问题"></a>Java中语法的问题</h1><h2 id="Java如何向数组中插入元素？"><a href="#Java如何向数组中插入元素？" class="headerlink" title="Java如何向数组中插入元素？"></a>Java如何向数组中插入元素？</h2><blockquote>
+<p>Java中的数组中长度是固定的，一旦创建，就不能改变大小</p>
+</blockquote>
+<h3 id="方法1：创建一个更大的数组，并手动复制插入"><a href="#方法1：创建一个更大的数组，并手动复制插入" class="headerlink" title="方法1：创建一个更大的数组，并手动复制插入"></a>方法1：创建一个更大的数组，并手动复制插入</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] oldArray = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>&#125;;</span><br><span class="line"><span class="type">int</span> <span class="variable">newValue</span> <span class="operator">=</span> <span class="number">3</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">insertIndex</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建新数组，长度+1</span></span><br><span class="line"><span class="type">int</span>[] newArray = <span class="keyword">new</span> <span class="title class_">int</span>[oldArray.length + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 复制前面的元素</span></span><br><span class="line">System.arraycopy(oldArray, <span class="number">0</span>, newArray, <span class="number">0</span>, insertIndex);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入新值</span></span><br><span class="line">newArray[insertIndex] = newValue;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 复制后面的元素</span></span><br><span class="line">System.arraycopy(oldArray, insertIndex, newArray, insertIndex + <span class="number">1</span>, oldArray.length - insertIndex);</span><br></pre></td></tr></table></figure>
+
+<p>输出的结果：<code>&#123;1，2，3，4&#125;</code></p>
+<h3 id="方法2：使用ArrayList（推荐用于频繁增删）"><a href="#方法2：使用ArrayList（推荐用于频繁增删）" class="headerlink" title="方法2：使用ArrayList（推荐用于频繁增删）"></a>方法2：使用<code>ArrayList</code>（推荐用于频繁增删）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line">ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">list.add(<span class="number">1</span>);</span><br><span class="line">list.add(<span class="number">2</span>);</span><br><span class="line">list.add(<span class="number">1</span>, <span class="number">10</span>); <span class="comment">// 在索引1处插入10 → [1, 10, 2]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果非要转回数组</span></span><br><span class="line">Integer[] arr = list.toArray(<span class="keyword">new</span> <span class="title class_">Integer</span>[<span class="number">0</span>]);</span><br><span class="line"><span class="comment">// 或者 int[] （需要额外转换）</span></span><br></pre></td></tr></table></figure>
+
+<p><code>ArrayList</code>支持动态扩容，是恶化需要频繁插入&#x2F;删除的场景。</p>
+<p>在 Java 中，<code>Map</code> 接口提供了丰富的常用方法，用于操作键值对（key-value pairs）。以下是 <code>Map</code> 最常用的函数及其详细说明、用法和示例。</p>
+<hr>
+<h2 id="Java中List如何初始化"><a href="#Java中List如何初始化" class="headerlink" title="Java中List&lt;List&lt;String&gt;&gt;如何初始化"></a>Java中<code>List&lt;List&lt;String&gt;&gt;</code>如何初始化</h2><p><code>List&lt;list&lt;String&gt;&gt;</code>是一个双层列表，实际上是一个二维数组</p>
+<p>Java中对于这种数组的创建，一般采用先创建外层的空列表，后续依据需求添加内层列表</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;List&lt;String&gt;&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加第一组</span></span><br><span class="line">result.add(Arrays.asList(<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加第二组可变列表</span></span><br><span class="line">List&lt;String&gt; group2 = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">group2.add(<span class="string">&quot;c&quot;</span>);</span><br><span class="line">group2.add(<span class="string">&quot;d&quot;</span>);</span><br><span class="line">result.add(group2);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<hr>
+<h1 id="Java中Map的常用实现类"><a href="#Java中Map的常用实现类" class="headerlink" title="Java中Map的常用实现类"></a>Java中Map的常用实现类</h1><blockquote>
+<p>该部分由通义千问生成</p>
+</blockquote>
+<p>在 Java 中，<code>Map</code> 是一个非常重要的接口，用于存储 <strong>键值对（key-value pairs）</strong>，即通过一个“键”来查找对应的“值”。它类似于数学中的映射关系。</p>
+<hr>
+<h2 id="📚-一、Map-的常用实现类（核心）"><a href="#📚-一、Map-的常用实现类（核心）" class="headerlink" title="📚 一、Map 的常用实现类（核心）"></a>📚 一、<code>Map</code> 的常用实现类（核心）</h2><p>以下是 Java 中最常用的 <code>Map</code> 实现类及其特点：</p>
+<table>
+<thead>
+<tr>
+<th>实现类</th>
+<th>是否有序</th>
+<th>线程安全</th>
+<th>允许 null 键&#x2F;值</th>
+<th>性能</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>HashMap</code></td>
+<td>❌ 无序</td>
+<td>❌ 不安全</td>
+<td>✅ 允许一个 null 键，多个 null 值</td>
+<td>⭐⭐⭐⭐ 平均 O(1)</td>
+<td>默认首选，高性能</td>
+</tr>
+<tr>
+<td><code>LinkedHashMap</code></td>
+<td>✅ 按插入&#x2F;访问顺序</td>
+<td>❌ 不安全</td>
+<td>✅ 允许</td>
+<td>⭐⭐⭐ 稍慢于 HashMap</td>
+<td>需要顺序输出</td>
+</tr>
+<tr>
+<td><code>TreeMap</code></td>
+<td>✅ 按键自然排序或自定义排序</td>
+<td>❌ 不安全</td>
+<td>❌ 不允许 null 键（会抛异常），值可为 null</td>
+<td>⭐⭐ O(log n)</td>
+<td>需要排序的场景</td>
+</tr>
+<tr>
+<td><code>Hashtable</code></td>
+<td>❌ 无序</td>
+<td>✅ 安全（方法加锁）</td>
+<td>❌ 不允许 null 键或值</td>
+<td>⭐⭐ 较慢（同步开销）</td>
+<td>老旧，基本被取代</td>
+</tr>
+<tr>
+<td><code>ConcurrentHashMap</code></td>
+<td>❌ 无序（Java 8+）</td>
+<td>✅ 高并发安全</td>
+<td>❌ 不允许 null 键或值</td>
+<td>⭐⭐⭐⭐ 高并发下性能好</td>
+<td>多线程环境</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🔍-二、详细说明每个实现类"><a href="#🔍-二、详细说明每个实现类" class="headerlink" title="🔍 二、详细说明每个实现类"></a>🔍 二、详细说明每个实现类</h2><h3 id="1-HashMap-✅-最常用"><a href="#1-HashMap-✅-最常用" class="headerlink" title="1. HashMap&lt;K, V&gt; ✅ 最常用"></a>1. <code>HashMap&lt;K, V&gt;</code> ✅ <strong>最常用</strong></h3><ul>
+<li><strong>特点</strong>：<ul>
+<li>基于哈希表实现，查找、插入、删除平均时间复杂度为 **O(1)**。</li>
+<li>不保证顺序（遍历顺序可能变化）。</li>
+<li>允许 <strong>一个 <strong><code>null</code></strong> 键</strong> 和 <strong>任意多个 <strong><code>null</code></strong> 值</strong>。</li>
+<li><strong>非线程安全</strong>，多线程环境下可能出错。</li>
+</ul>
+</li>
+<li><strong>使用场景</strong>：<ul>
+<li>绝大多数单线程场景下的键值映射。</li>
+<li>如缓存、计数器、Two Sum 算法等。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">map.put(<span class="string">&quot;Alice&quot;</span>, <span class="number">25</span>);</span><br><span class="line">map.put(<span class="string">&quot;Bob&quot;</span>, <span class="number">30</span>);</span><br><span class="line">System.out.println(map.get(<span class="string">&quot;Alice&quot;</span>)); <span class="comment">// 25</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-LinkedHashMap"><a href="#2-LinkedHashMap" class="headerlink" title="2. LinkedHashMap&lt;K, V&gt;"></a>2. <code>LinkedHashMap&lt;K, V&gt;</code></h3><ul>
+<li><strong>特点</strong>：<ul>
+<li>继承自 <code>HashMap</code>，但内部维护了一个双向链表。</li>
+<li>保持 <strong>插入顺序</strong> 或 <strong>访问顺序</strong>（可通过构造函数设置）。</li>
+<li>允许 <code>null</code> 键和 <code>null</code> 值。</li>
+<li>性能略低于 <code>HashMap</code>（因维护链表）。</li>
+<li>非线程安全。</li>
+</ul>
+</li>
+<li><strong>使用场景</strong>：<ul>
+<li>需要按插入顺序遍历的场景。</li>
+<li>实现 LRU 缓存（最近最少使用）。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">LinkedHashMap</span>&lt;&gt;();</span><br><span class="line">map.put(<span class="string">&quot;First&quot;</span>, <span class="number">1</span>);</span><br><span class="line">map.put(<span class="string">&quot;Second&quot;</span>, <span class="number">2</span>);</span><br><span class="line"><span class="comment">// 遍历时顺序 = 插入顺序</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>💡 实现 LRU 示例（简化）：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// accessOrder=true 表示按访问顺序排序</span></span><br><span class="line">LinkedHashMap&lt;Integer, Integer&gt; cache = <span class="keyword">new</span> <span class="title class_">LinkedHashMap</span>&lt;&gt;(<span class="number">16</span>, <span class="number">0.75f</span>, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-TreeMap"><a href="#3-TreeMap" class="headerlink" title="3. TreeMap&lt;K, V&gt;"></a>3. <code>TreeMap&lt;K, V&gt;</code></h3><ul>
+<li><strong>特点</strong>：<ul>
+<li>基于红黑树（自平衡二叉搜索树）实现。</li>
+<li>键（key）会自动按 <strong>自然顺序</strong> 或 <strong>自定义 Comparator</strong> 排序。</li>
+<li>不允许 <code>null</code> 键（会抛 <code>NullPointerException</code>），值可以为 <code>null</code>。</li>
+<li>时间复杂度为 **O(log n)**。</li>
+<li>非线程安全。</li>
+</ul>
+</li>
+<li><strong>使用场景</strong>：<ul>
+<li>需要按键排序的场景。</li>
+<li>范围查询（如查找 10~50 之间的键）。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Integer, String&gt; sortedMap = <span class="keyword">new</span> <span class="title class_">TreeMap</span>&lt;&gt;();</span><br><span class="line">sortedMap.put(<span class="number">3</span>, <span class="string">&quot;Three&quot;</span>);</span><br><span class="line">sortedMap.put(<span class="number">1</span>, <span class="string">&quot;One&quot;</span>);</span><br><span class="line">sortedMap.put(<span class="number">2</span>, <span class="string">&quot;Two&quot;</span>);</span><br><span class="line"><span class="comment">// 遍历输出：1, 2, 3（有序）</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="4-Hashtable-❌-已过时（不推荐）"><a href="#4-Hashtable-❌-已过时（不推荐）" class="headerlink" title="4. Hashtable ❌ 已过时（不推荐）"></a>4. <code>Hashtable</code> ❌ <strong>已过时（不推荐）</strong></h3><ul>
+<li><strong>特点</strong>：<ul>
+<li>早期的线程安全哈希表。</li>
+<li>方法都加了 <code>synchronized</code> 关键字，性能较差。</li>
+<li><strong>不允许 <strong><code>null</code></strong> 键或 <strong><code>null</code></strong> 值</strong>（否则抛 <code>NullPointerException</code>）。</li>
+<li>无序。</li>
+</ul>
+</li>
+<li><strong>替代方案</strong>：<code>ConcurrentHashMap</code> 或 <code>Collections.synchronizedMap()</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; map = <span class="keyword">new</span> <span class="title class_">Hashtable</span>&lt;&gt;(); <span class="comment">// 不推荐</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="5-ConcurrentHashMap-✅-高并发首选"><a href="#5-ConcurrentHashMap-✅-高并发首选" class="headerlink" title="5. ConcurrentHashMap&lt;K, V&gt; ✅ 高并发首选"></a>5. <code>ConcurrentHashMap&lt;K, V&gt;</code> ✅ <strong>高并发首选</strong></h3><ul>
+<li><strong>特点</strong>：<ul>
+<li>专为并发环境设计。</li>
+<li>使用 <strong>分段锁（Java 7）</strong> 或 <strong>CAS + synchronized（Java 8+）</strong> 实现高效并发。</li>
+<li>不允许 <code>null</code> 键或 <code>null</code> 值（避免歧义）。</li>
+<li>性能在高并发下远优于 <code>Hashtable</code> 和 <code>synchronizedMap</code>。</li>
+</ul>
+</li>
+<li><strong>使用场景</strong>：<ul>
+<li>多线程环境下共享的缓存、计数器等。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Long&gt; counter = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;();</span><br><span class="line">counter.put(<span class="string">&quot;requests&quot;</span>, <span class="number">100L</span>);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🛠-三、如何选择合适的-Map-实现？"><a href="#🛠-三、如何选择合适的-Map-实现？" class="headerlink" title="🛠 三、如何选择合适的 Map 实现？"></a>🛠 三、如何选择合适的 Map 实现？</h2><table>
+<thead>
+<tr>
+<th>需求</th>
+<th>推荐实现类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单线程，高性能，无序</td>
+<td><code>HashMap</code></td>
+</tr>
+<tr>
+<td>需要保持插入顺序</td>
+<td><code>LinkedHashMap</code></td>
+</tr>
+<tr>
+<td>需要按键排序</td>
+<td><code>TreeMap</code></td>
+</tr>
+<tr>
+<td>多线程，高性能并发</td>
+<td><code>ConcurrentHashMap</code></td>
+</tr>
+<tr>
+<td>老项目兼容</td>
+<td><code>Hashtable</code>（不推荐）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🧩-四、其他相关工具"><a href="#🧩-四、其他相关工具" class="headerlink" title="🧩 四、其他相关工具"></a>🧩 四、其他相关工具</h2><h3 id="1-Collections-synchronizedMap"><a href="#1-Collections-synchronizedMap" class="headerlink" title="1. Collections.synchronizedMap()"></a>1. <code>Collections.synchronizedMap()</code></h3><p>将普通 Map 包装成线程安全的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; syncMap = Collections.synchronizedMap(<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;());</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Map-of-Java-9"><a href="#2-Map-of-Java-9" class="headerlink" title="2. Map.of() (Java 9+)"></a>2. <code>Map.of()</code> (Java 9+)</h3><p>创建不可变的小 Map：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Integer&gt; map = Map.of(<span class="string">&quot;A&quot;</span>, <span class="number">1</span>, <span class="string">&quot;B&quot;</span>, <span class="number">2</span>); <span class="comment">// 最多 10 对</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Map-ofEntries-Java-9"><a href="#3-Map-ofEntries-Java-9" class="headerlink" title="3. Map.ofEntries() (Java 9+)"></a>3. <code>Map.ofEntries()</code> (Java 9+)</h3><p>创建更灵活的不可变 Map：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Integer&gt; map = Map.ofEntries(</span><br><span class="line">    Map.entry(<span class="string">&quot;A&quot;</span>, <span class="number">1</span>),</span><br><span class="line">    Map.entry(<span class="string">&quot;B&quot;</span>, <span class="number">2</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="✅-总结"><a href="#✅-总结" class="headerlink" title="✅ 总结"></a>✅ 总结</h2><table>
+<thead>
+<tr>
+<th>实现类</th>
+<th>推荐程度</th>
+<th>关键词</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>HashMap</code></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>高性能、无序、默认选择</td>
+</tr>
+<tr>
+<td><code>LinkedHashMap</code></td>
+<td>⭐⭐⭐⭐☆</td>
+<td>保持顺序、LRU</td>
+</tr>
+<tr>
+<td><code>TreeMap</code></td>
+<td>⭐⭐⭐☆☆</td>
+<td>排序、范围查询</td>
+</tr>
+<tr>
+<td><code>ConcurrentHashMap</code></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>高并发、线程安全</td>
+</tr>
+<tr>
+<td><code>Hashtable</code></td>
+<td>⭐☆☆☆☆</td>
+<td>过时、不推荐</td>
+</tr>
+</tbody></table>
+<hr>
+<p>📌 <strong>一句话建议</strong>：</p>
+<blockquote>
+<p>日常开发用 <code>HashMap</code>，需要顺序用 <code>LinkedHashMap</code>，要排序用 <code>TreeMap</code>，多线程用 <code>ConcurrentHashMap</code>。</p>
+</blockquote>
+<p>如果你有具体使用场景（比如缓存、排序、并发），我可以帮你推荐最合适的 <code>Map</code> 实现！</p>
+<hr>
+<h1 id="Java中Map的常用函数及使用"><a href="#Java中Map的常用函数及使用" class="headerlink" title="Java中Map的常用函数及使用"></a>Java中Map的常用函数及使用</h1><blockquote>
+<p>该部分由通义千问生成</p>
+</blockquote>
+<h2 id="📚-一、Map-的常用函数（方法）一览"><a href="#📚-一、Map-的常用函数（方法）一览" class="headerlink" title="📚 一、Map 的常用函数（方法）一览"></a>📚 一、Map 的常用函数（方法）一览</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+<th>返回类型</th>
+<th>是否修改 Map</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>put(K, V)</code></td>
+<td>添加或更新键值对</td>
+<td><code>V</code>（旧值，若存在）</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><code>get(Object)</code></td>
+<td>根据键获取值</td>
+<td><code>V</code></td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td><code>containsKey(Object)</code></td>
+<td>检查是否包含某个键</td>
+<td><code>boolean</code></td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td><code>containsValue(Object)</code></td>
+<td>检查是否包含某个值</td>
+<td><code>boolean</code></td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td><code>remove(Object)</code></td>
+<td>删除指定键的映射</td>
+<td><code>V</code>（被删除的值）</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><code>size()</code></td>
+<td>获取键值对的数量</td>
+<td><code>int</code></td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td><code>isEmpty()</code></td>
+<td>判断是否为空</td>
+<td><code>boolean</code></td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td><code>clear()</code></td>
+<td>清空所有映射</td>
+<td><code>void</code></td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><code>keySet()</code></td>
+<td>获取所有键的集合</td>
+<td><code>Set&lt;K&gt;</code></td>
+<td>❌ 否（但集合是视图）</td>
+</tr>
+<tr>
+<td><code>values()</code></td>
+<td>获取所有值的集合</td>
+<td><code>Collection&lt;V&gt;</code></td>
+<td>❌ 否（但集合是视图）</td>
+</tr>
+<tr>
+<td><code>entrySet()</code></td>
+<td>获取所有键值对的集合</td>
+<td><code>Set&lt;Map.Entry&lt;K,V&gt;&gt;</code></td>
+<td>❌ 否（但集合是视图）</td>
+</tr>
+<tr>
+<td><code>getOrDefault(Object, V)</code></td>
+<td>获取值，若键不存在则返回默认值</td>
+<td><code>V</code></td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td><code>putIfAbsent(K, V)</code></td>
+<td>若键不存在才添加</td>
+<td><code>V</code>（当前值）</td>
+<td>✅ 可能</td>
+</tr>
+<tr>
+<td><code>computeIfAbsent(K, Function)</code></td>
+<td>若键不存在，用函数生成值并放入</td>
+<td><code>V</code></td>
+<td>✅ 可能</td>
+</tr>
+<tr>
+<td><code>forEach(BiConsumer)</code></td>
+<td>遍历所有键值对</td>
+<td><code>void</code></td>
+<td>❌ 否</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🔍-二、详细说明与示例"><a href="#🔍-二、详细说明与示例" class="headerlink" title="🔍 二、详细说明与示例"></a>🔍 二、详细说明与示例</h2><p>我们以 <code>HashMap&lt;String, Integer&gt;</code> 为例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">map.put(<span class="string">&quot;Alice&quot;</span>, <span class="number">25</span>);</span><br><span class="line">map.put(<span class="string">&quot;Bob&quot;</span>, <span class="number">30</span>);</span><br><span class="line">map.put(<span class="string">&quot;Charlie&quot;</span>, <span class="number">35</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-put-K-key-V-value"><a href="#1-put-K-key-V-value" class="headerlink" title="1. put(K key, V value)"></a>1. <code>put(K key, V value)</code></h3><p>添加或更新一个键值对。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">map.put(<span class="string">&quot;David&quot;</span>, <span class="number">28</span>); <span class="comment">// 添加新键值对</span></span><br><span class="line">map.put(<span class="string">&quot;Alice&quot;</span>, <span class="number">26</span>); <span class="comment">// 更新已有键的值</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>返回值：如果键已存在，返回<strong>旧值</strong>；否则返回 <code>null</code>。</p>
+</blockquote>
+<hr>
+<h3 id="2-get-Object-key"><a href="#2-get-Object-key" class="headerlink" title="2. get(Object key)"></a>2. <code>get(Object key)</code></h3><p>根据键获取对应的值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Integer</span> <span class="variable">age</span> <span class="operator">=</span> map.get(<span class="string">&quot;Alice&quot;</span>); <span class="comment">// 返回 26</span></span><br><span class="line"><span class="type">Integer</span> <span class="variable">unknown</span> <span class="operator">=</span> map.get(<span class="string">&quot;Eve&quot;</span>); <span class="comment">// 返回 null（键不存在）</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>⚠️ 如果键不存在，返回 <code>null</code>。建议配合 <code>containsKey</code> 使用，或用 <code>getOrDefault</code>。</p>
+</blockquote>
+<hr>
+<h3 id="3-containsKey-Object-key"><a href="#3-containsKey-Object-key" class="headerlink" title="3. containsKey(Object key)"></a>3. <code>containsKey(Object key)</code></h3><p>检查是否包含某个键。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">hasAlice</span> <span class="operator">=</span> map.containsKey(<span class="string">&quot;Alice&quot;</span>); <span class="comment">// true</span></span><br><span class="line"><span class="type">boolean</span> <span class="variable">hasEve</span> <span class="operator">=</span> map.containsKey(<span class="string">&quot;Eve&quot;</span>);     <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="4-containsValue-Object-value"><a href="#4-containsValue-Object-value" class="headerlink" title="4. containsValue(Object value)"></a>4. <code>containsValue(Object value)</code></h3><p>检查是否包含某个值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">hasAge30</span> <span class="operator">=</span> map.containsValue(<span class="number">30</span>); <span class="comment">// true (Bob)</span></span><br><span class="line"><span class="type">boolean</span> <span class="variable">hasAge50</span> <span class="operator">=</span> map.containsValue(<span class="number">50</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>⚠️ 性能较差（O(n)），因为要遍历所有值。</p>
+</blockquote>
+<hr>
+<h3 id="5-remove-Object-key"><a href="#5-remove-Object-key" class="headerlink" title="5. remove(Object key)"></a>5. <code>remove(Object key)</code></h3><p>删除指定键的映射。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Integer</span> <span class="variable">removed</span> <span class="operator">=</span> map.remove(<span class="string">&quot;Bob&quot;</span>); <span class="comment">// 返回 30，并删除</span></span><br><span class="line">System.out.println(map.containsKey(<span class="string">&quot;Bob&quot;</span>)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="6-size"><a href="#6-size" class="headerlink" title="6. size()"></a>6. <code>size()</code></h3><p>返回键值对的数量。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> map.size(); <span class="comment">// 3（Alice, Charlie, David）</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="7-isEmpty"><a href="#7-isEmpty" class="headerlink" title="7. isEmpty()"></a>7. <code>isEmpty()</code></h3><p>判断 Map 是否为空。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">isEmpty</span> <span class="operator">=</span> map.isEmpty(); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="8-clear"><a href="#8-clear" class="headerlink" title="8. clear()"></a>8. <code>clear()</code></h3><p>清空所有键值对。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">map.clear();</span><br><span class="line">System.out.println(map.size()); <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="9-keySet"><a href="#9-keySet" class="headerlink" title="9. keySet()"></a>9. <code>keySet()</code></h3><p>返回所有键的集合（<code>Set&lt;K&gt;</code>）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; keys = map.keySet();</span><br><span class="line"><span class="keyword">for</span> (String key : keys) &#123;</span><br><span class="line">    System.out.println(key);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出：Alice, Bob, Charlie, David</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>🔔 返回的是<strong>视图（view）</strong>，修改 <code>keys</code> 会影响原 <code>map</code>。</p>
+</blockquote>
+<hr>
+<h3 id="10-values"><a href="#10-values" class="headerlink" title="10. values()"></a>10. <code>values()</code></h3><p>返回所有值的集合（<code>Collection&lt;V&gt;</code>）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Collection&lt;Integer&gt; values = map.values();</span><br><span class="line"><span class="keyword">for</span> (Integer value : values) &#123;</span><br><span class="line">    System.out.println(value);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出：26, 30, 35, 28</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="11-entrySet"><a href="#11-entrySet" class="headerlink" title="11. entrySet()"></a>11. <code>entrySet()</code></h3><p>返回所有键值对的集合（<code>Set&lt;Map.Entry&lt;K,V&gt;&gt;</code>），用于遍历。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Map.Entry&lt;String, Integer&gt; entry : map.entrySet()) &#123;</span><br><span class="line">    System.out.println(entry.getKey() + <span class="string">&quot; -&gt; &quot;</span> + entry.getValue());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出：</span></span><br><span class="line"><span class="comment">// Alice -&gt; 26</span></span><br><span class="line"><span class="comment">// Bob -&gt; 30</span></span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>✅ 这是<strong>遍历 Map 的推荐方式</strong>。</p>
+</blockquote>
+<hr>
+<h3 id="12-getOrDefault-Object-key-V-defaultValue"><a href="#12-getOrDefault-Object-key-V-defaultValue" class="headerlink" title="12. getOrDefault(Object key, V defaultValue)"></a>12. <code>getOrDefault(Object key, V defaultValue)</code></h3><p>获取值，如果键不存在，返回默认值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Integer</span> <span class="variable">age</span> <span class="operator">=</span> map.getOrDefault(<span class="string">&quot;Eve&quot;</span>, <span class="number">18</span>); <span class="comment">// 返回 18</span></span><br><span class="line"><span class="type">Integer</span> <span class="variable">aliceAge</span> <span class="operator">=</span> map.getOrDefault(<span class="string">&quot;Alice&quot;</span>, <span class="number">0</span>); <span class="comment">// 返回 26</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>✅ 避免 <code>null</code> 值带来的空指针异常。</p>
+</blockquote>
+<hr>
+<h3 id="13-putIfAbsent-K-key-V-value"><a href="#13-putIfAbsent-K-key-V-value" class="headerlink" title="13. putIfAbsent(K key, V value)"></a>13. <code>putIfAbsent(K key, V value)</code></h3><p>只有当键<strong>不存在</strong>时才插入。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">map.putIfAbsent(<span class="string">&quot;Alice&quot;</span>, <span class="number">20</span>); <span class="comment">// Alice 已存在，不更新</span></span><br><span class="line">map.putIfAbsent(<span class="string">&quot;Eve&quot;</span>, <span class="number">22</span>);   <span class="comment">// Eve 不存在，插入</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>返回当前值（可能是旧值或新插入的值）。</p>
+</blockquote>
+<hr>
+<h3 id="14-computeIfAbsent-K-key-Function-mappingFunction"><a href="#14-computeIfAbsent-K-key-Function-mappingFunction" class="headerlink" title="14. computeIfAbsent(K key, Function&lt;K,V&gt; mappingFunction)"></a>14. <code>computeIfAbsent(K key, Function&lt;K,V&gt; mappingFunction)</code></h3><p>如果键不存在，使用函数计算值并放入。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">map.computeIfAbsent(<span class="string">&quot;Frank&quot;</span>, k -&gt; k.length()); <span class="comment">// k=&quot;Frank&quot; → 长度=5</span></span><br><span class="line"><span class="comment">// 相当于：如果 Frank 不存在，就 put(&quot;Frank&quot;, 5)</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>✅ 常用于延迟初始化、缓存等场景。</p>
+</blockquote>
+<hr>
+<h3 id="15-forEach-BiConsumer-action"><a href="#15-forEach-BiConsumer-action" class="headerlink" title="15. forEach(BiConsumer&lt;K,V&gt; action)"></a>15. <code>forEach(BiConsumer&lt;K,V&gt; action)</code></h3><p>遍历所有键值对（Java 8+）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">map.forEach((key, value) -&gt; &#123;</span><br><span class="line">    System.out.println(key + <span class="string">&quot; = &quot;</span> + value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>✅ 简洁的 Lambda 写法。</p>
+</blockquote>
+<hr>
+<h2 id="🧩-三、Map-Entry-常用方法"><a href="#🧩-三、Map-Entry-常用方法" class="headerlink" title="🧩 三、Map.Entry&lt;K,V&gt; 常用方法"></a>🧩 三、Map.Entry&lt;K,V&gt; 常用方法</h2><p>当你使用 <code>entrySet()</code> 时，会得到 <code>Map.Entry</code> 对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Map.Entry&lt;String, Integer&gt; entry = ...;</span><br><span class="line">entry.getKey();    <span class="comment">// 获取键</span></span><br><span class="line">entry.getValue();  <span class="comment">// 获取值</span></span><br><span class="line">entry.setValue(<span class="number">40</span>); <span class="comment">// 修改值（允许）</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="✅-四、总结：最常用的方法（Top-10）"><a href="#✅-四、总结：最常用的方法（Top-10）" class="headerlink" title="✅ 四、总结：最常用的方法（Top 10）"></a>✅ 四、总结：最常用的方法（Top 10）</h2><table>
+<thead>
+<tr>
+<th>排名</th>
+<th>方法</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1️⃣</td>
+<td><code>put(K,V)</code></td>
+<td>添加&#x2F;更新</td>
+</tr>
+<tr>
+<td>2️⃣</td>
+<td><code>get(K)</code></td>
+<td>查找值</td>
+</tr>
+<tr>
+<td>3️⃣</td>
+<td><code>containsKey(K)</code></td>
+<td>判断键是否存在</td>
+</tr>
+<tr>
+<td>4️⃣</td>
+<td><code>getOrDefault(K, default)</code></td>
+<td>安全获取值</td>
+</tr>
+<tr>
+<td>5️⃣</td>
+<td><code>entrySet()</code> + <code>forEach</code></td>
+<td>遍历所有键值对</td>
+</tr>
+<tr>
+<td>6️⃣</td>
+<td><code>keySet()</code></td>
+<td>获取所有键</td>
+</tr>
+<tr>
+<td>7️⃣</td>
+<td><code>values()</code></td>
+<td>获取所有值</td>
+</tr>
+<tr>
+<td>8️⃣</td>
+<td><code>remove(K)</code></td>
+<td>删除</td>
+</tr>
+<tr>
+<td>9️⃣</td>
+<td><code>size()</code> &#x2F; <code>isEmpty()</code></td>
+<td>判断大小</td>
+</tr>
+<tr>
+<td>🔟</td>
+<td><code>computeIfAbsent(K, func)</code></td>
+<td>懒加载、避免重复创建</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="💡-小贴士"><a href="#💡-小贴士" class="headerlink" title="💡 小贴士"></a>💡 小贴士</h2><ul>
+<li>使用 <code>Map.of()</code>（Java 9+）创建不可变小 Map：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Integer&gt; map = Map.of(<span class="string">&quot;A&quot;</span>, <span class="number">1</span>, <span class="string">&quot;B&quot;</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>Map.ofEntries()</code> 创建更灵活的不可变 Map。</li>
+<li>多线程环境下优先使用 <code>ConcurrentHashMap</code>。</li>
+</ul>
+<hr>
+<p>如果你有具体使用场景（如缓存、计数、分组），我可以告诉你该用哪个方法组合！欢迎继续提问 😊</p>
+<h1 id="Java中List的实现类"><a href="#Java中List的实现类" class="headerlink" title="Java中List的实现类"></a>Java中<code>List</code>的实现类</h1><p>在 Java 中，<code>List</code> 是一个非常重要的<strong>接口</strong>，属于 <code>java.util</code> 包，是 <strong>Collection</strong> 框架的一部分。它表示一个<strong>有序的集合</strong>（也称为序列），允许重复元素，并且可以通过索引（下标）访问元素。</p>
+<hr>
+<h2 id="📚-一、List-的核心特点"><a href="#📚-一、List-的核心特点" class="headerlink" title="📚 一、List 的核心特点"></a>📚 一、<code>List</code> 的核心特点</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>✅ 有序</td>
+<td>元素按插入顺序排列（或指定顺序）</td>
+</tr>
+<tr>
+<td>✅ 可重复</td>
+<td>允许存储相同的元素多次</td>
+</tr>
+<tr>
+<td>✅ 可索引访问</td>
+<td>可以通过 <code>get(index)</code> 获取指定位置的元素</td>
+</tr>
+<tr>
+<td>✅ 动态大小</td>
+<td>大多数实现支持动态扩容</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🔍-二、List-的主要实现类"><a href="#🔍-二、List-的主要实现类" class="headerlink" title="🔍 二、List 的主要实现类"></a>🔍 二、<code>List</code> 的主要实现类</h2><p>Java 中最常用的 <code>List</code> 实现类有以下几种：</p>
+<table>
+<thead>
+<tr>
+<th>实现类</th>
+<th>底层结构</th>
+<th>是否可变</th>
+<th>线程安全</th>
+<th>性能特点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ArrayList</code></td>
+<td>动态数组</td>
+<td>✅ 可变</td>
+<td>❌ 不安全</td>
+<td>随机访问快 O(1)，插入&#x2F;删除慢 O(n)</td>
+<td>默认首选</td>
+</tr>
+<tr>
+<td><code>LinkedList</code></td>
+<td>双向链表</td>
+<td>✅ 可变</td>
+<td>❌ 不安全</td>
+<td>插入&#x2F;删除快 O(1)，随机访问慢 O(n)</td>
+<td>频繁增删</td>
+</tr>
+<tr>
+<td><code>Vector</code></td>
+<td>动态数组</td>
+<td>✅ 可变</td>
+<td>✅ 安全（方法同步）</td>
+<td>慢（同步开销）</td>
+<td>老旧，基本被取代</td>
+</tr>
+<tr>
+<td><code>Stack</code></td>
+<td>继承 <code>Vector</code></td>
+<td>✅ 可变</td>
+<td>✅ 安全</td>
+<td>后进先出（LIFO）</td>
+<td>已过时，建议用 <code>Deque</code></td>
+</tr>
+<tr>
+<td><code>CopyOnWriteArrayList</code></td>
+<td>写时复制数组</td>
+<td>✅ 可变</td>
+<td>✅ 安全</td>
+<td>读快写慢，适合读多写少</td>
+<td>并发场景</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🧩-三、详细解析每个实现类"><a href="#🧩-三、详细解析每个实现类" class="headerlink" title="🧩 三、详细解析每个实现类"></a>🧩 三、详细解析每个实现类</h2><h3 id="1-ArrayList-✅-最常用"><a href="#1-ArrayList-✅-最常用" class="headerlink" title="1. ArrayList&lt;E&gt; ✅ 最常用"></a>1. <code>ArrayList&lt;E&gt;</code> ✅ <strong>最常用</strong></h3><ul>
+<li><strong>底层结构</strong>：动态数组（基于 <code>Object[]</code>）</li>
+<li><strong>优点</strong>：<ul>
+<li>支持快速随机访问（<code>get(index)</code> 时间复杂度 O(1)）</li>
+<li>遍历效率高</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：<ul>
+<li>在中间插入或删除元素较慢（需要移动元素，O(n)）</li>
+<li>扩容时会创建新数组并复制数据</li>
+</ul>
+</li>
+<li><strong>默认初始容量</strong>：10（首次添加元素时扩容）</li>
+<li><strong>扩容机制</strong>：每次增长约 50%（<code>oldCapacity + (oldCapacity &gt;&gt; 1)</code>）</li>
+</ul>
+<blockquote>
+<p>✅ <strong>推荐作为 <strong><code>List</code></strong> 的默认选择</strong>，除非你有特殊需求。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">list.add(<span class="string">&quot;A&quot;</span>);</span><br><span class="line">list.add(<span class="string">&quot;B&quot;</span>);</span><br><span class="line">System.out.println(list.get(<span class="number">0</span>)); <span class="comment">// &quot;A&quot;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-LinkedList-🔄-链表结构"><a href="#2-LinkedList-🔄-链表结构" class="headerlink" title="2. LinkedList&lt;E&gt; 🔄 链表结构"></a>2. <code>LinkedList&lt;E&gt;</code> 🔄 链表结构</h3><ul>
+<li><strong>底层结构</strong>：双向链表（每个节点包含前驱和后继指针）</li>
+<li><strong>优点</strong>：<ul>
+<li>在头部&#x2F;尾部&#x2F;中间插入、删除效率高（O(1)，如果已有节点引用）</li>
+<li>无需扩容</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：<ul>
+<li>随机访问慢（必须从头或尾遍历，O(n)）</li>
+<li>占用更多内存（每个节点要存指针）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>✅ 适合<strong>频繁在中间插入&#x2F;删除</strong>的场景。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">list.addFirst(<span class="string">&quot;A&quot;</span>); <span class="comment">// 头部插入</span></span><br><span class="line">list.addLast(<span class="string">&quot;C&quot;</span>);  <span class="comment">// 尾部插入</span></span><br><span class="line">list.add(<span class="number">1</span>, <span class="string">&quot;B&quot;</span>);   <span class="comment">// 中间插入</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>💡 注意：<code>LinkedList</code> 还实现了 <code>Deque</code> 接口，可以用作队列或栈。</p>
+</blockquote>
+<hr>
+<h3 id="3-Vector-⚠️-已过时（不推荐）"><a href="#3-Vector-⚠️-已过时（不推荐）" class="headerlink" title="3. Vector&lt;E&gt; ⚠️ 已过时（不推荐）"></a>3. <code>Vector&lt;E&gt;</code> ⚠️ <strong>已过时（不推荐）</strong></h3><ul>
+<li><strong>底层结构</strong>：动态数组（类似 <code>ArrayList</code>）</li>
+<li><strong>特点</strong>：<ul>
+<li>方法都是 <code>synchronized</code> 的，<strong>线程安全</strong></li>
+<li>性能较差（同步开销大）</li>
+<li>默认扩容翻倍（比 <code>ArrayList</code> 浪费空间）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>❌ <strong>不推荐使用</strong>，除非维护老代码。</p>
+</blockquote>
+<p>✅ 替代方案：</p>
+<ul>
+<li>需要线程安全 → <code>Collections.synchronizedList(new ArrayList&lt;&gt;())</code></li>
+<li>或使用 <code>CopyOnWriteArrayList</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = Collections.synchronizedList(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;());</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="4-Stack-⚠️-已过时"><a href="#4-Stack-⚠️-已过时" class="headerlink" title="4. Stack&lt;E&gt; ⚠️ 已过时"></a>4. <code>Stack&lt;E&gt;</code> ⚠️ <strong>已过时</strong></h3><ul>
+<li>**继承自 **<code>Vector</code></li>
+<li>提供 <code>push()</code>、<code>pop()</code>、<code>peek()</code> 等栈操作</li>
+<li><strong>问题</strong>：<ul>
+<li>基于 <code>Vector</code>，性能差</li>
+<li>设计不合理（应该用组合而不是继承）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>✅ <strong>推荐替代</strong>：使用 <code>Deque</code> 实现栈</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Deque&lt;String&gt; stack = <span class="keyword">new</span> <span class="title class_">ArrayDeque</span>&lt;&gt;();</span><br><span class="line">stack.push(<span class="string">&quot;A&quot;</span>);</span><br><span class="line">stack.push(<span class="string">&quot;B&quot;</span>);</span><br><span class="line"><span class="type">String</span> <span class="variable">top</span> <span class="operator">=</span> stack.pop(); <span class="comment">// &quot;B&quot;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="5-CopyOnWriteArrayList-✅-高并发场景"><a href="#5-CopyOnWriteArrayList-✅-高并发场景" class="headerlink" title="5. CopyOnWriteArrayList&lt;E&gt; ✅ 高并发场景"></a>5. <code>CopyOnWriteArrayList&lt;E&gt;</code> ✅ 高并发场景</h3><ul>
+<li><strong>特点</strong>：<ul>
+<li>“写时复制”机制：每次修改都创建新数组，读操作不加锁</li>
+<li><strong>线程安全</strong></li>
+<li>读操作非常快，写操作较慢（因为要复制数组）</li>
+</ul>
+</li>
+<li><strong>适用场景</strong>：<ul>
+<li>读多写少的并发环境（如监听器列表、观察者模式）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">CopyOnWriteArrayList</span>&lt;&gt;();</span><br><span class="line">list.add(<span class="string">&quot;A&quot;</span>);</span><br><span class="line"><span class="comment">// 多个线程可以安全地读取</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>⚠️ 不适合写频繁的场景，否则性能很差。</p>
+</blockquote>
+<hr>
+<h2 id="🛠-四、如何选择合适的-List-实现？"><a href="#🛠-四、如何选择合适的-List-实现？" class="headerlink" title="🛠 四、如何选择合适的 List 实现？"></a>🛠 四、如何选择合适的 List 实现？</h2><table>
+<thead>
+<tr>
+<th>需求</th>
+<th>推荐实现类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>一般用途，随机访问多</td>
+<td><code>ArrayList</code> ✅</td>
+</tr>
+<tr>
+<td>频繁在头部&#x2F;中间插入删除</td>
+<td><code>LinkedList</code></td>
+</tr>
+<tr>
+<td>多线程环境，读多写少</td>
+<td><code>CopyOnWriteArrayList</code></td>
+</tr>
+<tr>
+<td>多线程环境，读写均衡</td>
+<td><code>Collections.synchronizedList(new ArrayList&lt;&gt;())</code></td>
+</tr>
+<tr>
+<td>实现栈（LIFO）</td>
+<td><code>ArrayDeque</code>（用 <code>push</code>&#x2F;<code>pop</code>）</td>
+</tr>
+<tr>
+<td>实现队列（FIFO）</td>
+<td><code>ArrayDeque</code> 或 <code>LinkedList</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🧪-五、创建不可变-List（Java-9-）"><a href="#🧪-五、创建不可变-List（Java-9-）" class="headerlink" title="🧪 五、创建不可变 List（Java 9+）"></a>🧪 五、创建不可变 List（Java 9+）</h2><p>如果你不需要修改，可以创建不可变列表：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java 9+</span></span><br><span class="line">List&lt;String&gt; list = List.of(<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>); <span class="comment">// 不可变</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 或使用 Arrays.asList（固定大小，不可 add/remove）</span></span><br><span class="line">List&lt;String&gt; fixed = Arrays.asList(<span class="string">&quot;X&quot;</span>, <span class="string">&quot;Y&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>⚠️ <code>List.of()</code> 和 <code>Arrays.asList()</code> 返回的列表都不能添加或删除元素。</p>
+</blockquote>
+<hr>
+<h2 id="✅-六、总结：推荐使用指南"><a href="#✅-六、总结：推荐使用指南" class="headerlink" title="✅ 六、总结：推荐使用指南"></a>✅ 六、总结：推荐使用指南</h2><table>
+<thead>
+<tr>
+<th>实现类</th>
+<th>推荐程度</th>
+<th>一句话总结</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ArrayList</code></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>默认首选，性能好，使用最广泛</td>
+</tr>
+<tr>
+<td><code>LinkedList</code></td>
+<td>⭐⭐⭐☆☆</td>
+<td>仅在频繁插入&#x2F;删除时使用</td>
+</tr>
+<tr>
+<td><code>CopyOnWriteArrayList</code></td>
+<td>⭐⭐⭐⭐☆</td>
+<td>并发读多写少场景</td>
+</tr>
+<tr>
+<td><code>Vector</code> &#x2F; <code>Stack</code></td>
+<td>⭐☆☆☆☆</td>
+<td>已过时，避免使用</td>
+</tr>
+</tbody></table>
+<hr>
+<p>📌 <strong>一句话建议</strong>：</p>
+<blockquote>
+<p>日常开发用 <code>ArrayList</code>，并发读多写少用 <code>CopyOnWriteArrayList</code>，实现栈&#x2F;队列用 <code>ArrayDeque</code>。</p>
+</blockquote>
+<p>如果你有具体场景（比如“我要实现一个缓存”或“高频增删的列表”），我可以帮你推荐最合适的 <code>List</code> 实现！</p>
+<p>在 Java 中，<code>List</code> 接口继承自 <code>Collection</code>，提供了比普通集合更丰富的操作方法，特别是<strong>基于索引（下标）的操作</strong>。它是开发中最常用的集合类型之一。</p>
+<hr>
+<h1 id="Java中List中的常用方法"><a href="#Java中List中的常用方法" class="headerlink" title="Java中List中的常用方法"></a>Java中<code>List</code>中的常用方法</h1><h2 id="📚-一、List-的核心特点回顾"><a href="#📚-一、List-的核心特点回顾" class="headerlink" title="📚 一、List 的核心特点回顾"></a>📚 一、<code>List</code> 的核心特点回顾</h2><ul>
+<li>✅ <strong>有序</strong>：元素按插入顺序排列</li>
+<li>✅ <strong>可重复</strong>：允许存储相同的元素</li>
+<li>✅ <strong>可索引访问</strong>：可以通过 <code>index</code>（下标）获取或修改元素</li>
+<li>✅ <strong>动态大小</strong>：大多数实现支持自动扩容</li>
+</ul>
+<hr>
+<h2 id="🔍-二、List-的常用方法一览表"><a href="#🔍-二、List-的常用方法一览表" class="headerlink" title="🔍 二、List 的常用方法一览表"></a>🔍 二、<code>List</code> 的常用方法一览表</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+<th>返回类型</th>
+<th>是否修改 List</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>add(E e)</code></td>
+<td>在末尾添加元素</td>
+<td><code>boolean</code></td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><code>add(int index, E element)</code></td>
+<td>在指定位置插入元素</td>
+<td><code>void</code></td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><code>get(int index)</code></td>
+<td>获取指定位置的元素</td>
+<td><code>E</code></td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td><code>set(int index, E element)</code></td>
+<td>替换指定位置的元素</td>
+<td><code>E</code>（旧值）</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><code>remove(int index)</code></td>
+<td>删除指定位置的元素</td>
+<td><code>E</code>（被删除的元素）</td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><code>remove(Object o)</code></td>
+<td>删除第一个匹配的元素</td>
+<td><code>boolean</code></td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><code>size()</code></td>
+<td>获取元素个数</td>
+<td><code>int</code></td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td><code>isEmpty()</code></td>
+<td>判断是否为空</td>
+<td><code>boolean</code></td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td><code>contains(Object o)</code></td>
+<td>判断是否包含某个元素</td>
+<td><code>boolean</code></td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td><code>indexOf(Object o)</code></td>
+<td>返回首次出现的索引</td>
+<td><code>int</code>（-1 表示不存在）</td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td><code>lastIndexOf(Object o)</code></td>
+<td>返回最后一次出现的索引</td>
+<td><code>int</code></td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td><code>clear()</code></td>
+<td>清空所有元素</td>
+<td><code>void</code></td>
+<td>✅ 是</td>
+</tr>
+<tr>
+<td><code>subList(int from, int to)</code></td>
+<td>截取子列表（视图）</td>
+<td><code>List&lt;E&gt;</code></td>
+<td>✅ 视图可修改原 list</td>
+</tr>
+<tr>
+<td><code>toArray()</code></td>
+<td>转为数组</td>
+<td><code>Object[]</code></td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td><code>equals(Object o)</code></td>
+<td>比较两个 List 是否相等</td>
+<td><code>boolean</code></td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td><code>toString()</code></td>
+<td>返回字符串表示</td>
+<td><code>String</code></td>
+<td>❌ 否</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>💡 所有方法都定义在 <code>java.util.List&lt;E&gt;</code> 接口中，<code>ArrayList</code>、<code>LinkedList</code> 等实现类都会提供这些方法。</p>
+</blockquote>
+<hr>
+<h2 id="🧩-三、详细说明与代码示例"><a href="#🧩-三、详细说明与代码示例" class="headerlink" title="🧩 三、详细说明与代码示例"></a>🧩 三、详细说明与代码示例</h2><p>我们以 <code>ArrayList&lt;String&gt;</code> 为例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">list.add(<span class="string">&quot;A&quot;</span>);</span><br><span class="line">list.add(<span class="string">&quot;B&quot;</span>);</span><br><span class="line">list.add(<span class="string">&quot;C&quot;</span>);</span><br><span class="line">list.add(<span class="string">&quot;B&quot;</span>); <span class="comment">// 允许重复</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-add-E-e-——-添加到末尾"><a href="#1-add-E-e-——-添加到末尾" class="headerlink" title="1. add(E e) —— 添加到末尾"></a>1. <code>add(E e)</code> —— 添加到末尾</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.add(<span class="string">&quot;D&quot;</span>); <span class="comment">// [A, B, C, B, D]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-add-int-index-E-element-——-插入到指定位置"><a href="#2-add-int-index-E-element-——-插入到指定位置" class="headerlink" title="2. add(int index, E element) —— 插入到指定位置"></a>2. <code>add(int index, E element)</code> —— 插入到指定位置</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list.add(<span class="number">1</span>, <span class="string">&quot;X&quot;</span>); <span class="comment">// 在索引1处插入 &quot;X&quot;</span></span><br><span class="line"><span class="comment">// 结果：[A, X, B, C, B, D]</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>⚠️ 如果 <code>index</code> 超出范围（<code>index &lt; 0 || index &gt; size()</code>），抛 <code>IndexOutOfBoundsException</code></p>
+</blockquote>
+<hr>
+<h3 id="3-get-int-index-——-获取元素"><a href="#3-get-int-index-——-获取元素" class="headerlink" title="3. get(int index) —— 获取元素"></a>3. <code>get(int index)</code> —— 获取元素</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">elem</span> <span class="operator">=</span> list.get(<span class="number">0</span>); <span class="comment">// 返回 &quot;A&quot;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="4-set-int-index-E-element-——-修改元素"><a href="#4-set-int-index-E-element-——-修改元素" class="headerlink" title="4. set(int index, E element) —— 修改元素"></a>4. <code>set(int index, E element)</code> —— 修改元素</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">old</span> <span class="operator">=</span> list.set(<span class="number">0</span>, <span class="string">&quot;Z&quot;</span>); <span class="comment">// 将索引0的元素改为 &quot;Z&quot;，返回旧值 &quot;A&quot;</span></span><br><span class="line"><span class="comment">// 结果：[Z, X, B, C, B, D]</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="5-remove-int-index-——-按索引删除"><a href="#5-remove-int-index-——-按索引删除" class="headerlink" title="5. remove(int index) —— 按索引删除"></a>5. <code>remove(int index)</code> —— 按索引删除</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">removed</span> <span class="operator">=</span> list.remove(<span class="number">1</span>); <span class="comment">// 删除索引1的元素 &quot;X&quot;，返回它</span></span><br><span class="line"><span class="comment">// 结果：[Z, B, C, B, D]</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="6-remove-Object-o-——-按对象删除"><a href="#6-remove-Object-o-——-按对象删除" class="headerlink" title="6. remove(Object o) —— 按对象删除"></a>6. <code>remove(Object o)</code> —— 按对象删除</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">isRemoved</span> <span class="operator">=</span> list.remove(<span class="string">&quot;B&quot;</span>); <span class="comment">// 删除第一个 &quot;B&quot;</span></span><br><span class="line"><span class="comment">// 结果：[Z, C, B, D]，返回 true</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>⚠️ 只删除<strong>第一个匹配项</strong></p>
+</blockquote>
+<hr>
+<h3 id="7-size-——-获取大小"><a href="#7-size-——-获取大小" class="headerlink" title="7. size() —— 获取大小"></a>7. <code>size()</code> —— 获取大小</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> list.size(); <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="8-isEmpty-——-判断是否为空"><a href="#8-isEmpty-——-判断是否为空" class="headerlink" title="8. isEmpty() —— 判断是否为空"></a>8. <code>isEmpty()</code> —— 判断是否为空</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">empty</span> <span class="operator">=</span> list.isEmpty(); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="9-contains-Object-o-——-判断是否包含"><a href="#9-contains-Object-o-——-判断是否包含" class="headerlink" title="9. contains(Object o) —— 判断是否包含"></a>9. <code>contains(Object o)</code> —— 判断是否包含</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">hasC</span> <span class="operator">=</span> list.contains(<span class="string">&quot;C&quot;</span>); <span class="comment">// true</span></span><br><span class="line"><span class="type">boolean</span> <span class="variable">hasX</span> <span class="operator">=</span> list.contains(<span class="string">&quot;X&quot;</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用 <code>equals()</code> 判断相等性。</p>
+</blockquote>
+<hr>
+<h3 id="10-indexOf-Object-o-和-lastIndexOf-Object-o"><a href="#10-indexOf-Object-o-和-lastIndexOf-Object-o" class="headerlink" title="10. indexOf(Object o) 和 lastIndexOf(Object o)"></a>10. <code>indexOf(Object o)</code> 和 <code>lastIndexOf(Object o)</code></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list.indexOf(<span class="string">&quot;B&quot;</span>);     <span class="comment">// 返回第一次出现的索引 → 2</span></span><br><span class="line">list.lastIndexOf(<span class="string">&quot;B&quot;</span>); <span class="comment">// 返回最后一次出现的索引 → 2（只有一个）</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果找不到，返回 <code>-1</code></p>
+</blockquote>
+<hr>
+<h3 id="11-clear-——-清空"><a href="#11-clear-——-清空" class="headerlink" title="11. clear() —— 清空"></a>11. <code>clear()</code> —— 清空</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list.clear();</span><br><span class="line">System.out.println(list.size()); <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="12-subList-int-from-int-to-——-截取子列表"><a href="#12-subList-int-from-int-to-——-截取子列表" class="headerlink" title="12. subList(int from, int to) —— 截取子列表"></a>12. <code>subList(int from, int to)</code> —— 截取子列表</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; sub = list.subList(<span class="number">1</span>, <span class="number">3</span>); <span class="comment">// 左闭右开 [1,3) → 索引1和2</span></span><br><span class="line"><span class="comment">// sub = [&quot;X&quot;, &quot;B&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>🔔 <strong>重要</strong>：<code>subList</code> 返回的是原 <code>List</code> 的<strong>视图（view）</strong>，修改 <code>sub</code> 会影响原 <code>list</code>！</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sub.remove(<span class="number">0</span>); <span class="comment">// 删除 &quot;X&quot;</span></span><br><span class="line"><span class="comment">// 原 list 变为：[&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;B&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="13-toArray-——-转为数组"><a href="#13-toArray-——-转为数组" class="headerlink" title="13. toArray() —— 转为数组"></a>13. <code>toArray()</code> —— 转为数组</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object[] arr = list.toArray();</span><br></pre></td></tr></table></figure>
+
+<p>或者指定类型（推荐）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String[] arr = list.toArray(<span class="keyword">new</span> <span class="title class_">String</span>[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="14-equals-Object-o-——-比较两个-List"><a href="#14-equals-Object-o-——-比较两个-List" class="headerlink" title="14. equals(Object o) —— 比较两个 List"></a>14. <code>equals(Object o)</code> —— 比较两个 List</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; a = Arrays.asList(<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>);</span><br><span class="line">List&lt;String&gt; b = Arrays.asList(<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>);</span><br><span class="line">System.out.println(a.equals(b)); <span class="comment">// true（内容相同即相等）</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>✅ <code>List</code> 的 <code>equals</code> 比较的是<strong>元素内容和顺序</strong>，不是引用。</p>
+</blockquote>
+<hr>
+<h3 id="15-toString-——-查看内容"><a href="#15-toString-——-查看内容" class="headerlink" title="15. toString() —— 查看内容"></a>15. <code>toString()</code> —— 查看内容</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(list); </span><br><span class="line"><span class="comment">// 输出：[A, B, C, B]</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>方便调试，自动调用。</p>
+</blockquote>
+<hr>
+<h2 id="🔄-四、遍历-List-的-4-种方式"><a href="#🔄-四、遍历-List-的-4-种方式" class="headerlink" title="🔄 四、遍历 List 的 4 种方式"></a>🔄 四、遍历 List 的 4 种方式</h2><h3 id="方式-1：增强-for-循环（最常用）"><a href="#方式-1：增强-for-循环（最常用）" class="headerlink" title="方式 1：增强 for 循环（最常用）"></a>方式 1：增强 for 循环（最常用）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (String s : list) &#123;</span><br><span class="line">    System.out.println(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="方式-2：普通-for-循环（适合需要索引）"><a href="#方式-2：普通-for-循环（适合需要索引）" class="headerlink" title="方式 2：普通 for 循环（适合需要索引）"></a>方式 2：普通 for 循环（适合需要索引）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">    System.out.println(i + <span class="string">&quot;: &quot;</span> + list.get(i));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="方式-3：迭代器（Iterator）"><a href="#方式-3：迭代器（Iterator）" class="headerlink" title="方式 3：迭代器（Iterator）"></a>方式 3：迭代器（Iterator）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Iterator&lt;String&gt; it = list.iterator();</span><br><span class="line"><span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">    System.out.println(it.next());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>⚠️ 遍历时不能用 <code>list.remove()</code>，要用 <code>it.remove()</code></p>
+</blockquote>
+<h3 id="方式-4：forEach-Lambda（Java-8-）"><a href="#方式-4：forEach-Lambda（Java-8-）" class="headerlink" title="方式 4：forEach + Lambda（Java 8+）"></a>方式 4：forEach + Lambda（Java 8+）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">list.forEach(System.out::println);</span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">list.forEach(item -&gt; System.out.println(<span class="string">&quot;Item: &quot;</span> + item));</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="⚠️-五、常见错误与注意事项"><a href="#⚠️-五、常见错误与注意事项" class="headerlink" title="⚠️ 五、常见错误与注意事项"></a>⚠️ 五、常见错误与注意事项</h2><table>
+<thead>
+<tr>
+<th>错误</th>
+<th>正确做法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>list.get(100)</code> 索引越界</td>
+<td>先判断 <code>index &lt; list.size()</code></td>
+</tr>
+<tr>
+<td>遍历时用 <code>list.remove()</code></td>
+<td>改用 <code>Iterator.remove()</code></td>
+</tr>
+<tr>
+<td>认为 <code>Arrays.asList()</code> 返回可变列表</td>
+<td>它返回固定大小列表，不能 <code>add/remove</code></td>
+</tr>
+<tr>
+<td>直接比较两个 List 引用</td>
+<td>应使用 <code>list1.equals(list2)</code> 比较内容</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="✅-六、总结：最常用方法-Top-10"><a href="#✅-六、总结：最常用方法-Top-10" class="headerlink" title="✅ 六、总结：最常用方法 Top 10"></a>✅ 六、总结：最常用方法 Top 10</h2><table>
+<thead>
+<tr>
+<th>排名</th>
+<th>方法</th>
+<th>使用频率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1️⃣</td>
+<td><code>add(E)</code></td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td>2️⃣</td>
+<td><code>get(int)</code></td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td>3️⃣</td>
+<td><code>size()</code></td>
+<td>⭐⭐⭐⭐☆</td>
+</tr>
+<tr>
+<td>4️⃣</td>
+<td><code>remove(int)</code> &#x2F; <code>remove(Object)</code></td>
+<td>⭐⭐⭐⭐☆</td>
+</tr>
+<tr>
+<td>5️⃣</td>
+<td><code>set(int, E)</code></td>
+<td>⭐⭐⭐☆☆</td>
+</tr>
+<tr>
+<td>6️⃣</td>
+<td><code>contains(Object)</code></td>
+<td>⭐⭐⭐☆☆</td>
+</tr>
+<tr>
+<td>7️⃣</td>
+<td><code>indexOf(Object)</code></td>
+<td>⭐⭐☆☆☆</td>
+</tr>
+<tr>
+<td>8️⃣</td>
+<td><code>subList(...)</code></td>
+<td>⭐⭐☆☆☆</td>
+</tr>
+<tr>
+<td>9️⃣</td>
+<td><code>clear()</code></td>
+<td>⭐⭐☆☆☆</td>
+</tr>
+<tr>
+<td>🔟</td>
+<td><code>toArray()</code></td>
+<td>⭐☆☆☆☆</td>
+</tr>
+</tbody></table>
+<hr>
+<p>📌 <strong>一句话建议</strong>：</p>
+<blockquote>
+<p>日常开发中，<code>add</code>、<code>get</code>、<code>remove</code>、<code>size</code> 是最常用的方法，配合增强 for 循环即可完成大部分操作。</p>
+</blockquote>
+<p>如果你有具体需求（比如“如何删除所有偶数”或“找出重复元素”），我可以给出对应的 <code>List</code> 方法组合！欢迎继续提问 😊</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>li kunsong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.nan-bluesky.top/2025/09/10/Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" title="Java基础语法">http://www.nan-bluesky.top/2025/09/10/Java基础语法/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/07/31/%E5%85%A8%E5%B1%80%E8%A7%84%E5%88%92%E8%B7%AF%E5%BE%84%E7%AE%97%E6%B3%95/" rel="prev" title="全局规划路径算法">
+      <i class="fa fa-chevron-left"></i> 全局规划路径算法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/10/09/LaTex%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C%E7%9A%84%E9%85%8D%E7%BD%AE/" rel="next" title="LaTex论文写作的配置">
+      LaTex论文写作的配置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E4%B8%AD%E8%AF%AD%E6%B3%95%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">Java中语法的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java%E5%A6%82%E4%BD%95%E5%90%91%E6%95%B0%E7%BB%84%E4%B8%AD%E6%8F%92%E5%85%A5%E5%85%83%E7%B4%A0%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">Java如何向数组中插入元素？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%951%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E7%9A%84%E6%95%B0%E7%BB%84%EF%BC%8C%E5%B9%B6%E6%89%8B%E5%8A%A8%E5%A4%8D%E5%88%B6%E6%8F%92%E5%85%A5"><span class="nav-number">1.1.1.</span> <span class="nav-text">方法1：创建一个更大的数组，并手动复制插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%952%EF%BC%9A%E4%BD%BF%E7%94%A8ArrayList%EF%BC%88%E6%8E%A8%E8%8D%90%E7%94%A8%E4%BA%8E%E9%A2%91%E7%B9%81%E5%A2%9E%E5%88%A0%EF%BC%89"><span class="nav-number">1.1.2.</span> <span class="nav-text">方法2：使用ArrayList（推荐用于频繁增删）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java%E4%B8%ADList%E5%A6%82%E4%BD%95%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.2.</span> <span class="nav-text">Java中List&lt;List&lt;String&gt;&gt;如何初始化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E4%B8%ADMap%E7%9A%84%E5%B8%B8%E7%94%A8%E5%AE%9E%E7%8E%B0%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">Java中Map的常用实现类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%9A-%E4%B8%80%E3%80%81Map-%E7%9A%84%E5%B8%B8%E7%94%A8%E5%AE%9E%E7%8E%B0%E7%B1%BB%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">📚 一、Map 的常用实现类（核心）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%8D-%E4%BA%8C%E3%80%81%E8%AF%A6%E7%BB%86%E8%AF%B4%E6%98%8E%E6%AF%8F%E4%B8%AA%E5%AE%9E%E7%8E%B0%E7%B1%BB"><span class="nav-number">2.2.</span> <span class="nav-text">🔍 二、详细说明每个实现类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-HashMap-%E2%9C%85-%E6%9C%80%E5%B8%B8%E7%94%A8"><span class="nav-number">2.2.1.</span> <span class="nav-text">1. HashMap&lt;K, V&gt; ✅ 最常用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-LinkedHashMap"><span class="nav-number">2.2.2.</span> <span class="nav-text">2. LinkedHashMap&lt;K, V&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-TreeMap"><span class="nav-number">2.2.3.</span> <span class="nav-text">3. TreeMap&lt;K, V&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Hashtable-%E2%9D%8C-%E5%B7%B2%E8%BF%87%E6%97%B6%EF%BC%88%E4%B8%8D%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="nav-number">2.2.4.</span> <span class="nav-text">4. Hashtable ❌ 已过时（不推荐）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-ConcurrentHashMap-%E2%9C%85-%E9%AB%98%E5%B9%B6%E5%8F%91%E9%A6%96%E9%80%89"><span class="nav-number">2.2.5.</span> <span class="nav-text">5. ConcurrentHashMap&lt;K, V&gt; ✅ 高并发首选</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%9B%A0-%E4%B8%89%E3%80%81%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84-Map-%E5%AE%9E%E7%8E%B0%EF%BC%9F"><span class="nav-number">2.3.</span> <span class="nav-text">🛠 三、如何选择合适的 Map 实现？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%A9-%E5%9B%9B%E3%80%81%E5%85%B6%E4%BB%96%E7%9B%B8%E5%85%B3%E5%B7%A5%E5%85%B7"><span class="nav-number">2.4.</span> <span class="nav-text">🧩 四、其他相关工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Collections-synchronizedMap"><span class="nav-number">2.4.1.</span> <span class="nav-text">1. Collections.synchronizedMap()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Map-of-Java-9"><span class="nav-number">2.4.2.</span> <span class="nav-text">2. Map.of() (Java 9+)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Map-ofEntries-Java-9"><span class="nav-number">2.4.3.</span> <span class="nav-text">3. Map.ofEntries() (Java 9+)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9C%85-%E6%80%BB%E7%BB%93"><span class="nav-number">2.5.</span> <span class="nav-text">✅ 总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E4%B8%ADMap%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%8F%8A%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">Java中Map的常用函数及使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%9A-%E4%B8%80%E3%80%81Map-%E7%9A%84%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%EF%BC%88%E6%96%B9%E6%B3%95%EF%BC%89%E4%B8%80%E8%A7%88"><span class="nav-number">3.1.</span> <span class="nav-text">📚 一、Map 的常用函数（方法）一览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%8D-%E4%BA%8C%E3%80%81%E8%AF%A6%E7%BB%86%E8%AF%B4%E6%98%8E%E4%B8%8E%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.2.</span> <span class="nav-text">🔍 二、详细说明与示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-put-K-key-V-value"><span class="nav-number">3.2.1.</span> <span class="nav-text">1. put(K key, V value)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-get-Object-key"><span class="nav-number">3.2.2.</span> <span class="nav-text">2. get(Object key)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-containsKey-Object-key"><span class="nav-number">3.2.3.</span> <span class="nav-text">3. containsKey(Object key)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-containsValue-Object-value"><span class="nav-number">3.2.4.</span> <span class="nav-text">4. containsValue(Object value)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-remove-Object-key"><span class="nav-number">3.2.5.</span> <span class="nav-text">5. remove(Object key)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-size"><span class="nav-number">3.2.6.</span> <span class="nav-text">6. size()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-isEmpty"><span class="nav-number">3.2.7.</span> <span class="nav-text">7. isEmpty()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-clear"><span class="nav-number">3.2.8.</span> <span class="nav-text">8. clear()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-keySet"><span class="nav-number">3.2.9.</span> <span class="nav-text">9. keySet()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-values"><span class="nav-number">3.2.10.</span> <span class="nav-text">10. values()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-entrySet"><span class="nav-number">3.2.11.</span> <span class="nav-text">11. entrySet()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-getOrDefault-Object-key-V-defaultValue"><span class="nav-number">3.2.12.</span> <span class="nav-text">12. getOrDefault(Object key, V defaultValue)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-putIfAbsent-K-key-V-value"><span class="nav-number">3.2.13.</span> <span class="nav-text">13. putIfAbsent(K key, V value)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-computeIfAbsent-K-key-Function-mappingFunction"><span class="nav-number">3.2.14.</span> <span class="nav-text">14. computeIfAbsent(K key, Function&lt;K,V&gt; mappingFunction)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-forEach-BiConsumer-action"><span class="nav-number">3.2.15.</span> <span class="nav-text">15. forEach(BiConsumer&lt;K,V&gt; action)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%A9-%E4%B8%89%E3%80%81Map-Entry-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">🧩 三、Map.Entry&lt;K,V&gt; 常用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9C%85-%E5%9B%9B%E3%80%81%E6%80%BB%E7%BB%93%EF%BC%9A%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%88Top-10%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">✅ 四、总结：最常用的方法（Top 10）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%A1-%E5%B0%8F%E8%B4%B4%E5%A3%AB"><span class="nav-number">3.5.</span> <span class="nav-text">💡 小贴士</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E4%B8%ADList%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%B1%BB"><span class="nav-number">4.</span> <span class="nav-text">Java中List的实现类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%9A-%E4%B8%80%E3%80%81List-%E7%9A%84%E6%A0%B8%E5%BF%83%E7%89%B9%E7%82%B9"><span class="nav-number">4.1.</span> <span class="nav-text">📚 一、List 的核心特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%8D-%E4%BA%8C%E3%80%81List-%E7%9A%84%E4%B8%BB%E8%A6%81%E5%AE%9E%E7%8E%B0%E7%B1%BB"><span class="nav-number">4.2.</span> <span class="nav-text">🔍 二、List 的主要实现类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%A9-%E4%B8%89%E3%80%81%E8%AF%A6%E7%BB%86%E8%A7%A3%E6%9E%90%E6%AF%8F%E4%B8%AA%E5%AE%9E%E7%8E%B0%E7%B1%BB"><span class="nav-number">4.3.</span> <span class="nav-text">🧩 三、详细解析每个实现类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-ArrayList-%E2%9C%85-%E6%9C%80%E5%B8%B8%E7%94%A8"><span class="nav-number">4.3.1.</span> <span class="nav-text">1. ArrayList&lt;E&gt; ✅ 最常用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-LinkedList-%F0%9F%94%84-%E9%93%BE%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="nav-number">4.3.2.</span> <span class="nav-text">2. LinkedList&lt;E&gt; 🔄 链表结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Vector-%E2%9A%A0%EF%B8%8F-%E5%B7%B2%E8%BF%87%E6%97%B6%EF%BC%88%E4%B8%8D%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="nav-number">4.3.3.</span> <span class="nav-text">3. Vector&lt;E&gt; ⚠️ 已过时（不推荐）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Stack-%E2%9A%A0%EF%B8%8F-%E5%B7%B2%E8%BF%87%E6%97%B6"><span class="nav-number">4.3.4.</span> <span class="nav-text">4. Stack&lt;E&gt; ⚠️ 已过时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-CopyOnWriteArrayList-%E2%9C%85-%E9%AB%98%E5%B9%B6%E5%8F%91%E5%9C%BA%E6%99%AF"><span class="nav-number">4.3.5.</span> <span class="nav-text">5. CopyOnWriteArrayList&lt;E&gt; ✅ 高并发场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%9B%A0-%E5%9B%9B%E3%80%81%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84-List-%E5%AE%9E%E7%8E%B0%EF%BC%9F"><span class="nav-number">4.4.</span> <span class="nav-text">🛠 四、如何选择合适的 List 实现？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%AA-%E4%BA%94%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%8D%E5%8F%AF%E5%8F%98-List%EF%BC%88Java-9-%EF%BC%89"><span class="nav-number">4.5.</span> <span class="nav-text">🧪 五、创建不可变 List（Java 9+）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9C%85-%E5%85%AD%E3%80%81%E6%80%BB%E7%BB%93%EF%BC%9A%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97"><span class="nav-number">4.6.</span> <span class="nav-text">✅ 六、总结：推荐使用指南</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E4%B8%ADList%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">Java中List中的常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%9A-%E4%B8%80%E3%80%81List-%E7%9A%84%E6%A0%B8%E5%BF%83%E7%89%B9%E7%82%B9%E5%9B%9E%E9%A1%BE"><span class="nav-number">5.1.</span> <span class="nav-text">📚 一、List 的核心特点回顾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%8D-%E4%BA%8C%E3%80%81List-%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E4%B8%80%E8%A7%88%E8%A1%A8"><span class="nav-number">5.2.</span> <span class="nav-text">🔍 二、List 的常用方法一览表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%A9-%E4%B8%89%E3%80%81%E8%AF%A6%E7%BB%86%E8%AF%B4%E6%98%8E%E4%B8%8E%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-number">5.3.</span> <span class="nav-text">🧩 三、详细说明与代码示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-add-E-e-%E2%80%94%E2%80%94-%E6%B7%BB%E5%8A%A0%E5%88%B0%E6%9C%AB%E5%B0%BE"><span class="nav-number">5.3.1.</span> <span class="nav-text">1. add(E e) —— 添加到末尾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-add-int-index-E-element-%E2%80%94%E2%80%94-%E6%8F%92%E5%85%A5%E5%88%B0%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE"><span class="nav-number">5.3.2.</span> <span class="nav-text">2. add(int index, E element) —— 插入到指定位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-get-int-index-%E2%80%94%E2%80%94-%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="nav-number">5.3.3.</span> <span class="nav-text">3. get(int index) —— 获取元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-set-int-index-E-element-%E2%80%94%E2%80%94-%E4%BF%AE%E6%94%B9%E5%85%83%E7%B4%A0"><span class="nav-number">5.3.4.</span> <span class="nav-text">4. set(int index, E element) —— 修改元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-remove-int-index-%E2%80%94%E2%80%94-%E6%8C%89%E7%B4%A2%E5%BC%95%E5%88%A0%E9%99%A4"><span class="nav-number">5.3.5.</span> <span class="nav-text">5. remove(int index) —— 按索引删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-remove-Object-o-%E2%80%94%E2%80%94-%E6%8C%89%E5%AF%B9%E8%B1%A1%E5%88%A0%E9%99%A4"><span class="nav-number">5.3.6.</span> <span class="nav-text">6. remove(Object o) —— 按对象删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-size-%E2%80%94%E2%80%94-%E8%8E%B7%E5%8F%96%E5%A4%A7%E5%B0%8F"><span class="nav-number">5.3.7.</span> <span class="nav-text">7. size() —— 获取大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-isEmpty-%E2%80%94%E2%80%94-%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E4%B8%BA%E7%A9%BA"><span class="nav-number">5.3.8.</span> <span class="nav-text">8. isEmpty() —— 判断是否为空</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-contains-Object-o-%E2%80%94%E2%80%94-%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB"><span class="nav-number">5.3.9.</span> <span class="nav-text">9. contains(Object o) —— 判断是否包含</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-indexOf-Object-o-%E5%92%8C-lastIndexOf-Object-o"><span class="nav-number">5.3.10.</span> <span class="nav-text">10. indexOf(Object o) 和 lastIndexOf(Object o)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-clear-%E2%80%94%E2%80%94-%E6%B8%85%E7%A9%BA"><span class="nav-number">5.3.11.</span> <span class="nav-text">11. clear() —— 清空</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-subList-int-from-int-to-%E2%80%94%E2%80%94-%E6%88%AA%E5%8F%96%E5%AD%90%E5%88%97%E8%A1%A8"><span class="nav-number">5.3.12.</span> <span class="nav-text">12. subList(int from, int to) —— 截取子列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-toArray-%E2%80%94%E2%80%94-%E8%BD%AC%E4%B8%BA%E6%95%B0%E7%BB%84"><span class="nav-number">5.3.13.</span> <span class="nav-text">13. toArray() —— 转为数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-equals-Object-o-%E2%80%94%E2%80%94-%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AA-List"><span class="nav-number">5.3.14.</span> <span class="nav-text">14. equals(Object o) —— 比较两个 List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-toString-%E2%80%94%E2%80%94-%E6%9F%A5%E7%9C%8B%E5%86%85%E5%AE%B9"><span class="nav-number">5.3.15.</span> <span class="nav-text">15. toString() —— 查看内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%84-%E5%9B%9B%E3%80%81%E9%81%8D%E5%8E%86-List-%E7%9A%84-4-%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="nav-number">5.4.</span> <span class="nav-text">🔄 四、遍历 List 的 4 种方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F-1%EF%BC%9A%E5%A2%9E%E5%BC%BA-for-%E5%BE%AA%E7%8E%AF%EF%BC%88%E6%9C%80%E5%B8%B8%E7%94%A8%EF%BC%89"><span class="nav-number">5.4.1.</span> <span class="nav-text">方式 1：增强 for 循环（最常用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F-2%EF%BC%9A%E6%99%AE%E9%80%9A-for-%E5%BE%AA%E7%8E%AF%EF%BC%88%E9%80%82%E5%90%88%E9%9C%80%E8%A6%81%E7%B4%A2%E5%BC%95%EF%BC%89"><span class="nav-number">5.4.2.</span> <span class="nav-text">方式 2：普通 for 循环（适合需要索引）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F-3%EF%BC%9A%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%88Iterator%EF%BC%89"><span class="nav-number">5.4.3.</span> <span class="nav-text">方式 3：迭代器（Iterator）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F-4%EF%BC%9AforEach-Lambda%EF%BC%88Java-8-%EF%BC%89"><span class="nav-number">5.4.4.</span> <span class="nav-text">方式 4：forEach + Lambda（Java 8+）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9A%A0%EF%B8%8F-%E4%BA%94%E3%80%81%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E4%B8%8E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">5.5.</span> <span class="nav-text">⚠️ 五、常见错误与注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9C%85-%E5%85%AD%E3%80%81%E6%80%BB%E7%BB%93%EF%BC%9A%E6%9C%80%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95-Top-10"><span class="nav-number">5.6.</span> <span class="nav-text">✅ 六、总结：最常用方法 Top 10</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="li kunsong"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">li kunsong</p>
+  <div class="site-description" itemprop="description">世事漫随流水，算来一梦浮生</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wuwei1636" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wuwei1636" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1537628435@qq.com" title="E-Mail → mailto:1537628435@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">li kunsong</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+<script>
+!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+</script>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</html>
