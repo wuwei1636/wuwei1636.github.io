@@ -20,29 +20,30 @@
     var CONFIG = {"hostname":"www.nan-bluesky.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":false,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
   </script>
 
-  <meta name="description" content="UE5.4 实现叉车（AGV）沿样条线平滑移动 业务场景：旨在实现叉车（或 AGV 等物流设备）根据给定的路径坐标进行精准移动。后续可通过算法动态传入路径点，并通过 WebSocket 协议实现 UE 客户端与后端的实时通讯。 技术栈：主要基于 UE C++ 实现，结合蓝图进行参数配置与测试。  核心目标：  叉车能够严格按照指定的样条线（Spline）轨迹移动。 引入时间轴（Timeline）组">
+  <meta name="description" content="UE5C++实现叉车（AGV）按照样条线平滑移动">
 <meta property="og:type" content="article">
-<meta property="og:title" content="南的个人博客">
-<meta property="og:url" content="http://www.nan-bluesky.top/2026/03/26/UE5.4%20%E5%AE%9E%E7%8E%B0%E5%8F%89%E8%BD%A6%EF%BC%88AGV%EF%BC%89%E6%B2%BF%E6%A0%B7%E6%9D%A1%E7%BA%BF%E5%B9%B3%E6%BB%91%E7%A7%BB%E5%8A%A8/index.html">
+<meta property="og:title" content="UE5.4实现叉车（AGV）按照样条线平滑移动">
+<meta property="og:url" content="http://www.nan-bluesky.top/2026/03/26/UE5-4%E5%AE%9E%E7%8E%B0%E5%8F%89%E8%BD%A6%EF%BC%88AGV%EF%BC%89%E6%8C%89%E7%85%A7%E6%A0%B7%E6%9D%A1%E7%BA%BF%E5%B9%B3%E6%BB%91%E7%A7%BB%E5%8A%A8/index.html">
 <meta property="og:site_name" content="南的个人博客">
-<meta property="og:description" content="UE5.4 实现叉车（AGV）沿样条线平滑移动 业务场景：旨在实现叉车（或 AGV 等物流设备）根据给定的路径坐标进行精准移动。后续可通过算法动态传入路径点，并通过 WebSocket 协议实现 UE 客户端与后端的实时通讯。 技术栈：主要基于 UE C++ 实现，结合蓝图进行参数配置与测试。  核心目标：  叉车能够严格按照指定的样条线（Spline）轨迹移动。 引入时间轴（Timeline）组">
+<meta property="og:description" content="UE5C++实现叉车（AGV）按照样条线平滑移动">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260325213116972.png">
-<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260325212644908.png">
-<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260325213151421.png">
-<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260325213610913.png">
-<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260325214812993.png">
-<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260326202821012.png">
-<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260326202936112.png">
-<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260326202332734.png">
-<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260326205258434.png">
-<meta property="article:published_time" content="2026-03-26T13:48:18.348Z">
-<meta property="article:modified_time" content="2026-03-26T13:47:03.061Z">
+<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260325213116972.png">
+<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260325212644908.png">
+<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260325213151421.png">
+<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260325213610913.png">
+<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260325214812993.png">
+<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260326202821012.png">
+<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260326202936112.png">
+<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260326202332734.png">
+<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260326205258434.png">
+<meta property="article:published_time" content="2026-03-26T14:02:55.000Z">
+<meta property="article:modified_time" content="2026-03-26T14:04:56.263Z">
 <meta property="article:author" content="li kunsong">
+<meta property="article:tag" content="UE">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260325213116972.png">
+<meta name="twitter:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260325213116972.png">
 
-<link rel="canonical" href="http://www.nan-bluesky.top/2026/03/26/UE5.4%20%E5%AE%9E%E7%8E%B0%E5%8F%89%E8%BD%A6%EF%BC%88AGV%EF%BC%89%E6%B2%BF%E6%A0%B7%E6%9D%A1%E7%BA%BF%E5%B9%B3%E6%BB%91%E7%A7%BB%E5%8A%A8/">
+<link rel="canonical" href="http://www.nan-bluesky.top/2026/03/26/UE5-4%E5%AE%9E%E7%8E%B0%E5%8F%89%E8%BD%A6%EF%BC%88AGV%EF%BC%89%E6%8C%89%E7%85%A7%E6%A0%B7%E6%9D%A1%E7%BA%BF%E5%B9%B3%E6%BB%91%E7%A7%BB%E5%8A%A8/">
 
 
 <script id="page-configurations">
@@ -55,7 +56,7 @@
   };
 </script>
 
-  <title> | 南的个人博客</title>
+  <title>UE5.4实现叉车（AGV）按照样条线平滑移动 | 南的个人博客</title>
   
 
 
@@ -212,7 +213,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.nan-bluesky.top/2026/03/26/UE5.4%20%E5%AE%9E%E7%8E%B0%E5%8F%89%E8%BD%A6%EF%BC%88AGV%EF%BC%89%E6%B2%BF%E6%A0%B7%E6%9D%A1%E7%BA%BF%E5%B9%B3%E6%BB%91%E7%A7%BB%E5%8A%A8/">
+    <link itemprop="mainEntityOfPage" href="http://www.nan-bluesky.top/2026/03/26/UE5-4%E5%AE%9E%E7%8E%B0%E5%8F%89%E8%BD%A6%EF%BC%88AGV%EF%BC%89%E6%8C%89%E7%85%A7%E6%A0%B7%E6%9D%A1%E7%BA%BF%E5%B9%B3%E6%BB%91%E7%A7%BB%E5%8A%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -225,7 +226,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          UE5.4实现叉车（AGV）按照样条线平滑移动
         </h1>
 
         <div class="post-meta">
@@ -237,7 +238,16 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-26 21:48:18 / 修改时间：21:47:03" itemprop="dateCreated datePublished" datetime="2026-03-26T21:48:18+08:00">2026-03-26</time>
+              <time title="创建时间：2026-03-26 22:02:55 / 修改时间：22:04:56" itemprop="dateCreated datePublished" datetime="2026-03-26T22:02:55+08:00">2026-03-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UE/" itemprop="url" rel="index"><span itemprop="name">UE</span></a>
+                </span>
             </span>
 
           
@@ -248,6 +258,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
+            <div class="post-description">UE5C++实现叉车（AGV）按照样条线平滑移动</div>
 
         </div>
       </header>
@@ -258,7 +269,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="UE5-4-实现叉车（AGV）沿样条线平滑移动"><a href="#UE5-4-实现叉车（AGV）沿样条线平滑移动" class="headerlink" title="UE5.4 实现叉车（AGV）沿样条线平滑移动"></a>UE5.4 实现叉车（AGV）沿样条线平滑移动</h1><blockquote>
+        <blockquote>
 <p><strong>业务场景</strong>：旨在实现叉车（或 AGV 等物流设备）根据给定的路径坐标进行精准移动。后续可通过算法动态传入路径点，并通过 WebSocket 协议实现 UE 客户端与后端的实时通讯。</p>
 <p><strong>技术栈</strong>：主要基于 <strong>UE C++</strong> 实现，结合蓝图进行参数配置与测试。</p>
 </blockquote>
@@ -277,10 +288,10 @@
 <p>再创建一个C++类，作为叉车类的父类，在该C++类中创建叉车的移动等函数，实现叉车的移动</p>
 </blockquote>
 <h4 id="创建样条线Actor"><a href="#创建样条线Actor" class="headerlink" title="创建样条线Actor"></a>创建样条线Actor</h4><p>创建样条线的C++类，并创建基于该C++类的蓝图类，在蓝图类中放入样条线组件（Spline Component）注意不是Spline Mesh Component，那是用来依附模型的</p>
-<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260325213116972.png" alt="image-20260325213116972"></p>
-<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260325212644908.png" alt="image-20260325212644908"></p>
-<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260325213151421.png" alt="image-20260325213151421"></p>
-<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260325213610913.png" alt="image-20260325213610913"></p>
+<p><img src="/D:/env\typora\localImg\image-20260325213116972.png" alt="image-20260325213116972"></p>
+<p><img src="/D:/env\typora\localImg\image-20260325212644908.png" alt="image-20260325212644908"></p>
+<p><img src="/D:/env\typora\localImg\image-20260325213151421.png" alt="image-20260325213151421"></p>
+<p><img src="/D:/env\typora\localImg\image-20260325213610913.png" alt="image-20260325213610913"></p>
 <p>创建完毕后，将<code>BP_Spline</code>这个Actor拖入场景中，下面稍微讲解一下如何先手动拉出一条自己想要路径的样条线：</p>
 <ol>
 <li>在场景中，<strong>鼠标左键点击</strong>那条短线上面的<strong>最后一个点</strong>（白色的方块点）。选中后，该点会变成高亮的颜色，并且出现常规的移动坐标轴（红绿蓝箭头）。</li>
@@ -291,7 +302,7 @@
 </ol>
 <h4 id="创建叉车Actor"><a href="#创建叉车Actor" class="headerlink" title="创建叉车Actor"></a>创建叉车Actor</h4><p>按照创建样条线相同的方法，我们创建叉车的C++类，并以这个C++类创建一个蓝图类</p>
 <p>在蓝图类中摆放叉车的模型</p>
-<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260325214812993.png" alt="image-20260325214812993"></p>
+<p><img src="/D:/env\typora\localImg\image-20260325214812993.png" alt="image-20260325214812993"></p>
 <h4 id="叉车沿着样条线移动"><a href="#叉车沿着样条线移动" class="headerlink" title="叉车沿着样条线移动"></a>叉车沿着样条线移动</h4><p>要让叉车“认识”并“跑到”样条线上，我们需要完成以下几个步骤：</p>
 <ol>
 <li><strong>全局搜索</strong>：在当前关卡中找到目标样条线 Actor。</li>
@@ -321,11 +332,11 @@
 <p>为此，我们通过 C++ 封装一个标准的 <strong>时间轴组件（Timeline Component）</strong>，作为所有物流设备的“动力核心”。我们将通过 C++ 绑定一个 Timeline 组件，利用它输出的平滑曲线（Curve）来动态驱动插值的 Alpha 值，从而让叉车真正拥有起步、匀速、停车的物理表现</p>
 <h3 id="使用时间轴（Timeline）驱动叉车的移动"><a href="#使用时间轴（Timeline）驱动叉车的移动" class="headerlink" title="使用时间轴（Timeline）驱动叉车的移动"></a>使用时间轴（Timeline）驱动叉车的移动</h3><h4 id="创建浮点曲线-Curve-Float"><a href="#创建浮点曲线-Curve-Float" class="headerlink" title="创建浮点曲线(Curve Float)"></a>创建浮点曲线(<code>Curve Float</code>)</h4><p>首先在 UE 引擎中，右键新建 -&gt; 其他 -&gt; 曲线 -&gt; 选择 <code>Curve Float</code>。</p>
 <p><strong>关键帧设置</strong>：添加两个关键帧，起点为 **(0, 0)**，终点为 **(1, 1)**。这条 1 秒长、从 0 渐变到 1 的直线段，将作为我们后续换算路程的基础比例尺。</p>
-<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260326202821012.png" alt="image-20260326202821012"></p>
-<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260326202936112.png" alt="image-20260326202936112"></p>
+<p><img src="/D:/env\typora\localImg\image-20260326202821012.png" alt="image-20260326202821012"></p>
+<p><img src="/D:/env\typora\localImg\image-20260326202936112.png" alt="image-20260326202936112"></p>
 <h4 id="编写自定义时间轴组件-UMyTimeLineComponent"><a href="#编写自定义时间轴组件-UMyTimeLineComponent" class="headerlink" title="编写自定义时间轴组件 (UMyTimeLineComponent)"></a>编写自定义时间轴组件 (<code>UMyTimeLineComponent</code>)</h4><p>为了方便以后复用，我们将Timeline组件写成一个标准的组件（继承自<code>UActorComponent</code>），后续我们将其绑定在穿梭车、AGV等复用。</p>
 <p>创建一个继承自 <code>UActorComponent</code> 的 C++ 类，方便挂载到任何 Actor 上。</p>
-<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260326202332734.png" alt="image-20260326202332734"></p>
+<p><img src="/D:/env\typora\localImg\image-20260326202332734.png" alt="image-20260326202332734"></p>
 <p><strong>源文件 (<code>MyTimeLineComponent.cpp</code>) 避坑指南：</strong></p>
 <ul>
 <li><strong>性能优化</strong>：时间轴底层自带 Tick 计算，务必在构造函数中设置 <code>PrimaryComponentTick.bCanEverTick = false;</code> 关闭当前组件的额外 Tick。</li>
@@ -389,7 +400,7 @@
 <li>将这个数组连入我们刚刚写好的 <strong><code>Move Along Path</code></strong> 节点。</li>
 <li>运行游戏，按下 <code>1</code>，叉车就会开始移动</li>
 </ol>
-<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/image-20260326205258434.png" alt="image-20260326205258434"></p>
+<p><img src="/D:/env\typora\localImg\image-20260326205258434.png" alt="image-20260326205258434"></p>
 <p>至此我们已经实现了叉车按照动态生成的样条线进行移动，并暴露了接口 <code>MoveAlongPath(const TArray&lt;FVector&gt;&amp; PathPoints)</code> 供后端数据调用。</p>
 <h2 id="那我们来总结一下我们到底具体干了什么"><a href="#那我们来总结一下我们到底具体干了什么" class="headerlink" title="那我们来总结一下我们到底具体干了什么"></a>那我们来总结一下我们到底具体干了什么</h2><h3 id="前置原型阶段（最初的静态测试）"><a href="#前置原型阶段（最初的静态测试）" class="headerlink" title="前置原型阶段（最初的静态测试）"></a>前置原型阶段（最初的静态测试）</h3><p>在引入复杂机制前，最初的版本仅仅是为了让叉车“动起来”。</p>
 <ul>
@@ -440,7 +451,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.nan-bluesky.top/2026/03/26/UE5.4%20%E5%AE%9E%E7%8E%B0%E5%8F%89%E8%BD%A6%EF%BC%88AGV%EF%BC%89%E6%B2%BF%E6%A0%B7%E6%9D%A1%E7%BA%BF%E5%B9%B3%E6%BB%91%E7%A7%BB%E5%8A%A8/" title="">http://www.nan-bluesky.top/2026/03/26/UE5.4 实现叉车（AGV）沿样条线平滑移动/</a>
+    <a href="http://www.nan-bluesky.top/2026/03/26/UE5-4%E5%AE%9E%E7%8E%B0%E5%8F%89%E8%BD%A6%EF%BC%88AGV%EF%BC%89%E6%8C%89%E7%85%A7%E6%A0%B7%E6%9D%A1%E7%BA%BF%E5%B9%B3%E6%BB%91%E7%A7%BB%E5%8A%A8/" title="UE5.4实现叉车（AGV）按照样条线平滑移动">http://www.nan-bluesky.top/2026/03/26/UE5-4实现叉车（AGV）按照样条线平滑移动/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -450,6 +461,9 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/UE/" rel="tag"># UE</a>
+          </div>
 
         
 
@@ -519,7 +533,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UE5-4-%E5%AE%9E%E7%8E%B0%E5%8F%89%E8%BD%A6%EF%BC%88AGV%EF%BC%89%E6%B2%BF%E6%A0%B7%E6%9D%A1%E7%BA%BF%E5%B9%B3%E6%BB%91%E7%A7%BB%E5%8A%A8"><span class="nav-number">1.</span> <span class="nav-text">UE5.4 实现叉车（AGV）沿样条线平滑移动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%89%E8%BD%A6%E6%8C%89%E7%85%A7%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E7%9A%84%E6%A0%B7%E6%9D%A1%E7%BA%BF%E7%A7%BB%E5%8A%A8"><span class="nav-number">1.1.</span> <span class="nav-text">叉车按照动态生成的样条线移动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.1.1.</span> <span class="nav-text">前期准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%A0%B7%E6%9D%A1%E7%BA%BFActor"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">创建样条线Actor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%8F%89%E8%BD%A6Actor"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">创建叉车Actor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%89%E8%BD%A6%E6%B2%BF%E7%9D%80%E6%A0%B7%E6%9D%A1%E7%BA%BF%E7%A7%BB%E5%8A%A8"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">叉车沿着样条线移动</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Forklift-h%E9%83%A8%E5%88%86"><span class="nav-number">1.1.1.3.1.</span> <span class="nav-text">Forklift.h部分</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Forklift-cpp%E9%83%A8%E5%88%86"><span class="nav-number">1.1.1.3.2.</span> <span class="nav-text">Forklift.cpp部分</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%97%B6%E9%97%B4%E8%BD%B4%EF%BC%88Timeline%EF%BC%89%E9%A9%B1%E5%8A%A8%E5%8F%89%E8%BD%A6%E7%9A%84%E7%A7%BB%E5%8A%A8"><span class="nav-number">1.1.2.</span> <span class="nav-text">使用时间轴（Timeline）驱动叉车的移动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%B5%AE%E7%82%B9%E6%9B%B2%E7%BA%BF-Curve-Float"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">创建浮点曲线(Curve Float)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E8%87%AA%E5%AE%9A%E4%B9%89%E6%97%B6%E9%97%B4%E8%BD%B4%E7%BB%84%E4%BB%B6-UMyTimeLineComponent"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">编写自定义时间轴组件 (UMyTimeLineComponent)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MyTimeLineComponent%E7%9A%84%E5%85%B7%E4%BD%93%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">MyTimeLineComponent的具体代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8-Forklift-h-%E4%B8%AD%EF%BC%9A"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">在 Forklift.h 中：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8-Forklift-cpp-%E4%B8%AD%EF%BC%9A"><span class="nav-number">1.1.2.5.</span> <span class="nav-text">在 Forklift.cpp 中：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%97%B6%E9%97%B4%E8%BD%B4%E4%BF%AE%E6%94%B9%E5%8F%89%E8%BD%A6%E7%A7%BB%E5%8A%A8%E7%9A%84%E9%80%9F%E5%BA%A6"><span class="nav-number">1.1.3.</span> <span class="nav-text">通过时间轴修改叉车移动的速度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-Forklift-h"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">修改 Forklift.h</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-Forklift-cpp"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">修改 Forklift.cpp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E6%A0%B7%E6%9D%A1%E7%BA%BF"><span class="nav-number">1.1.4.</span> <span class="nav-text">动态生成样条线</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-Forklift-h-1"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">修改 Forklift.h</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-Forklift-cpp-1"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">修改 Forklift.cpp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">1.1.5.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%A3%E6%88%91%E4%BB%AC%E6%9D%A5%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B%E6%88%91%E4%BB%AC%E5%88%B0%E5%BA%95%E5%85%B7%E4%BD%93%E5%B9%B2%E4%BA%86%E4%BB%80%E4%B9%88"><span class="nav-number">1.2.</span> <span class="nav-text">那我们来总结一下我们到底具体干了什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E5%8E%9F%E5%9E%8B%E9%98%B6%E6%AE%B5%EF%BC%88%E6%9C%80%E5%88%9D%E7%9A%84%E9%9D%99%E6%80%81%E6%B5%8B%E8%AF%95%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">前置原型阶段（最初的静态测试）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%BF%AD%E4%BB%A3%EF%BC%9A%E5%BC%95%E5%85%A5%E6%97%B6%E9%97%B4%E8%BD%B4-Timeline"><span class="nav-number">1.2.2.</span> <span class="nav-text">第一次迭代：引入时间轴 (Timeline)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E8%BF%AD%E4%BB%A3%EF%BC%9A%E9%80%9F%E5%BA%A6%E6%8D%A2%E7%AE%97-PlayRate-%E6%8E%A7%E5%88%B6"><span class="nav-number">1.2.3.</span> <span class="nav-text">第二次迭代：速度换算 (PlayRate 控制)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AC%A1%E8%BF%AD%E4%BB%A3%EF%BC%9A%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E4%B8%93%E5%B1%9E%E6%A0%B7%E6%9D%A1%E7%BA%BF"><span class="nav-number">1.2.4.</span> <span class="nav-text">第三次迭代：动态生成专属样条线</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%89%E8%BD%A6%E6%8C%89%E7%85%A7%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E7%9A%84%E6%A0%B7%E6%9D%A1%E7%BA%BF%E7%A7%BB%E5%8A%A8"><span class="nav-number">1.</span> <span class="nav-text">叉车按照动态生成的样条线移动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.1.</span> <span class="nav-text">前期准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%A0%B7%E6%9D%A1%E7%BA%BFActor"><span class="nav-number">1.1.1.</span> <span class="nav-text">创建样条线Actor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%8F%89%E8%BD%A6Actor"><span class="nav-number">1.1.2.</span> <span class="nav-text">创建叉车Actor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%89%E8%BD%A6%E6%B2%BF%E7%9D%80%E6%A0%B7%E6%9D%A1%E7%BA%BF%E7%A7%BB%E5%8A%A8"><span class="nav-number">1.1.3.</span> <span class="nav-text">叉车沿着样条线移动</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Forklift-h%E9%83%A8%E5%88%86"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">Forklift.h部分</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Forklift-cpp%E9%83%A8%E5%88%86"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">Forklift.cpp部分</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%97%B6%E9%97%B4%E8%BD%B4%EF%BC%88Timeline%EF%BC%89%E9%A9%B1%E5%8A%A8%E5%8F%89%E8%BD%A6%E7%9A%84%E7%A7%BB%E5%8A%A8"><span class="nav-number">1.2.</span> <span class="nav-text">使用时间轴（Timeline）驱动叉车的移动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%B5%AE%E7%82%B9%E6%9B%B2%E7%BA%BF-Curve-Float"><span class="nav-number">1.2.1.</span> <span class="nav-text">创建浮点曲线(Curve Float)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E8%87%AA%E5%AE%9A%E4%B9%89%E6%97%B6%E9%97%B4%E8%BD%B4%E7%BB%84%E4%BB%B6-UMyTimeLineComponent"><span class="nav-number">1.2.2.</span> <span class="nav-text">编写自定义时间轴组件 (UMyTimeLineComponent)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MyTimeLineComponent%E7%9A%84%E5%85%B7%E4%BD%93%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="nav-number">1.2.3.</span> <span class="nav-text">MyTimeLineComponent的具体代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8-Forklift-h-%E4%B8%AD%EF%BC%9A"><span class="nav-number">1.2.4.</span> <span class="nav-text">在 Forklift.h 中：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8-Forklift-cpp-%E4%B8%AD%EF%BC%9A"><span class="nav-number">1.2.5.</span> <span class="nav-text">在 Forklift.cpp 中：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%97%B6%E9%97%B4%E8%BD%B4%E4%BF%AE%E6%94%B9%E5%8F%89%E8%BD%A6%E7%A7%BB%E5%8A%A8%E7%9A%84%E9%80%9F%E5%BA%A6"><span class="nav-number">1.3.</span> <span class="nav-text">通过时间轴修改叉车移动的速度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-Forklift-h"><span class="nav-number">1.3.1.</span> <span class="nav-text">修改 Forklift.h</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-Forklift-cpp"><span class="nav-number">1.3.2.</span> <span class="nav-text">修改 Forklift.cpp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E6%A0%B7%E6%9D%A1%E7%BA%BF"><span class="nav-number">1.4.</span> <span class="nav-text">动态生成样条线</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-Forklift-h-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">修改 Forklift.h</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-Forklift-cpp-1"><span class="nav-number">1.4.2.</span> <span class="nav-text">修改 Forklift.cpp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">1.5.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%A3%E6%88%91%E4%BB%AC%E6%9D%A5%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B%E6%88%91%E4%BB%AC%E5%88%B0%E5%BA%95%E5%85%B7%E4%BD%93%E5%B9%B2%E4%BA%86%E4%BB%80%E4%B9%88"><span class="nav-number">2.</span> <span class="nav-text">那我们来总结一下我们到底具体干了什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E5%8E%9F%E5%9E%8B%E9%98%B6%E6%AE%B5%EF%BC%88%E6%9C%80%E5%88%9D%E7%9A%84%E9%9D%99%E6%80%81%E6%B5%8B%E8%AF%95%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">前置原型阶段（最初的静态测试）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%BF%AD%E4%BB%A3%EF%BC%9A%E5%BC%95%E5%85%A5%E6%97%B6%E9%97%B4%E8%BD%B4-Timeline"><span class="nav-number">2.2.</span> <span class="nav-text">第一次迭代：引入时间轴 (Timeline)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E8%BF%AD%E4%BB%A3%EF%BC%9A%E9%80%9F%E5%BA%A6%E6%8D%A2%E7%AE%97-PlayRate-%E6%8E%A7%E5%88%B6"><span class="nav-number">2.3.</span> <span class="nav-text">第二次迭代：速度换算 (PlayRate 控制)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AC%A1%E8%BF%AD%E4%BB%A3%EF%BC%9A%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E4%B8%93%E5%B1%9E%E6%A0%B7%E6%9D%A1%E7%BA%BF"><span class="nav-number">2.4.</span> <span class="nav-text">第三次迭代：动态生成专属样条线</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
