@@ -27,21 +27,21 @@
 <meta property="og:site_name" content="南的个人博客">
 <meta property="og:description" content="UE5C++实现叉车（AGV）按照样条线平滑移动">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260325213116972.png">
-<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260325212644908.png">
-<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260325213151421.png">
-<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260325213610913.png">
-<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260325214812993.png">
-<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260326202821012.png">
-<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260326202936112.png">
-<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260326202332734.png">
-<meta property="og:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260326205258434.png">
+<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714517.png">
+<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714519.png">
+<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714520.png">
+<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714521.png">
+<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714522.png">
+<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714523.png">
+<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714524.png">
+<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714525.png">
+<meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714526.png">
 <meta property="article:published_time" content="2026-03-26T14:02:55.000Z">
-<meta property="article:modified_time" content="2026-03-26T14:04:56.263Z">
+<meta property="article:modified_time" content="2026-03-26T14:07:18.811Z">
 <meta property="article:author" content="li kunsong">
 <meta property="article:tag" content="UE">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.nan-bluesky.top/D:/env/typora/localImg/image-20260325213116972.png">
+<meta name="twitter:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714517.png">
 
 <link rel="canonical" href="http://www.nan-bluesky.top/2026/03/26/UE5-4%E5%AE%9E%E7%8E%B0%E5%8F%89%E8%BD%A6%EF%BC%88AGV%EF%BC%89%E6%8C%89%E7%85%A7%E6%A0%B7%E6%9D%A1%E7%BA%BF%E5%B9%B3%E6%BB%91%E7%A7%BB%E5%8A%A8/">
 
@@ -238,7 +238,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-26 22:02:55 / 修改时间：22:04:56" itemprop="dateCreated datePublished" datetime="2026-03-26T22:02:55+08:00">2026-03-26</time>
+              <time title="创建时间：2026-03-26 22:02:55 / 修改时间：22:07:18" itemprop="dateCreated datePublished" datetime="2026-03-26T22:02:55+08:00">2026-03-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -288,10 +288,10 @@
 <p>再创建一个C++类，作为叉车类的父类，在该C++类中创建叉车的移动等函数，实现叉车的移动</p>
 </blockquote>
 <h4 id="创建样条线Actor"><a href="#创建样条线Actor" class="headerlink" title="创建样条线Actor"></a>创建样条线Actor</h4><p>创建样条线的C++类，并创建基于该C++类的蓝图类，在蓝图类中放入样条线组件（Spline Component）注意不是Spline Mesh Component，那是用来依附模型的</p>
-<p><img src="/D:/env\typora\localImg\image-20260325213116972.png" alt="image-20260325213116972"></p>
-<p><img src="/D:/env\typora\localImg\image-20260325212644908.png" alt="image-20260325212644908"></p>
-<p><img src="/D:/env\typora\localImg\image-20260325213151421.png" alt="image-20260325213151421"></p>
-<p><img src="/D:/env\typora\localImg\image-20260325213610913.png" alt="image-20260325213610913"></p>
+<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714517.png" alt="image-20260325213116972"></p>
+<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714519.png" alt="image-20260325212644908"></p>
+<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714520.png" alt="image-20260325213151421"></p>
+<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714521.png" alt="image-20260325213610913"></p>
 <p>创建完毕后，将<code>BP_Spline</code>这个Actor拖入场景中，下面稍微讲解一下如何先手动拉出一条自己想要路径的样条线：</p>
 <ol>
 <li>在场景中，<strong>鼠标左键点击</strong>那条短线上面的<strong>最后一个点</strong>（白色的方块点）。选中后，该点会变成高亮的颜色，并且出现常规的移动坐标轴（红绿蓝箭头）。</li>
@@ -302,7 +302,7 @@
 </ol>
 <h4 id="创建叉车Actor"><a href="#创建叉车Actor" class="headerlink" title="创建叉车Actor"></a>创建叉车Actor</h4><p>按照创建样条线相同的方法，我们创建叉车的C++类，并以这个C++类创建一个蓝图类</p>
 <p>在蓝图类中摆放叉车的模型</p>
-<p><img src="/D:/env\typora\localImg\image-20260325214812993.png" alt="image-20260325214812993"></p>
+<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714522.png" alt="image-20260325214812993"></p>
 <h4 id="叉车沿着样条线移动"><a href="#叉车沿着样条线移动" class="headerlink" title="叉车沿着样条线移动"></a>叉车沿着样条线移动</h4><p>要让叉车“认识”并“跑到”样条线上，我们需要完成以下几个步骤：</p>
 <ol>
 <li><strong>全局搜索</strong>：在当前关卡中找到目标样条线 Actor。</li>
@@ -332,11 +332,11 @@
 <p>为此，我们通过 C++ 封装一个标准的 <strong>时间轴组件（Timeline Component）</strong>，作为所有物流设备的“动力核心”。我们将通过 C++ 绑定一个 Timeline 组件，利用它输出的平滑曲线（Curve）来动态驱动插值的 Alpha 值，从而让叉车真正拥有起步、匀速、停车的物理表现</p>
 <h3 id="使用时间轴（Timeline）驱动叉车的移动"><a href="#使用时间轴（Timeline）驱动叉车的移动" class="headerlink" title="使用时间轴（Timeline）驱动叉车的移动"></a>使用时间轴（Timeline）驱动叉车的移动</h3><h4 id="创建浮点曲线-Curve-Float"><a href="#创建浮点曲线-Curve-Float" class="headerlink" title="创建浮点曲线(Curve Float)"></a>创建浮点曲线(<code>Curve Float</code>)</h4><p>首先在 UE 引擎中，右键新建 -&gt; 其他 -&gt; 曲线 -&gt; 选择 <code>Curve Float</code>。</p>
 <p><strong>关键帧设置</strong>：添加两个关键帧，起点为 **(0, 0)**，终点为 **(1, 1)**。这条 1 秒长、从 0 渐变到 1 的直线段，将作为我们后续换算路程的基础比例尺。</p>
-<p><img src="/D:/env\typora\localImg\image-20260326202821012.png" alt="image-20260326202821012"></p>
-<p><img src="/D:/env\typora\localImg\image-20260326202936112.png" alt="image-20260326202936112"></p>
+<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714523.png" alt="image-20260326202821012"></p>
+<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714524.png" alt="image-20260326202936112"></p>
 <h4 id="编写自定义时间轴组件-UMyTimeLineComponent"><a href="#编写自定义时间轴组件-UMyTimeLineComponent" class="headerlink" title="编写自定义时间轴组件 (UMyTimeLineComponent)"></a>编写自定义时间轴组件 (<code>UMyTimeLineComponent</code>)</h4><p>为了方便以后复用，我们将Timeline组件写成一个标准的组件（继承自<code>UActorComponent</code>），后续我们将其绑定在穿梭车、AGV等复用。</p>
 <p>创建一个继承自 <code>UActorComponent</code> 的 C++ 类，方便挂载到任何 Actor 上。</p>
-<p><img src="/D:/env\typora\localImg\image-20260326202332734.png" alt="image-20260326202332734"></p>
+<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714525.png" alt="image-20260326202332734"></p>
 <p><strong>源文件 (<code>MyTimeLineComponent.cpp</code>) 避坑指南：</strong></p>
 <ul>
 <li><strong>性能优化</strong>：时间轴底层自带 Tick 计算，务必在构造函数中设置 <code>PrimaryComponentTick.bCanEverTick = false;</code> 关闭当前组件的额外 Tick。</li>
@@ -400,7 +400,7 @@
 <li>将这个数组连入我们刚刚写好的 <strong><code>Move Along Path</code></strong> 节点。</li>
 <li>运行游戏，按下 <code>1</code>，叉车就会开始移动</li>
 </ol>
-<p><img src="/D:/env\typora\localImg\image-20260326205258434.png" alt="image-20260326205258434"></p>
+<p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/20260326220714526.png" alt="image-20260326205258434"></p>
 <p>至此我们已经实现了叉车按照动态生成的样条线进行移动，并暴露了接口 <code>MoveAlongPath(const TArray&lt;FVector&gt;&amp; PathPoints)</code> 供后端数据调用。</p>
 <h2 id="那我们来总结一下我们到底具体干了什么"><a href="#那我们来总结一下我们到底具体干了什么" class="headerlink" title="那我们来总结一下我们到底具体干了什么"></a>那我们来总结一下我们到底具体干了什么</h2><h3 id="前置原型阶段（最初的静态测试）"><a href="#前置原型阶段（最初的静态测试）" class="headerlink" title="前置原型阶段（最初的静态测试）"></a>前置原型阶段（最初的静态测试）</h3><p>在引入复杂机制前，最初的版本仅仅是为了让叉车“动起来”。</p>
 <ul>
