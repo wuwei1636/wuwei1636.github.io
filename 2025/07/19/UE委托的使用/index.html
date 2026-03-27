@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507191901914.png">
 <meta property="og:image" content="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507191901916.png">
 <meta property="article:published_time" content="2025-07-19T09:45:32.000Z">
-<meta property="article:modified_time" content="2025-07-19T11:01:16.960Z">
+<meta property="article:modified_time" content="2026-03-27T06:56:31.818Z">
 <meta property="article:author" content="li kunsong">
 <meta property="article:tag" content="UE">
 <meta name="twitter:card" content="summary">
@@ -229,10 +229,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2025-07-19 17:45:32 / 修改时间：19:01:16" itemprop="dateCreated datePublished" datetime="2025-07-19T17:45:32+08:00">2025-07-19</time>
+              <time title="创建时间：2025-07-19 17:45:32" itemprop="dateCreated datePublished" datetime="2025-07-19T17:45:32+08:00">2025-07-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-27 14:56:31" itemprop="dateModified" datetime="2026-03-27T14:56:31+08:00">2026-03-27</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -283,7 +289,57 @@
 <p><img src="https://github-shanghai.oss-cn-shanghai.aliyuncs.com/images/202507191901916.png" alt="image-20250719184658679"></p>
 <p>从上图可以看到，使用委托和不使用委托的区别，使用委托可以降低事件触发类和被调用类之间的耦合，将这两个类的操作放在委托制造类里面进行操作，这对于大型项目十分重要。</p>
 <p>这里做个比喻就是：你点了一家饭店的吃饭，你要吃的饭汇报给饭店，饭店指定厨师做饭并将饭端给你。这里的你就是事件触发类，饭店就是委托制造类，厨师就是被调用类。</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><blockquote>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h3 id="委托的核心类型"><a href="#委托的核心类型" class="headerlink" title="委托的核心类型"></a>委托的核心类型</h3><p>根据使用场景的不同，UE 提供了四种主要的委托类型：</p>
+<table>
+<thead>
+<tr>
+<th><strong>委托类型</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>单播委托 (Single-cast)</strong></td>
+<td>只能绑定 <strong>1个</strong> 函数。执行时有返回值。</td>
+</tr>
+<tr>
+<td><strong>多播委托 (Multi-cast)</strong></td>
+<td>可以绑定 <strong>N个</strong> 函数。触发时按顺序执行所有函数。没有返回值。</td>
+</tr>
+<tr>
+<td><strong>动态委托 (Dynamic)</strong></td>
+<td>可以在 <strong>蓝图</strong> 中使用，支持序列化。执行速度稍慢于普通委托。</td>
+</tr>
+<tr>
+<td><strong>事件 (Events)</strong></td>
+<td>类似于多播委托，但只能由声明它的类触发（更安全）。</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="宏命名规则"><a href="#宏命名规则" class="headerlink" title="宏命名规则"></a>宏命名规则</h3><p>声明委托时，你需要使用特定的宏。宏的名称直接告诉了你它的功能：</p>
+<ul>
+<li><code>DECLARE_DELEGATE...</code> (单播)</li>
+<li><code>DECLARE_MULTICAST_DELEGATE...</code> (多播)</li>
+<li><code>DECLARE_DYNAMIC_DELEGATE...</code> (动态单播)</li>
+<li><code>DECLARE_DYNAMIC_MULTICAST_DELEGATE...</code> (动态多播)</li>
+</ul>
+<p><strong>参数后缀：</strong></p>
+<ul>
+<li>无后缀：0个参数</li>
+<li><code>_OneParam</code>：1个参数</li>
+<li><code>_TwoParams</code>：2个参数（以此类推，最多支持9个）</li>
+</ul>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="简单代码的实现"><a href="#简单代码的实现" class="headerlink" title="简单代码的实现"></a>简单代码的实现</h3><h4 id="声明与定义"><a href="#声明与定义" class="headerlink" title="声明与定义"></a>声明与定义</h4><p>假设我们要制作一个“玩家得分”的委托。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 在头文件顶部或类上方声明委托</span></span><br><span class="line"><span class="comment">// 动态多播委托：支持蓝图，1个参数（新分数）</span></span><br><span class="line"><span class="built_in">DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam</span>(FOnScoreChanged, int32, NewScore);</span><br><span class="line"></span><br><span class="line"><span class="built_in">UCLASS</span>()</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MYGAME_API</span> AMyGameMode : <span class="keyword">public</span> AGameModeBase</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">GENERATED_BODY</span>()</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 2. 定义委托变量</span></span><br><span class="line">    <span class="built_in">UPROPERTY</span>(BlueprintAssignable, Category = <span class="string">&quot;Events&quot;</span>)</span><br><span class="line">    FOnScoreChanged OnScoreChanged;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="绑定-Binding"><a href="#绑定-Binding" class="headerlink" title="绑定 (Binding)"></a>绑定 (Binding)</h4><p>你可以在 C++ 或蓝图中监听这个事件。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在某个 UI 类或监听者类中</span></span><br><span class="line">MyGameMode-&gt;OnScoreChanged.<span class="built_in">AddDynamic</span>(<span class="keyword">this</span>, &amp;AMyUserWidget::UpdateScoreDisplay);</span><br></pre></td></tr></table></figure>
+
+<h4 id="触发-Execution"><a href="#触发-Execution" class="headerlink" title="触发 (Execution)"></a>触发 (Execution)</h4><p>在 GameMode 中，当分数变化时执行委托：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AMyGameMode::AddScore</span><span class="params">(int32 Amount)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    CurrentScore += Amount;</span><br><span class="line">    <span class="comment">// 3. 触发委托</span></span><br><span class="line">    OnScoreChanged.<span class="built_in">Broadcast</span>(CurrentScore);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> UE 委托机制中最核心的特性之一：<strong>参数自动传递</strong>。</p>
+<p>当你执行 <code>OnScoreChanged.Broadcast(CurrentScore)</code> 时，UE 的反射机制会自动将这个 <code>CurrentScore</code> 变量“喂”给所有通过 <code>AddDynamic</code> 绑定了该委托的函数。</p>
+<blockquote>
 <p>这里的代码修改了 <a target="_blank" rel="noopener" href="https://wuwei1636.github.io/2025/06/26/UEC++%E5%AE%9E%E7%8E%B0%E4%BA%BA%E7%89%A9%E6%8C%89%E7%85%A7A%E6%98%9F%E8%B7%AF%E7%BA%BF%E7%A7%BB%E5%8A%A8/">UEC++实现人物按照A星路线移动</a> 里面的算法，有需要可以去参考</p>
 </blockquote>
 <h3 id="事件触发类"><a href="#事件触发类" class="headerlink" title="事件触发类"></a>事件触发类</h3><p><code>AStar_test2Character.h</code></p>
@@ -409,7 +465,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A7%94%E6%89%98%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">委托简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A7%94%E6%89%98%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">委托的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A7%94%E6%89%98%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">委托使用的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.2.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91%E7%B1%BB"><span class="nav-number">2.2.1.</span> <span class="nav-text">事件触发类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A7%94%E6%89%98%E5%88%B6%E9%80%A0%E7%B1%BB%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">2.2.2.</span> <span class="nav-text">委托制造类（重点）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A2%AB%E8%B0%83%E7%94%A8%E7%B1%BB"><span class="nav-number">2.2.3.</span> <span class="nav-text">被调用类</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A7%94%E6%89%98%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">委托简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A7%94%E6%89%98%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">委托的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A7%94%E6%89%98%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">委托使用的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">2.2.</span> <span class="nav-text">补充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A7%94%E6%89%98%E7%9A%84%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.2.1.</span> <span class="nav-text">委托的核心类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">2.2.2.</span> <span class="nav-text">宏命名规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.3.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E4%BB%A3%E7%A0%81%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.3.1.</span> <span class="nav-text">简单代码的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E4%B8%8E%E5%AE%9A%E4%B9%89"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">声明与定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A-Binding"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">绑定 (Binding)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91-Execution"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">触发 (Execution)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91%E7%B1%BB"><span class="nav-number">2.3.2.</span> <span class="nav-text">事件触发类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A7%94%E6%89%98%E5%88%B6%E9%80%A0%E7%B1%BB%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">2.3.3.</span> <span class="nav-text">委托制造类（重点）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A2%AB%E8%B0%83%E7%94%A8%E7%B1%BB"><span class="nav-number">2.3.4.</span> <span class="nav-text">被调用类</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
